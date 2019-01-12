@@ -29,6 +29,7 @@ public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static DriveTrain driveTrain = new DriveTrain();
   public static OI m_oi;
+  public static TestSolSub sol = new TestSolSub();
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -116,8 +117,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    Command dfault = new TestDrive();
-    dfault.start();
+    Command drive = new TestDriveXbox();
+    
+    drive.start();
   }
 
   /**
