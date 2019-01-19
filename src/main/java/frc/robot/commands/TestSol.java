@@ -25,17 +25,23 @@ public class TestSol extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.sol.getSol()) {
-      Robot.sol.retract();
+    if(Robot.sol.getSol1()) {
+      Robot.sol.retractSol1();
     } else {
-      Robot.sol.extend();
+      Robot.sol.extendSol1();
+    }
+
+    if(Robot.sol.getSol2()) {
+      Robot.sol.retractSol2();
+    } else {
+      Robot.sol.extendSol2();
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

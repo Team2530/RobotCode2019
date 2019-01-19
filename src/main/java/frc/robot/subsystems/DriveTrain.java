@@ -25,14 +25,19 @@ public class DriveTrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  //VictorSP motor0 = new VictorSP(0);
-  //VictorSP motor2 = new VictorSP(2);
+  // VictorSP motor0 = new VictorSP(0);
+  // VictorSP motor2 = new VictorSP(2);
 
-  TalonSRX motor0 = new TalonSRX(1);
-  TalonSRX motor2 = new TalonSRX(4);
-    
-  VictorSPX motor1 = new VictorSPX(2); //id 0
-  VictorSPX motor3 = new VictorSPX(3); //id 1
+  // VictorSPX motor1 = new VictorSPX(0); //id 0
+  // VictorSPX motor3 = new VictorSPX(1); //id 1
+
+  //below for bot, above for practice bot
+
+  TalonSRX motor0 = new TalonSRX(1); //id 1
+  TalonSRX motor2 = new TalonSRX(4); //id 4
+   
+  VictorSPX motor1 = new VictorSPX(2); //id 2
+  VictorSPX motor3 = new VictorSPX(3); //id 3
 
   double y1;
   double y2;
@@ -57,20 +62,25 @@ public class DriveTrain extends Subsystem {
     x1 = stick.getX();
     y1 = stick.getY();
     z1 = stick.getZ();
-    if (z1 >= -deadzone && z1 <= deadzone)
-            {
-                x1 = 0;
-            }
+    if (z1 >= -deadzone && z1 <= deadzone) {
+      x1 = 0;
+    }
     frontRightPow = (y1 - z1 - x1);
     backRightPow = (y1 - z1 + x1);
     frontLeftPow = (y1 + z1 + x1);
     backLeftPow = (y1 + z1 - x1);
 
+    // motor0.set(frontRightPow);
+    // motor2.set(backRightPow);
+
+    // motor1.set(ControlMode.PercentOutput, frontLeftPow);
+    // motor3.set(ControlMode.PercentOutput, backLeftPow);
+
     motor0.set(ControlMode.PercentOutput, frontRightPow);
     motor2.set(ControlMode.PercentOutput, backRightPow);
 
-    motor1.set(ControlMode.PercentOutput, frontLeftPow);
-    motor3.set(ControlMode.PercentOutput, backLeftPow);
+    motor1.set(ControlMode.PercentOutput, frontLeftPow); //i think in the back
+    motor3.set(ControlMode.PercentOutput, backLeftPow); //i think in the back
   }
 
   public void XboxDrive(XboxController xbox) {
@@ -78,35 +88,51 @@ public class DriveTrain extends Subsystem {
     y1 = xbox.getY(Hand.kLeft);
     x2 = xbox.getX(Hand.kRight);
     y2 = xbox.getY(Hand.kRight);
-    if (x1 >= -deadzone && x1 <= deadzone)
-            {
-                x1 = 0;
-            }
-            if (x2 >= -deadzone && x2 <= deadzone)
-            {
-                x2 = 0;
-            }
-            if (y1 >= -deadzone && y1 <= deadzone)
-            {
-                y1 = 0;
-            }
-            if (y2 >= -deadzone && y2 <= deadzone)
-            {
-                y2 = 0;
-            }
+    if (x1 >= -deadzone && x1 <= deadzone) {
+      x1 = 0;
+    }
+    if (x2 >= -deadzone && x2 <= deadzone) {
+      x2 = 0;
+    }
+    if (y1 >= -deadzone && y1 <= deadzone) {
+      y1 = 0;
+    }
+    if (y2 >= -deadzone && y2 <= deadzone) {
+      y2 = 0;
+    }
 
-            frontRightPow = (y1 - x2 - x1);
-            //backRightPow = (y1 - x2 + x1);
-            frontLeftPow = (y1 + x2 + x1);
-            //backLeftPow = (y1 + x2 - x1);
-    motor0.set(ControlMode.PercentOutput, frontLeftPow);
-    motor2.set(ControlMode.PercentOutput, -frontRightPow);
+    /*frontRightPow = (y1 - x2 - x1);
+    //backRightPow = (y1 - x2 + x1);
+    frontLeftPow = (y1 + x2 + x1);
+    //backLeftPow = (y1 + x2 - x1);*/
 
-    motor1.set(ControlMode.PercentOutput, -frontRightPow);
-    motor3.set(ControlMode.PercentOutput, frontLeftPow);
+    frontRightPow = (y1 - x1); 
+    frontLeftPow = (y1 + x1); //should? be tank drive
+    
+    // motor0.set(frontLeftPow);
+    // motor2.set(-frontRightPow);
+
+    // motor1.set(ControlMode.PercentOutput, -frontRightPow);
+    // motor3.set(ControlMode.PercentOutput, frontLeftPow);
+
+    //practice vs real
+
+    motor0.set(ControlMode.PercentOutput, -frontLeftPow);
+    motor2.set(ControlMode.PercentOutput, frontRightPow);
+
+    motor1.set(ControlMode.PercentOutput, frontRightPow); //i think in the back
+    motor3.set(ControlMode.PercentOutput, -frontLeftPow); //i think in the back
   }
 
   public void Stop() {
+    // motor0.set(0);
+    // motor2.set(0);
+
+    // motor1.set(ControlMode.PercentOutput, 0);
+    // motor3.set(ControlMode.PercentOutput, 0);
+
+    //practice vs real
+
     motor0.set(ControlMode.PercentOutput, 0);
     motor2.set(ControlMode.PercentOutput, 0);
 

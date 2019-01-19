@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
+//import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -19,21 +19,38 @@ public class TestSolSub extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   DoubleSolenoid sol1 = new DoubleSolenoid(0, 1);
+  DoubleSolenoid sol2 = new DoubleSolenoid(2, 3);
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
-  public void extend(){
+
+  public void extendSol1(){
     sol1.set(Value.kForward);
   }
-  public void retract(){
+  public void retractSol1(){
     sol1.set(Value.kReverse);
   }
 
-  public boolean getSol(){
+  public boolean getSol1(){
     if(sol1.get()==Value.kForward){
+      return true;//sol is extened
+    }else {
+      return false;
+    }
+  }
+
+  public void extendSol2(){
+    sol2.set(Value.kForward);
+  }
+  public void retractSol2(){
+    sol2.set(Value.kReverse);
+  }
+
+  public boolean getSol2(){
+    if(sol2.get()==Value.kForward){
       return true;//sol is extened
     }else {
       return false;

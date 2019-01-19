@@ -22,12 +22,15 @@ public class OI {
   Joystick stick = new Joystick(0);
 
   Button button1 = new JoystickButton(stick, 1);
+  Button button2 = new JoystickButton(stick, 2);
 
   XboxController xbox = new XboxController(1);
 
   public OI() {
 
     button1.whenPressed(new TestSol());
+    button2.whenPressed(new FireSol());
+
     
   }
 
