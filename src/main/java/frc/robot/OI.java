@@ -19,12 +19,13 @@ import frc.robot.commands.*; //imports all commands
  */
 public class OI {
 
-  Joystick stick = new Joystick(0);
+  Joystick stick = new Joystick(1);
+  Joystick stick2 = new Joystick(2);
 
   Button button1 = new JoystickButton(stick, 1);
   Button button2 = new JoystickButton(stick, 2);
 
-  XboxController xbox = new XboxController(1);
+  XboxController xbox = new XboxController(0);
 
   public OI() {
 
@@ -68,6 +69,10 @@ public class OI {
 
   public XboxController getXbox() {
     return xbox;
+  }
+
+  public Joystick getJoystick2() {
+	  return stick2;
   }
 
 }

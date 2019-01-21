@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.XboxController;
@@ -65,23 +66,47 @@ public class DriveTrain extends Subsystem {
     if (z1 >= -deadzone && z1 <= deadzone) {
       x1 = 0;
     }
+
     frontRightPow = (y1 - z1 - x1);
-    backRightPow = (y1 - z1 + x1);
+    //backRightPow = (y1 - z1 + x1);
     frontLeftPow = (y1 + z1 + x1);
-    backLeftPow = (y1 + z1 - x1);
+    //backLeftPow = (y1 + z1 - x1);
 
     // motor0.set(frontRightPow);
-    // motor2.set(backRightPow);
+    // motor2.set(frontRightPow);
 
     // motor1.set(ControlMode.PercentOutput, frontLeftPow);
-    // motor3.set(ControlMode.PercentOutput, backLeftPow);
+    // motor3.set(ControlMode.PercentOutput, frontLeftPow);
 
     motor0.set(ControlMode.PercentOutput, frontRightPow);
-    motor2.set(ControlMode.PercentOutput, backRightPow);
+    motor2.set(ControlMode.PercentOutput, frontRightPow);
 
     motor1.set(ControlMode.PercentOutput, frontLeftPow); //i think in the back
-    motor3.set(ControlMode.PercentOutput, backLeftPow); //i think in the back
+    motor3.set(ControlMode.PercentOutput, frontLeftPow); //i think in the back
   }
+
+  public void Drive2(Joystick stick1, Joystick stick2) {
+    x1 = stick1.getX();
+    y1 = stick1.getY();
+    x2 = stick2.getX();
+    y2 = stick2.getY();
+
+    frontRightPow = (y2); 
+    frontLeftPow = (y1); //should? be tank drive
+
+    // motor0.set(frontRightPow);
+    // motor2.set(frontRightPow);
+
+    // motor1.set(ControlMode.PercentOutput, frontLeftPow);
+    // motor3.set(ControlMode.PercentOutput, frontLeftPow);
+
+    motor0.set(ControlMode.PercentOutput, -frontLeftPow);
+    motor2.set(ControlMode.PercentOutput, frontRightPow);
+
+    motor1.set(ControlMode.PercentOutput, frontRightPow); //i think in the back
+    motor3.set(ControlMode.PercentOutput, -frontLeftPow); //i think in the back
+  }
+
 
   public void XboxDrive(XboxController xbox) {
     x1 = xbox.getX(Hand.kLeft);
@@ -106,8 +131,44 @@ public class DriveTrain extends Subsystem {
     frontLeftPow = (y1 + x2 + x1);
     //backLeftPow = (y1 + x2 - x1);*/
 
-    frontRightPow = (y1 - x1); 
-    frontLeftPow = (y1 + x1); //should? be tank drive
+    frontRightPow = (y1 + x1); 
+    frontLeftPow = (y1 - x1); //should? be tank drive
+    
+    // motor0.set(frontLeftPow);
+    // motor2.set(-frontRightPow);
+
+    // motor1.set(ControlMode.PercentOutput, -frontRightPow);
+    // motor3.set(ControlMode.PercentOutput, frontLeftPow);
+
+    //practice vs real
+
+    motor0.set(ControlMode.PercentOutput, -frontLeftPow);
+    motor2.set(ControlMode.PercentOutput, frontRightPow);
+
+    motor1.set(ControlMode.PercentOutput, frontRightPow); //i think in the back
+    motor3.set(ControlMode.PercentOutput, -frontLeftPow); //i think in the back
+  }
+
+  public void XboxDrive2(XboxController xbox) {
+    x1 = xbox.getX(Hand.kLeft);
+    y1 = xbox.getY(Hand.kLeft);
+    x2 = xbox.getX(Hand.kRight);
+    y2 = xbox.getY(Hand.kRight);
+    if (x1 >= -deadzone && x1 <= deadzone) {
+      x1 = 0;
+    }
+    if (x2 >= -deadzone && x2 <= deadzone) {
+      x2 = 0;
+    }
+    if (y1 >= -deadzone && y1 <= deadzone) {
+      y1 = 0;
+    }
+    if (y2 >= -deadzone && y2 <= deadzone) {
+      y2 = 0;
+    }
+
+    frontRightPow = (y1); 
+    frontLeftPow = (y2); //should? be tank drive
     
     // motor0.set(frontLeftPow);
     // motor2.set(-frontRightPow);
