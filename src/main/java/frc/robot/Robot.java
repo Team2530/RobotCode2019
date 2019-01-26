@@ -30,6 +30,7 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static DriveTrain driveTrain = new DriveTrain();
+  public static Turret turret = new Turret(); 
   public static OI m_oi;
   public static TestSolSub sol = new TestSolSub();
 
@@ -119,7 +120,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    Command drive = new TestDriveXbox();
+    Command drive = new TestDrive();
     
     drive.start();
   }
