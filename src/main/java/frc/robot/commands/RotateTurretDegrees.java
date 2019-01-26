@@ -13,10 +13,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class RotateTurretDegrees extends Command {
-  final double encoderRange = 5;
+  final double encoderRange = 1;
   double target;
-  Encoder encoder;
+  Encoder encoder = new Encoder(8, 9);
   double initialEncoder;
+  final double pulseToDegrees = 5.55;
+  //one encoder click = 0.28089887640449438202247191011236 degrees
+  //one rotation = 1281.6 encoder clicks
 
   public RotateTurretDegrees(double TargetDegrees) {
     // Use requires() here to declare subsystem dependencies
@@ -28,26 +31,30 @@ public class RotateTurretDegrees extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    encoder = new Encoder(8, 9);
-    //encoder.reset();
+    
+    encoder.reset();
     initialEncoder = encoder.getDistance();
     target = target + initialEncoder;
+    SmartDashboard.putNumber("start distance", initialEncoder);
     SmartDashboard.putNumber("encoder", encoder.getDistance());
     SmartDashboard.putNumber("target", target);
+    encoder.setDistancePerPulse((double) 1);
+    SmartDashboard.putNumber("Distance per Pulse", encoder.getDistancePerPulse());
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.turret.Rotate(.25);
+    Robot.turret.Rotate(-1);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    double distance = encoder.getDistance();
+    double distance = encoder.getDistance()/pulseToDegrees;
+    double distanceABS = Math.abs(distance);
     SmartDashboard.putNumber("encoder", distance);
-    if(distance >= target - encoderRange && distance <= target + encoderRange) {
+    if(distanceABS >= target - encoderRange) {//&& distanceABS <= target + encoderRange
       return true;
     } else {
       return false;
