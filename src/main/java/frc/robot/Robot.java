@@ -6,10 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
-package org.usfirst.frc.team2530.robot;
-
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.IterativeRobot; //video from cameras to driver
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -143,14 +139,4 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
-  /*
-  This probably lets people use the robot camera (not plural) (yet)
-  */
-  
-  public class Robot extends IterativeRobot {
-    
-    public void robotInit() {
-        CameraServer.getInstance().startAutomaticCapture();
-    }
-}
 }
