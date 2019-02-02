@@ -7,10 +7,15 @@
 
 package frc.robot;
 
+
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
@@ -38,6 +43,8 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
+  NetworkTableEntry testEntry;
+
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -48,6 +55,8 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    NetworkTable table = NetworkTableInstance.getDefault().getTable("datatable");
+    testEntry = table.getEntry("X");
   }
 
   /**
@@ -139,6 +148,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
     SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
     SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
+    SmartDashboard.putString("Pi to RoboRio", testEntry.toString());
   }
 
   /**

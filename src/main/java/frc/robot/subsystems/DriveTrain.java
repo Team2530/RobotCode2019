@@ -25,19 +25,19 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
  */
 public class DriveTrain extends Subsystem {
 
-  VictorSP motor0 = new VictorSP(0);
-  VictorSP motor2 = new VictorSP(2);
+  // VictorSP motor0 = new VictorSP(0);
+  // VictorSP motor2 = new VictorSP(2);
 
-  VictorSPX motor1 = new VictorSPX(0); //id 0
-  VictorSPX motor3 = new VictorSPX(1); //id 1
+  // VictorSPX motor1 = new VictorSPX(0); //id 0
+  // VictorSPX motor3 = new VictorSPX(1); //id 1
 
   //below for bot, above for practice bot
 
-  // TalonSRX motor0 = new TalonSRX(1); //id 1
-  // TalonSRX motor2 = new TalonSRX(4); //id 4
+  TalonSRX motor3 = new TalonSRX(3); //id 3
+  TalonSRX motor4 = new TalonSRX(4); //id 4
    
-  // VictorSPX motor1 = new VictorSPX(2); //id 2
-  // VictorSPX motor3 = new VictorSPX(3); //id 3
+  VictorSPX motor1 = new VictorSPX(1); //id 1
+  VictorSPX motor2 = new VictorSPX(2); //id 2
 
   double y1;
   double y2;
@@ -45,10 +45,10 @@ public class DriveTrain extends Subsystem {
   double x2;
   double z1;
 
-  double backLeftPow;
-  double backRightPow;
-  double frontLeftPow;
-  double frontRightPow;
+  // double backleftPow;
+  // double backrightPow;
+  double leftPow;
+  double rightPow;
   final double deadzone = 0.2;
 
   @Override
@@ -64,9 +64,11 @@ public class DriveTrain extends Subsystem {
     z1 = stick.getZ();
     if (x1 >= -deadzone && x1 <= deadzone) {
       x1 = 0;
-    } else if (y1 >= -deadzone && y1 <= deadzone) {
+    } 
+    if (y1 >= -deadzone && y1 <= deadzone) {
       y1 = 0;
-    } else if (z1 >= -.3 && z1 <= .3) {
+    } 
+    if (Math.abs(z1) <= 0.3) {
       z1 = 0;
     }
 
@@ -74,22 +76,22 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("y", y1);
     SmartDashboard.putNumber("z", z1);
 
-    frontRightPow = (y1 - z1 - x1);
-    //backRightPow = (y1 - z1 + x1);
-    frontLeftPow = (y1 + z1 + x1);
-    //backLeftPow = (y1 + z1 - x1);
+    rightPow = (y1 + z1 - x1);
+    //backrightPow = (y1 - z1 + x1);
+    leftPow = (y1 - z1 + x1);
+    //backleftPow = (y1 + z1 - x1);
 
-    motor0.set(frontRightPow);
-    motor2.set(frontRightPow);
+    // motor0.set(rightPow);
+    // motor2.set(rightPow);
 
-    motor1.set(ControlMode.PercentOutput, frontLeftPow);
-    motor3.set(ControlMode.PercentOutput, frontLeftPow);
+    // motor1.set(ControlMode.PercentOutput, leftPow);
+    // motor3.set(ControlMode.PercentOutput, leftPow);
 
-    // motor0.set(ControlMode.PercentOutput, frontRightPow);
-    // motor2.set(ControlMode.PercentOutput, frontRightPow);
+    motor3.set(ControlMode.PercentOutput, leftPow);
+    motor4.set(ControlMode.PercentOutput, -rightPow);
 
-    // motor1.set(ControlMode.PercentOutput, frontLeftPow); //i think in the back
-    // motor3.set(ControlMode.PercentOutput, frontLeftPow); //i think in the back
+    motor1.set(ControlMode.PercentOutput, leftPow); 
+    motor2.set(ControlMode.PercentOutput, -rightPow); 
   }
 
   public void Drive2(Joystick stick1, Joystick stick2) {
@@ -98,20 +100,20 @@ public class DriveTrain extends Subsystem {
     x2 = stick2.getX();
     y2 = stick2.getY();
 
-    frontRightPow = (y2); 
-    frontLeftPow = (y1); //should? be tank drive
+    rightPow = (y2); 
+    leftPow = (y1); //should? be tank drive
 
-    motor0.set(frontRightPow);
-    motor2.set(frontRightPow);
+    // motor0.set(rightPow);
+    // motor2.set(rightPow);
 
-    motor1.set(ControlMode.PercentOutput, frontLeftPow);
-    motor3.set(ControlMode.PercentOutput, frontLeftPow);
+    // motor1.set(ControlMode.PercentOutput, leftPow);
+    // motor3.set(ControlMode.PercentOutput, leftPow);
 
-    // motor0.set(ControlMode.PercentOutput, -frontLeftPow);
-    // motor2.set(ControlMode.PercentOutput, frontRightPow);
+    motor3.set(ControlMode.PercentOutput, -leftPow);
+    motor4.set(ControlMode.PercentOutput, rightPow);
 
-    // motor1.set(ControlMode.PercentOutput, frontRightPow); //i think in the back
-    // motor3.set(ControlMode.PercentOutput, -frontLeftPow); //i think in the back
+    motor1.set(ControlMode.PercentOutput, rightPow); 
+    motor2.set(ControlMode.PercentOutput, -leftPow); 
   }
 
 
@@ -133,27 +135,27 @@ public class DriveTrain extends Subsystem {
       y2 = 0;
     }
 
-    /*frontRightPow = (y1 - x2 - x1);
-    //backRightPow = (y1 - x2 + x1);
-    frontLeftPow = (y1 + x2 + x1);
-    //backLeftPow = (y1 + x2 - x1);*/
+    /*rightPow = (y1 - x2 - x1);
+    //backrightPow = (y1 - x2 + x1);
+    leftPow = (y1 + x2 + x1);
+    //backleftPow = (y1 + x2 - x1);*/
 
-    frontRightPow = (y1 + x1); 
-    frontLeftPow = (y1 - x1); //should? be tank drive
+    rightPow = (y1 + x1); 
+    leftPow = (y1 - x1); //should? be tank drive
     
-    motor0.set(frontLeftPow);
-    motor2.set(-frontRightPow);
+    // motor0.set(leftPow);
+    // motor2.set(-rightPow);
 
-    motor1.set(ControlMode.PercentOutput, -frontRightPow);
-    motor3.set(ControlMode.PercentOutput, frontLeftPow);
+    // motor1.set(ControlMode.PercentOutput, -rightPow);
+    // motor3.set(ControlMode.PercentOutput, leftPow);
 
     //practice vs real
 
-    // motor0.set(ControlMode.PercentOutput, -frontLeftPow);
-    // motor2.set(ControlMode.PercentOutput, frontRightPow);
+    motor3.set(ControlMode.PercentOutput, -leftPow);
+    motor4.set(ControlMode.PercentOutput, rightPow);
 
-    // motor1.set(ControlMode.PercentOutput, frontRightPow); //i think in the back
-    // motor3.set(ControlMode.PercentOutput, -frontLeftPow); //i think in the back
+    motor1.set(ControlMode.PercentOutput, rightPow); 
+    motor2.set(ControlMode.PercentOutput, -leftPow); 
   }
 
   public void XboxDrive2(XboxController xbox) {
@@ -174,37 +176,37 @@ public class DriveTrain extends Subsystem {
       y2 = 0;
     }
 
-    frontRightPow = (y1); 
-    frontLeftPow = (y2); //should? be tank drive
+    rightPow = (y1); 
+    leftPow = (y2); //should? be tank drive
     
-    motor0.set(frontLeftPow);
-    motor2.set(-frontRightPow);
+    // motor0.set(leftPow);
+    // motor2.set(-rightPow);
 
-    motor1.set(ControlMode.PercentOutput, -frontRightPow);
-    motor3.set(ControlMode.PercentOutput, frontLeftPow);
+    // motor1.set(ControlMode.PercentOutput, -rightPow);
+    // motor3.set(ControlMode.PercentOutput, leftPow);
 
     //practice vs real
 
-    // motor0.set(ControlMode.PercentOutput, -frontLeftPow);
-    // motor2.set(ControlMode.PercentOutput, frontRightPow);
+    motor3.set(ControlMode.PercentOutput, -leftPow);
+    motor4.set(ControlMode.PercentOutput, rightPow);
 
-    // motor1.set(ControlMode.PercentOutput, frontRightPow); //i think in the back
-    // motor3.set(ControlMode.PercentOutput, -frontLeftPow); //i think in the back
+    motor1.set(ControlMode.PercentOutput, rightPow); 
+    motor2.set(ControlMode.PercentOutput, -leftPow); 
   }
 
   public void Stop() {
-    motor0.set(0);
-    motor2.set(0);
-
-    motor1.set(ControlMode.PercentOutput, 0);
-    motor3.set(ControlMode.PercentOutput, 0);
-
-    //practice vs real
-
-    // motor0.set(ControlMode.PercentOutput, 0);
-    // motor2.set(ControlMode.PercentOutput, 0);
+    // motor0.set(0);
+    // motor2.set(0);
 
     // motor1.set(ControlMode.PercentOutput, 0);
     // motor3.set(ControlMode.PercentOutput, 0);
+
+    //practice vs real
+
+    motor3.set(ControlMode.PercentOutput, 0);
+    motor4.set(ControlMode.PercentOutput, 0);
+
+    motor1.set(ControlMode.PercentOutput, 0);
+    motor2.set(ControlMode.PercentOutput, 0);
   }
 }
