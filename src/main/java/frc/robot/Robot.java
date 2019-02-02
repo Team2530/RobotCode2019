@@ -57,15 +57,16 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     NetworkTable table = NetworkTableInstance.getDefault().getTable("datatable");
+    testEntry = table.getEntry("time2");s
 
     Thread {
-      UsbCamera camera(0) = CameraServer.getInstance().startAutomaticCapture;
+      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture;
       //camera.setResolution(640, 480);
     
     }
     CameraServer.getInstance().startAutomaticCapture();
  
-    testEntry = table.getEntry("time2");
+    
   }
 
   /**
