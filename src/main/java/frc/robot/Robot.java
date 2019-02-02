@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -57,6 +58,14 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
     NetworkTable table = NetworkTableInstance.getDefault().getTable("datatable");
     testEntry = table.getEntry("X");
+
+    Thread {
+      UsbCamera camera(0) = CameraServer.getInstance().startAutomaticCapture;
+      //camera.setResolution(640, 480);
+    
+    }
+    CameraServer.getInstance().startAutomaticCapture();
+ 
   }
 
   /**
@@ -157,4 +166,13 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+
+  public void camera() {
+
+//UsbCamera camera1 = new UsbCamera(new camera(1), this);
+//UsbCamera camera2 = new UsbCamera(new camera(2), this);
+
+}
+
+  
 }
