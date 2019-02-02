@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -111,6 +112,8 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
+  AnalogInput exampleAnalog = new AnalogInput(0);
+  
   @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when
@@ -120,6 +123,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    AnalogInput.setGlobalSampleRate(62500);
     Command drive = new TestDrive();
     
     drive.start();
@@ -131,6 +135,10 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    SmartDashboard.putNumber("Analog", exampleAnalog.getValue());
+    SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
+    SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
+    SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
   }
 
   /**

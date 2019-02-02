@@ -7,6 +7,8 @@
 
 package frc.robot.commands;
 
+
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,11 +17,15 @@ import frc.robot.Robot;
 public class RotateTurretDegrees extends Command {
   final double encoderRange = 1;
   double target;
-  Encoder encoder = new Encoder(8, 9);
+  Encoder encoder = new Encoder(8, 9); //do we want to create an encoder subclass
   double initialEncoder;
-  final double pulseToDegrees = 5.55;
+  final double pulseToDegrees = 5.55; //encoder ticks divived by this to get degrees
+  final double gearRatio = 2/5; //idk lol
   //one encoder click = 0.28089887640449438202247191011236 degrees
   //one rotation = 1281.6 encoder clicks
+
+  DigitalInput limitSwitch1 = new DigitalInput(6);
+  DigitalInput limitSwitch2 = new DigitalInput(7); //same as encoder, do we want an limitswitch/digitalinput subclass
 
   public RotateTurretDegrees(double TargetDegrees) {
     // Use requires() here to declare subsystem dependencies
@@ -45,7 +51,11 @@ public class RotateTurretDegrees extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.turret.Rotate(-1);
+    if(limitSwitch1.get() || limitSwitch2.get()) {
+
+    } else {
+      Robot.turret.Rotate(-1);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
