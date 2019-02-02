@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -61,9 +62,17 @@ public class DriveTrain extends Subsystem {
     x1 = stick.getX();
     y1 = stick.getY();
     z1 = stick.getZ();
-    if (z1 >= -deadzone && z1 <= deadzone) {
+    if (x1 >= -deadzone && x1 <= deadzone) {
       x1 = 0;
+    } else if (y1 >= -deadzone && y1 <= deadzone) {
+      y1 = 0;
+    } else if (z1 >= -.3 && z1 <= .3) {
+      z1 = 0;
     }
+
+    SmartDashboard.putNumber("x", x1);
+    SmartDashboard.putNumber("y", y1);
+    SmartDashboard.putNumber("z", z1);
 
     frontRightPow = (y1 - z1 - x1);
     //backRightPow = (y1 - z1 + x1);

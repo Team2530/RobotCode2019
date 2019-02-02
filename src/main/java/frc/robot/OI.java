@@ -26,6 +26,7 @@ public class OI {
   Button button2 = new JoystickButton(stick, 2);
   Button button3 = new JoystickButton(stick, 3);
   Button button4 = new JoystickButton(stick, 4);
+  //Button button5 = new JoystickButton(stick, 5);
 
   XboxController xbox = new XboxController(0);
 
@@ -35,6 +36,8 @@ public class OI {
     button2.whenPressed(new FireSol());
     button3.whileHeld(new RotateTurret());
     button4.whenPressed(new RotateTurretDegrees(180));
+    //button5.whenPressed(new RotateTurretDegrees(-180));
+    //button5.whenPressed(new SwitchLight());
     
   }
 

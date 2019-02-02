@@ -38,7 +38,7 @@ public class RotateTurretDegrees extends Command {
   @Override
   protected void initialize() {
     
-    encoder.reset();
+    //encoder.reset();
     initialEncoder = encoder.getDistance();
     target = target + initialEncoder;
     SmartDashboard.putNumber("start distance", initialEncoder);
@@ -52,9 +52,11 @@ public class RotateTurretDegrees extends Command {
   @Override
   protected void execute() {
     if(limitSwitch1.get() || limitSwitch2.get()) {
-
-    } else {
+      
+    } /*else if(encoder.getDistance()/pulseToDegrees > target) {
       Robot.turret.Rotate(-1);
+    } */else { //if(encoder.getDistance()/pulseToDegrees < target)
+      Robot.turret.Rotate(1);
     }
   }
 
@@ -62,9 +64,9 @@ public class RotateTurretDegrees extends Command {
   @Override
   protected boolean isFinished() {
     double distance = encoder.getDistance()/pulseToDegrees;
-    double distanceABS = Math.abs(distance);
+    //double distanceABS = Math.abs(distance);
     SmartDashboard.putNumber("encoder", distance);
-    if(distanceABS >= target - encoderRange) {//&& distanceABS <= target + encoderRange
+    if(distance >= target - encoderRange && distance <= target + encoderRange) {//&& distanceABS <= target + encoderRange
       return true;
     } else {
       return false;
