@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     NetworkTable table = NetworkTableInstance.getDefault().getTable("datatable");
-    testEntry = table.getEntry("X");
+    testEntry = table.getEntry("time2");
   }
 
   /**
@@ -148,7 +148,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
     SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
     SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
-    SmartDashboard.putString("Pi to RoboRio", testEntry.getString("No string"));
+    SmartDashboard.putNumber("Pi to RoboRio N",testEntry.getDouble(-1));
   }
 
   /**
