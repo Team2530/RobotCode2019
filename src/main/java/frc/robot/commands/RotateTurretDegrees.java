@@ -51,25 +51,27 @@ public class RotateTurretDegrees extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(limitSwitch1.get() || limitSwitch2.get()) {
-      
-    } /*else if(encoder.getDistance()/pulseToDegrees > target) {
-      Robot.turret.Rotate(-1);
-    } */else { //if(encoder.getDistance()/pulseToDegrees < target)
+    if(encoder.getDistance() < target) {
       Robot.turret.Rotate(1);
+    } else if(encoder.getDistance() > target) {
+      Robot.turret.Rotate(-1); //not sure this works
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    double distance = encoder.getDistance()/pulseToDegrees;
-    //double distanceABS = Math.abs(distance);
-    SmartDashboard.putNumber("encoder", distance);
-    if(distance >= target - encoderRange && distance <= target + encoderRange) {//&& distanceABS <= target + encoderRange
+    if(limitSwitch1.get() == false || limitSwitch1.get() == false) {
       return true;
     } else {
-      return false;
+      double distance = encoder.getDistance()/pulseToDegrees;
+      //double distanceABS = Math.abs(distance);
+      SmartDashboard.putNumber("encoder", distance);
+      if(distance >= target - encoderRange && distance <= target + encoderRange) {//&& distanceABS <= target + encoderRange
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 

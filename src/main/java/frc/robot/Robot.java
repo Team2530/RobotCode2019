@@ -148,7 +148,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
     SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
     SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
-    SmartDashboard.putString("Pi to RoboRio", testEntry.toString());
+    SmartDashboard.putString("Pi to RoboRio", testEntry.getString("No string"));
   }
 
   /**
