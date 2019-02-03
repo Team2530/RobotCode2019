@@ -24,8 +24,8 @@ public class RotateTurretDegrees extends Command {
   //one encoder click = 0.28089887640449438202247191011236 degrees
   //one rotation = 1281.6 encoder clicks
 
-  DigitalInput limitSwitch1 = new DigitalInput(6);
-  DigitalInput limitSwitch2 = new DigitalInput(7); //same as encoder, do we want an limitswitch/digitalinput subclass
+  DigitalInput limitSwitch1;
+  DigitalInput limitSwitch2; //same as encoder, do we want an limitswitch/digitalinput subclass
 
   public RotateTurretDegrees(double TargetDegrees) {
     // Use requires() here to declare subsystem dependencies
@@ -46,6 +46,8 @@ public class RotateTurretDegrees extends Command {
     SmartDashboard.putNumber("target", target);
     encoder.setDistancePerPulse((double) 1);
     SmartDashboard.putNumber("Distance per Pulse", encoder.getDistancePerPulse());
+    limitSwitch1 = new DigitalInput(6);
+    limitSwitch2 = new DigitalInput(7);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -61,7 +63,7 @@ public class RotateTurretDegrees extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(limitSwitch1.get() == false || limitSwitch1.get() == false) {
+    if(limitSwitch1.get() == false || limitSwitch2.get() == false) {
       return true;
     } else {
       double distance = encoder.getDistance()/pulseToDegrees;
@@ -79,6 +81,8 @@ public class RotateTurretDegrees extends Command {
   @Override
   protected void end() {
     Robot.turret.Stop();
+    limitSwitch1.free();
+    limitSwitch2.free();
   }
 
   // Called when another command which requires one or more of the same
@@ -86,5 +90,7 @@ public class RotateTurretDegrees extends Command {
   @Override
   protected void interrupted() {
     Robot.turret.Stop();
+    limitSwitch1.free();
+    limitSwitch2.free();
   }
 }
