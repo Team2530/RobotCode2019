@@ -46,8 +46,8 @@ public class RotateTurretDegrees extends Command {
     SmartDashboard.putNumber("target", target);
     encoder.setDistancePerPulse((double) 1);
     SmartDashboard.putNumber("Distance per Pulse", encoder.getDistancePerPulse());
-    limitSwitch1 = new DigitalInput(6);
-    limitSwitch2 = new DigitalInput(7);
+    limitSwitch1 = new DigitalInput(1);
+    limitSwitch2 = new DigitalInput(2);
   }
 
   // Called repeatedly when this Command is scheduled to run

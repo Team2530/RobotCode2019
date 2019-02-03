@@ -26,7 +26,7 @@ public class OI {
   Button button2 = new JoystickButton(stick, 2);
   Button button3 = new JoystickButton(stick, 3);
   Button button4 = new JoystickButton(stick, 4);
-  //Button button5 = new JoystickButton(stick, 5);
+  Button button5 = new JoystickButton(stick, 5);
   Button button6 = new JoystickButton(stick, 6);
 
   XboxController xbox = new XboxController(0);
@@ -35,8 +35,9 @@ public class OI {
 
     button1.whenPressed(new TestSol());
     button2.whenPressed(new FireSol());
-    button3.whileHeld(new RotateTurret());
+    button3.whileHeld(new RotateTurret(1)); //forwards soon i hope it is clockwise rn
     button4.whenPressed(new RotateTurretDegrees(180));
+    button5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
     //button5.whenPressed(new RotateTurretDegrees(-180));
     //button5.whenPressed(new SwitchLight());
     button6.whenPressed(new fireEndSol());

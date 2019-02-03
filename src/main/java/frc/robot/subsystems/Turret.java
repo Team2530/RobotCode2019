@@ -19,7 +19,9 @@ public class Turret extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  VictorSPX motor0 = new VictorSPX(2);
+  //VictorSPX motor0 = new VictorSPX(2);
+
+  VictorSPX motor0 = new VictorSPX(5);
 
   @Override
   public void initDefaultCommand() {

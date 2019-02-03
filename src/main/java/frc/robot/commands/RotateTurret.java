@@ -16,18 +16,20 @@ public class RotateTurret extends Command {
 
   DigitalInput limitSwitch1;
   DigitalInput limitSwitch2;
+  int power;
 
-  public RotateTurret() {
+  public RotateTurret(int speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    power = speed;
     requires(Robot.turret);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    limitSwitch1 = new DigitalInput(6);
-    limitSwitch2 = new DigitalInput(7);
+    limitSwitch1 = new DigitalInput(1); //back
+    limitSwitch2 = new DigitalInput(2); //front
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -35,13 +37,21 @@ public class RotateTurret extends Command {
   protected void execute() {
     SmartDashboard.putBoolean("LimitSwitch1", limitSwitch1.get());
     SmartDashboard.putBoolean("LimitSwitch2", limitSwitch2.get());
-    Robot.turret.Rotate(1);
+    if(limitSwitch1.get() && power > 0) { //false is closed on NO, but closed is true on NC
+      
+    } else if(limitSwitch2.get() && power < 0) { //false is closed on ON, but closed is true on NC
+      
+    } else {
+      Robot.turret.Rotate(power);
+    }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(limitSwitch1.get() == false || limitSwitch2.get() == false) {
+    if(limitSwitch1.get() && power > 0) { //false is closed on NO, but closed is true on NC
+      return true;
+    } else if(limitSwitch2.get() && power < 0) { //false is closed on ON, but closed is true on NC
       return true;
     } else {
       return false;
