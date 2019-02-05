@@ -30,6 +30,7 @@ import frc.robot.commands.TestDriveXbox2;
 import frc.robot.subsystems.*;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
+import org.opencv.core.Mat;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -65,28 +66,33 @@ public class Robot extends TimedRobot {
     //Begin Camera code
     new Thread(() -> {
       UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
-      camera0.setResolution (640,480);
+      //camera0.setResolution (640,480);
       UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-      camera1.setResolution (640,480);
+      //camera1.setResolution (640,480);
 
       CvSink cvSink0 = CameraServer.getInstance().getVideo(camera0);
       CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
       CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 640, 480);
       
-      boolean cameraview = true;
+      boolean camera0view = true;
 
       Mat image = new Mat();
                 
       while(!Thread.interrupted()) {
-          if(){
-            cvSink1.grabFrame(image);
+          if(camera0view = false){
+            cvSink0.grabFrame(image);
+            camera0view = true;
           } else{
-            cvSink2.grabFrame(image);
+            cvSink1.grabFrame(image);
+            camera0view = false;
           } 
+          
           /* try{
             cvSink1.grabFrame
           }catch(Exception e){
           } */
+          
+          //if more than 2 cameras, add 3rd camera and create camera1view and camera2view. then do if(camera0view || camera1view){}
           
           outputStream.putFrame(image);
         }
