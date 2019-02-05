@@ -17,7 +17,7 @@ import frc.robot.Robot;
 public class RotateTurretDegrees extends Command {
   final double encoderRange = 1;
   double target;
-  Encoder encoder = new Encoder(8, 9); //do we want to create an encoder subclass
+  Encoder encoder = new Encoder(3, 4); //do we want to create an encoder subclass
   double initialEncoder;
   final double pulseToDegrees = 5.55; //encoder ticks divived by this to get degrees
   final double gearRatio = 2/5; //idk lol
