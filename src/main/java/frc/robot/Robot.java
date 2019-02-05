@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+
 import edu.wpi.cscore.UsbCamera;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -27,6 +28,8 @@ import frc.robot.commands.TestDriveXbox;
 import frc.robot.commands.TestDriveXbox2;
 //import frc.robot.subsystems.ExampleSubsystem;;
 import frc.robot.subsystems.*;
+import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -61,7 +64,33 @@ public class Robot extends TimedRobot {
     testEntry = table.getEntry("time2");
     //Begin Camera code
     new Thread(() -> {
-      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+      UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
+      camera0.setResolution (640,480);
+      UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
+      camera1.setResolution (640,480);
+
+      CvSink cvSink0 = CameraServer.getInstance().getVideo(camera0);
+      CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
+      CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 640, 480);
+      
+      boolean cameraview = true;
+
+      Mat image = new Mat();
+                
+      while(!Thread.interrupted()) {
+          if(){
+            cvSink1.grabFrame(image);
+          } else{
+            cvSink2.grabFrame(image);
+          } 
+          /* try{
+            cvSink1.grabFrame
+          }catch(Exception e){
+          } */
+          
+          outputStream.putFrame(image);
+        }
+
       //camera.setResolution(640, 480);
       
     }).start();
@@ -177,8 +206,7 @@ public class Robot extends TimedRobot {
 
   public void camera() {
 
-//UsbCamera camera1 = new UsbCamera(new camera(1), this);
-//UsbCamera camera2 = new UsbCamera(new camera(2), this);
+
 
 }
 
