@@ -63,12 +63,16 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
     NetworkTable table = NetworkTableInstance.getDefault().getTable("datatable");
     testEntry = table.getEntry("time2");
-    //Begin Camera code
+    /*//Begin Camera code
     new Thread(() -> {
       UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
       //camera0.setResolution (640,480);
       UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
       //camera1.setResolution (640,480);
+<<<<<<< Updated upstream
+=======
+    }
+>>>>>>> Stashed changes
 
       CvSink cvSink0 = CameraServer.getInstance().getVideo(camera0);
       CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
@@ -86,27 +90,33 @@ public class Robot extends TimedRobot {
             cvSink1.grabFrame(image);
             camera0view = false;
           } 
+<<<<<<< Updated upstream
           
           /* try{
+=======
+           try{
+>>>>>>> Stashed changes
             cvSink1.grabFrame
           }catch(Exception e){
-          } */
+          } 
           
           //if more than 2 cameras, add 3rd camera and create camera1view and camera2view. then do if(camera0view || camera1view){}
           
           outputStream.putFrame(image);
         }
 
-      //camera.setResolution(640, 480);
-      
+      camera.setResolution(640, 480);      
     }).start();
+  
+
   //Old code, fallback if above fails and needs to be removed/debugged
-    /*Thread {
+
+    Thread {
       UsbCamera camera = CameraServer.getInstance().startAutomaticCapture;
       //camera.setResolution(640, 480);
     
-    }*/
-    CameraServer.getInstance().startAutomaticCapture();
+    }
+    CameraServer.getInstance().startAutomaticCapture(); */
  
     
   }

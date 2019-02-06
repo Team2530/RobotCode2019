@@ -14,8 +14,6 @@ import frc.robot.Robot;
 
 public class RotateTurret extends Command {
 
-  DigitalInput limitSwitch1;
-  DigitalInput limitSwitch2;
   int power;
 
   public RotateTurret(int speed) {
@@ -28,18 +26,18 @@ public class RotateTurret extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    limitSwitch1 = new DigitalInput(1); //back
-    limitSwitch2 = new DigitalInput(2); //front
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putBoolean("LimitSwitch1", limitSwitch1.get());
-    SmartDashboard.putBoolean("LimitSwitch2", limitSwitch2.get());
-    if(limitSwitch1.get() && power > 0) { //false is closed on NO, but closed is true on NC
+    SmartDashboard.putBoolean("LimitSwitch1", Robot.turret.getlimitSwitch1().get());
+    SmartDashboard.putBoolean("LimitSwitch2", Robot.turret.getlimitSwitch2().get());
+    SmartDashboard.putNumber("encoder", Robot.turret.getEncoderDistance());
+    if(Robot.turret.getLimit1Value() && power > 0) { //false is closed on NO, but closed is true on NC
       
-    } else if(limitSwitch2.get() && power < 0) { //false is closed on ON, but closed is true on NC
+    } else if(Robot.turret.getLimit2Value() && power < 0) { //false is closed on ON, but closed is true on NC
       
     } else {
       Robot.turret.Rotate(power);
@@ -49,9 +47,9 @@ public class RotateTurret extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(limitSwitch1.get() && power > 0) { //false is closed on NO, but closed is true on NC
+    if(Robot.turret.getLimit1Value()&& power > 0) { //false is closed on NO, but closed is true on NC
       return true;
-    } else if(limitSwitch2.get() && power < 0) { //false is closed on ON, but closed is true on NC
+    } else if(Robot.turret.getLimit2Value() && power < 0) { //false is closed on ON, but closed is true on NC
       return true;
     } else {
       return false;
@@ -62,8 +60,6 @@ public class RotateTurret extends Command {
   @Override
   protected void end() {
     Robot.turret.Stop();
-    limitSwitch1.free();
-    limitSwitch2.free();
   }
 
   // Called when another command which requires one or more of the same
@@ -71,7 +67,6 @@ public class RotateTurret extends Command {
   @Override
   protected void interrupted() {
     Robot.turret.Stop();
-    limitSwitch1.free();
-    limitSwitch2.free();
+
   }
 }
