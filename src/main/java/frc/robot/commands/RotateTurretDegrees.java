@@ -16,7 +16,7 @@ import frc.robot.Robot;
 
 public class RotateTurretDegrees extends Command {
   final double encoderRange = 1;
-  double target =-66;
+  double target;
    //do we want to create an encoder subclass
   double initialEncoder;
   final double pulseToDegrees = 5.55; //encoder ticks divived by this to get degrees
@@ -36,8 +36,7 @@ public class RotateTurretDegrees extends Command {
   protected void initialize() {
     
     //Robot.turret.getEncoder().reset();
-    initialEncoder = Robot.turret.getEncoderDistance();
-    target = target + initialEncoder;
+    
     SmartDashboard.putNumber("initial encoder", Robot.turret.getEncoderDistance());
     
   }
@@ -45,6 +44,8 @@ public class RotateTurretDegrees extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    initialEncoder = Robot.turret.getEncoderDistance();
+    target = (target + initialEncoder)*pulseToDegrees*gearRatio;
     SmartDashboard.putNumber("start distance", initialEncoder);
     SmartDashboard.putNumber("encoder", Robot.turret.getEncoderDistance());
     SmartDashboard.putNumber("target", target);
