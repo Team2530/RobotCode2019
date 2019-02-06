@@ -69,11 +69,11 @@ public class Robot extends TimedRobot {
       //camera0.setResolution (640,480);
       UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
       //camera1.setResolution (640,480);
-<<<<<<< Updated upstream
-=======
     }
->>>>>>> Stashed changes
-
+      */
+    CameraServer.getInstance().startAutomaticCapture();
+    CameraServer.getInstance().startAutomaticCapture();
+      /*
       CvSink cvSink0 = CameraServer.getInstance().getVideo(camera0);
       CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
       CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 640, 480);
@@ -90,12 +90,7 @@ public class Robot extends TimedRobot {
             cvSink1.grabFrame(image);
             camera0view = false;
           } 
-<<<<<<< Updated upstream
-          
-          /* try{
-=======
            try{
->>>>>>> Stashed changes
             cvSink1.grabFrame
           }catch(Exception e){
           } 
