@@ -34,7 +34,7 @@ public class RotateTurret extends Command {
   protected void execute() {
     SmartDashboard.putBoolean("LimitSwitch1", Robot.turret.getlimitSwitch1().get());
     SmartDashboard.putBoolean("LimitSwitch2", Robot.turret.getlimitSwitch2().get());
-    SmartDashboard.putNumber("encoder", Robot.turret.getEncoderDistance());
+    SmartDashboard.putNumber("encoder", Robot.turret.getEncoderValue());
     if(Robot.turret.getLimit1Value() && power > 0) { //false is closed on NO, but closed is true on NC
       
     } else if(Robot.turret.getLimit2Value() && power < 0) { //false is closed on ON, but closed is true on NC

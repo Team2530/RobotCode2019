@@ -16,18 +16,21 @@ import frc.robot.Robot;
 
 public class RotateTurretDegrees extends Command {
   final double encoderRange = 1;
-  double target;
+  double targetDeg;
    //do we want to create an encoder subclass
   double initialEncoder;
   final double pulseToDegrees = 5.55; //encoder ticks divived by this to get degrees
-  final double gearRatio = 2/5; //idk lol
+  final double gearRatio = 0.4; //idk lol
   //one encoder click = 0.28089887640449438202247191011236 degrees
   //one rotation = 1281.6 encoder clicks
 
-  public RotateTurretDegrees(double target) {
+  double targetTicks;
+
+  public RotateTurretDegrees(double targetDeg) {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    target = this.target;
+    // eg. requires(chassis); 
+    
+    targetDeg = this.targetDeg;
     requires(Robot.turret);
   }
 
@@ -37,38 +40,54 @@ public class RotateTurretDegrees extends Command {
     
     //Robot.turret.getEncoder().reset();
     
-    SmartDashboard.putNumber("initial encoder", Robot.turret.getEncoderDistance());
-    
+    SmartDashboard.putNumber("initial encoder", Robot.turret.getEncoderValue());    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    initialEncoder = Robot.turret.getEncoderDistance();
-    target = (target + initialEncoder)*pulseToDegrees*gearRatio;
-    SmartDashboard.putNumber("start distance", initialEncoder);
-    SmartDashboard.putNumber("encoder", Robot.turret.getEncoderDistance());
-    SmartDashboard.putNumber("target", target);
-    //SmartDashboard.putNumber("Distance per Pulse", Robot.turret.getEncoder().getDistancePerPulse());
-    if(Robot.turret.getEncoderDistance() < target) {
-      Robot.turret.Rotate(1);
-    } else if(Robot.turret.getEncoderDistance() > target) {
-      Robot.turret.Rotate(-1); //not sure this works
-    }else{
-      Robot.turret.Stop();
-    }
-  }
+
+    initialEncoder = Robot.turret.getEncoderValue();
+    double targetDegFin = ((targetDeg + (initialEncoder/pulseToDegrees)) * gearRatio); //variable to store end angle in encoder tick rather than degree
+
+    SmartDashboard.putNumber("initial encoder (tick)", initialEncoder);
+    SmartDashboard.putNumber("encoder (tick)", Robot.turret.getEncoderValue());
+    SmartDashboard.putNumber("target ((deg+(initEnc(deg)))*GearRat)", targetDegFin); // displays target in degrees from tick value
+
+    //code to spin to the target
+    double encoderDegrees = (Robot.turret.getEncoderValue()/pulseToDegrees);
+
+    if(encoderDegrees < targetDegFin){
+        //while(encoderDegrees < targetDegFin || !Robot.turret.getLimit1Value() || !Robot.turret.getLimit2Value()) {
+          Robot.turret.Rotate(1);
+        //}
+      } 
+      
+      else if(encoderDegrees > targetDegFin) {
+        //while(encoderDegrees > targetDegFin || !Robot.turret.getLimit1Value() || !Robot.turret.getLimit2Value()) {
+          Robot.turret.Rotate(-1); //not sure this works
+        //}
+      }
+
+      else{
+        Robot.turret.Stop();
+      }
+    }  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(!Robot.turret.getLimit1Value() || !Robot.turret.getLimit2Value()) {
+    if (Robot.turret.getLimit1Value() || Robot.turret.getLimit2Value()) {
+      Robot.turret.Stop();
+      SmartDashboard.putString("Ends","Limit");
       return true;
-    } else {
-      double distance = Robot.turret.getEncoderDistance()/pulseToDegrees;
+    } 
+    else {
+      double encoderDegrees = (Robot.turret.getEncoderValue() / pulseToDegrees)*gearRatio;
       //double distanceABS = Math.abs(distance);
-      SmartDashboard.putNumber("EndEncoder", distance);
-      if(distance >= target - encoderRange && distance <= target + encoderRange) {//&& distanceABS <= target + encoderRange
+      SmartDashboard.putNumber("EndEncoder", encoderDegrees);
+      if((encoderDegrees >= targetDeg - encoderRange) && (encoderDegrees <= targetDeg + encoderRange)) {//&& distanceABS <= target + encoderRange
+        SmartDashboard.putString("Ends","Encoder");
         return true;
       } else {
         return false;
@@ -79,7 +98,7 @@ public class RotateTurretDegrees extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.turret.Stop();
+    //Robot.turret.Stop();
     
    // Robot.turret.getlimitSwitch1().close();
     //Robot.turret.getlimitSwitch2().close();
@@ -89,7 +108,7 @@ public class RotateTurretDegrees extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.turret.Stop();
+    //Robot.turret.Stop();
     //Robot.turret.getlimitSwitch1().close();
     //Robot.turret.getlimitSwitch2().close();
     }

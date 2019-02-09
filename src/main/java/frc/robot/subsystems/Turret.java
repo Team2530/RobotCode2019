@@ -50,7 +50,7 @@ public class Turret extends Subsystem {
   public boolean getLimit2Value(){
     return limitSwitch2.get();
   }
-  public double getEncoderDistance(){
+  public double getEncoderValue(){
     return encoder.getDistance();
   }
   public void Rotate(double speed) {
