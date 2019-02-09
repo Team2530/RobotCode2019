@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 
 import edu.wpi.cscore.UsbCamera;
-
+import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -55,6 +55,8 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
    */
+  
+  
   @Override
   public void robotInit() {
     m_oi = new OI();
@@ -63,6 +65,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
     NetworkTable table = NetworkTableInstance.getDefault().getTable("datatable");
     testEntry = table.getEntry("time2");
+    
     /*//Begin Camera code
     new Thread(() -> {
       UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
@@ -71,8 +74,7 @@ public class Robot extends TimedRobot {
       //camera1.setResolution (640,480);
     }
       */
-    CameraServer.getInstance().startAutomaticCapture();
-    CameraServer.getInstance().startAutomaticCapture();
+    
       /*
       CvSink cvSink0 = CameraServer.getInstance().getVideo(camera0);
       CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
@@ -206,6 +208,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
     SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
     SmartDashboard.putNumber("Pi to RoboRio N",testEntry.getDouble(-1));
+   
+    //m_oi.button7.whenReleased(new Co);
+    
   }
 
   /**
@@ -215,11 +220,6 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
   }
 
-  public void camera() {
-
-
-
-}
 
   
 }
