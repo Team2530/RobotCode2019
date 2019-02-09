@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class RotateTurretDegrees extends Command {
-  final double encoderRange = 1;
+  final double encoderRange = 10;
   double targetDeg;
    //do we want to create an encoder subclass
   double initialEncoder;
@@ -23,14 +23,14 @@ public class RotateTurretDegrees extends Command {
   final double gearRatio = 0.4; //idk lol
   //one encoder click = 0.28089887640449438202247191011236 degrees
   //one rotation = 1281.6 encoder clicks
-
+  double targetDegFin;
   double targetTicks;
-
-  public RotateTurretDegrees(double targetDeg) {
+  double encoderDegrees;
+  public RotateTurretDegrees(double target) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis); 
     
-    targetDeg = this.targetDeg;
+    targetDeg = target;
     requires(Robot.turret);
   }
 
@@ -41,51 +41,48 @@ public class RotateTurretDegrees extends Command {
     //Robot.turret.getEncoder().reset();
     
     SmartDashboard.putNumber("initial encoder", Robot.turret.getEncoderValue());    
+    initialEncoder = Robot.turret.getEncoderValue();
+    targetDegFin = (targetDeg + ((initialEncoder/pulseToDegrees)* gearRatio));
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
 
-    initialEncoder = Robot.turret.getEncoderValue();
-    double targetDegFin = ((targetDeg + (initialEncoder/pulseToDegrees)) * gearRatio); //variable to store end angle in encoder tick rather than degree
+   
+     //variable to store end angle in encoder tick rather than degree
 
     SmartDashboard.putNumber("initial encoder (tick)", initialEncoder);
-    SmartDashboard.putNumber("encoder (tick)", Robot.turret.getEncoderValue());
-    SmartDashboard.putNumber("target ((deg+(initEnc(deg)))*GearRat)", targetDegFin); // displays target in degrees from tick value
-
+    SmartDashboard.putNumber("encoder", Robot.turret.getEncoderValue());
+    SmartDashboard.putNumber("target", targetDeg); 
     //code to spin to the target
-    double encoderDegrees = (Robot.turret.getEncoderValue()/pulseToDegrees);
+    encoderDegrees = (Robot.turret.getEncoderValue()/pulseToDegrees);
 
     if(encoderDegrees < targetDegFin){
-        //while(encoderDegrees < targetDegFin || !Robot.turret.getLimit1Value() || !Robot.turret.getLimit2Value()) {
           Robot.turret.Rotate(1);
-        //}
       } 
       
       else if(encoderDegrees > targetDegFin) {
-        //while(encoderDegrees > targetDegFin || !Robot.turret.getLimit1Value() || !Robot.turret.getLimit2Value()) {
-          Robot.turret.Rotate(-1); //not sure this works
-        //}
-      }
-
-      else{
-        Robot.turret.Stop();
+          Robot.turret.Rotate(-1); 
       }
     }  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (Robot.turret.getLimit1Value() || Robot.turret.getLimit2Value()) {
-      Robot.turret.Stop();
+    if (Robot.turret.getLimit1Value() || Robot.turret.getLimit2Value()) { // Safety block to make sure it stops at limit switches
+
       SmartDashboard.putString("Ends","Limit");
       return true;
     } 
+
     else {
       double encoderDegrees = (Robot.turret.getEncoderValue() / pulseToDegrees)*gearRatio;
       //double distanceABS = Math.abs(distance);
-      SmartDashboard.putNumber("EndEncoder", encoderDegrees);
+      SmartDashboard.putNumber("CurrentEncoderDeg", encoderDegrees);
+      SmartDashboard.putBoolean("Is Done", (encoderDegrees >= targetDeg - encoderRange) && (encoderDegrees <= targetDeg + encoderRange));
+
+
       if((encoderDegrees >= targetDeg - encoderRange) && (encoderDegrees <= targetDeg + encoderRange)) {//&& distanceABS <= target + encoderRange
         SmartDashboard.putString("Ends","Encoder");
         return true;
@@ -98,7 +95,7 @@ public class RotateTurretDegrees extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    //Robot.turret.Stop();
+    Robot.turret.Stop();
     
    // Robot.turret.getlimitSwitch1().close();
     //Robot.turret.getlimitSwitch2().close();
