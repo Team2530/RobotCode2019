@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class RotateTurretDegrees extends Command {
-  final double encoderRange = 10;
+  final double encoderRange = 0;
   double targetDeg;
    //do we want to create an encoder subclass
   double initialEncoder;
@@ -49,21 +49,22 @@ public class RotateTurretDegrees extends Command {
   @Override
   protected void execute() {
 
-   
-     //variable to store end angle in encoder tick rather than degree
-
     SmartDashboard.putNumber("initial encoder (tick)", initialEncoder);
     SmartDashboard.putNumber("encoder", Robot.turret.getEncoderValue());
-    SmartDashboard.putNumber("target", targetDeg); 
+    SmartDashboard.putNumber("target (deg)", targetDeg); 
+    SmartDashboard.putNumber("targetDegFin", targetDegFin);
     //code to spin to the target
     encoderDegrees = (Robot.turret.getEncoderValue()/pulseToDegrees);
+    SmartDashboard.putNumber("encoder (deg)", encoderDegrees);
 
-    if(encoderDegrees < targetDegFin){
+
+
+    if((encoderDegrees < targetDegFin) /*&& (encoderDegrees <= targetDegFin - encoderRange)*/){
           Robot.turret.Rotate(1);
       } 
       
-      else if(encoderDegrees > targetDegFin) {
-          Robot.turret.Rotate(-1); 
+      else if((encoderDegrees > targetDegFin) /*&& (encoderDegrees >= targetDegFin + encoderRange)*/){
+          Robot.turret.Rotate(-1);
       }
     }  
 
