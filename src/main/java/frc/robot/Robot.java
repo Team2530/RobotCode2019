@@ -7,10 +7,10 @@
 
 package frc.robot;
 
-import edu.wpi.first.cameraserver.CameraServer;
+// import edu.wpi.first.cameraserver.CameraServer;
 
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.cscore.VideoSink;
+// import edu.wpi.cscore.UsbCamera;
+// import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -28,9 +28,9 @@ import frc.robot.commands.TestDriveXbox;
 import frc.robot.commands.TestDriveXbox2;
 //import frc.robot.subsystems.ExampleSubsystem;;
 import frc.robot.subsystems.*;
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import org.opencv.core.Mat;
+// import edu.wpi.cscore.CvSink;
+// import edu.wpi.cscore.CvSource;
+// import org.opencv.core.Mat;
 
 /**
  * The VM is configured to automatically run this class, and to call the
