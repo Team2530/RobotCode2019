@@ -39,7 +39,7 @@ public class RotateTurretDegrees extends Command {
   protected void initialize() {
     
     //Robot.turret.getEncoder().reset();
-    
+    SmartDashboard.putString("Ends","");
     SmartDashboard.putNumber("initial encoder", Robot.turret.getEncoderValue());    
     initialEncoder = Robot.turret.getEncoderValue();
     targetDegFin = (targetDeg + ((initialEncoder/pulseToDegrees)* gearRatio));
@@ -54,7 +54,7 @@ public class RotateTurretDegrees extends Command {
     SmartDashboard.putNumber("target (deg)", targetDeg); 
     SmartDashboard.putNumber("targetDegFin", targetDegFin);
     //code to spin to the target
-    encoderDegrees = (Robot.turret.getEncoderValue()/pulseToDegrees);
+    encoderDegrees = ((Robot.turret.getEncoderValue()/pulseToDegrees)*gearRatio);
     SmartDashboard.putNumber("encoder (deg)", encoderDegrees);
 
 
