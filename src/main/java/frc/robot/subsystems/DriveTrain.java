@@ -147,7 +147,7 @@ public class DriveTrain extends Subsystem {
     leftPow = (y1 + x2 + x1);
     //backleftPow = (y1 + x2 - x1);*/
 
-    rightPow = (y1 + x1); 
+    rightPow = -(y1 + x1); 
     leftPow = (y1 - x1); //should? be tank drive
     
     // motor0.set(leftPow);
@@ -158,11 +158,11 @@ public class DriveTrain extends Subsystem {
 
     //practice vs real
 
-    motor3.set(ControlMode.PercentOutput, -leftPow);
+    motor3.set(ControlMode.PercentOutput, leftPow);
     motor4.set(ControlMode.PercentOutput, rightPow);
 
-    motor1.set(ControlMode.PercentOutput, rightPow); 
-    motor2.set(ControlMode.PercentOutput, -leftPow); 
+    motor1.set(ControlMode.PercentOutput, leftPow); 
+    motor2.set(ControlMode.PercentOutput, rightPow); 
   }
 
   public void XboxDrive2(XboxController xbox) {

@@ -34,6 +34,8 @@ public class OI {
 
   XboxController xbox = new XboxController(0);
 
+  Button xbox1 = new JoystickButton(xbox, 1);
+
   public OI() {
 
     button1.whenPressed(new TestSol());
@@ -45,10 +47,10 @@ public class OI {
     //button5.whenPressed(new SwitchLight());
     //button6.whenPressed(new FireEndSol());
     button7.whenPressed(new CameraSub());
+    xbox1.whenPressed(new FireSol());
   }
 
-  //// CREATING BUTTONS
-  // One type of button is a joystick button which is any button on a
+  //// CREATING BUTTON // One type of button is a joystick button which is any button on a
   //// joystick.
   // You create one by telling it which joystick it's on and which button
   // number it is.
