@@ -43,7 +43,7 @@ public class OI {
     button5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
     button6.whenPressed(new RotateTurretDegrees(-180));
     //button5.whenPressed(new SwitchLight());
-    button6.whenPressed(new FireEndSol());
+    //button6.whenPressed(new FireEndSol());
     button7.whenPressed(new CameraSub());
   }
 
