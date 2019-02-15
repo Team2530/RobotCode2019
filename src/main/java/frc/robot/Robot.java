@@ -14,10 +14,15 @@ package frc.robot;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -45,7 +50,8 @@ public class Robot extends TimedRobot {
   public static Turret turret = new Turret(); 
   public static OI m_oi;
   public static TestSolSub sol = new TestSolSub();
-
+  AHRS ahrs;
+  boolean motionDetected;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -65,56 +71,15 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", m_chooser);
     NetworkTable table = NetworkTableInstance.getDefault().getTable("datatable");
     testEntry = table.getEntry("time2");
-    
-    /*//Begin Camera code
-    new Thread(() -> {
-      UsbCamera camera0 = CameraServer.getInstance().startAutomaticCapture();
-      //camera0.setResolution (640,480);
-      UsbCamera camera1 = CameraServer.getInstance().startAutomaticCapture();
-      //camera1.setResolution (640,480);
+    //
+    try {
+      /* Communicate w/navX-MXP via the MXP SPI Bus.                                     */
+      /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
+      /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
+      ahrs = new AHRS(SPI.Port.kMXP); 
+    } catch (RuntimeException ex ) {
+      DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
     }
-      */
-    
-      /*
-      CvSink cvSink0 = CameraServer.getInstance().getVideo(camera0);
-      CvSink cvSink1 = CameraServer.getInstance().getVideo(camera1);
-      CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 640, 480);
-      
-      boolean camera0view = true;
-
-      Mat image = new Mat();
-                
-      while(!Thread.interrupted()) {
-          if(camera0view = false){
-            cvSink0.grabFrame(image);
-            camera0view = true;
-          } else{
-            cvSink1.grabFrame(image);
-            camera0view = false;
-          } 
-           try{
-            cvSink1.grabFrame
-          }catch(Exception e){
-          } 
-          
-          //if more than 2 cameras, add 3rd camera and create camera1view and camera2view. then do if(camera0view || camera1view){}
-          
-          outputStream.putFrame(image);
-        }
-
-      camera.setResolution(640, 480);      
-    }).start();
-  
-
-  //Old code, fallback if above fails and needs to be removed/debugged
-
-    Thread {
-      UsbCamera camera = CameraServer.getInstance().startAutomaticCapture;
-      //camera.setResolution(640, 480);
-    
-    }
-    CameraServer.getInstance().startAutomaticCapture(); */
- 
     
   }
 
@@ -192,7 +157,8 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     AnalogInput.setGlobalSampleRate(62500);
-    Command drive = new TestDriveXbox();
+    Command drive = new TestDrive();
+    ahrs.resetDisplacement();
     
     drive.start();
   }
@@ -200,6 +166,12 @@ public class Robot extends TimedRobot {
   /**
    * This function is called periodically during operator control.
    */
+double acclx;
+double accly;
+double acclz;
+double gyrox;
+double gyroy;
+double gyroz;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
@@ -208,7 +180,25 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
     SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
     SmartDashboard.putNumber("Pi to RoboRio N",testEntry.getDouble(-1));
-   
+    motionDetected = ahrs.isMoving();
+    acclx = ahrs.getRawAccelX();
+    accly = ahrs.getRawAccelY();
+    acclz = ahrs.getRawAccelZ();
+    gyrox = ahrs.getRawGyroX();
+    gyroy = ahrs.getRawGyroY();
+    gyroz = ahrs.getRawGyroZ();
+
+    SmartDashboard.putBoolean("MotionDetected", motionDetected);
+    SmartDashboard.putNumber("Acclx", acclx);
+    SmartDashboard.putNumber("Accly", accly);
+    SmartDashboard.putNumber("Acclz", acclz);
+    SmartDashboard.putNumber("gyrox", gyrox);
+    SmartDashboard.putNumber("gyroy", gyroy);
+    SmartDashboard.putNumber("gyroz", gyroz);
+    SmartDashboard.putNumber("displacementx", ahrs.getDisplacementX());
+    SmartDashboard.putNumber("displacementy", ahrs.getDisplacementY());
+    SmartDashboard.putNumber("displacementz", ahrs.getDisplacementZ());
+
     //m_oi.button7.whenReleased(new Co);
     
   }
