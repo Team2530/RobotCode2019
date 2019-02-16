@@ -116,8 +116,8 @@ public class DriveTrain extends Subsystem {
     // motor1.set(ControlMode.PercentOutput, leftPow);
     // motor3.set(ControlMode.PercentOutput, leftPow);
 
-    motor3.set(ControlMode.PercentOutput, -leftPow);
-    motor4.set(ControlMode.PercentOutput, rightPow);
+    motor3.set(ControlMode.PercentOutput, leftPow);
+    motor4.set(ControlMode.PercentOutput, -rightPow);
 
     motor1.set(ControlMode.PercentOutput, rightPow); 
     motor2.set(ControlMode.PercentOutput, -leftPow); 
