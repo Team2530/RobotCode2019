@@ -41,20 +41,31 @@ public class Turret extends Subsystem {
   public DigitalInput getlimitSwitch1(){
     return limitSwitch1;
   }
+  
   public DigitalInput getlimitSwitch2(){
     return limitSwitch2;
   }
+
   public boolean getLimit1Value(){
     return limitSwitch1.get();
   }
+
   public boolean getLimit2Value(){
     return limitSwitch2.get();
   }
+
   public double getEncoderValue(){
     return encoder.getDistance();
   }
+
   public void Rotate(double speed) {
-    motor0.set(ControlMode.PercentOutput, speed);
+    if(limitSwitch1.get() && speed > 0) { //false is closed on NO, but closed is true on NC
+      
+    } else if(limitSwitch2.get() && speed < 0) { //false is closed on ON, but closed is true on NC
+      
+    } else {
+      motor0.set(ControlMode.PercentOutput, speed);
+    }  
   }
 
   public void Stop() {
