@@ -8,8 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.subsystems.Turret;
 
 public class TestDrive2 extends Command {
   public TestDrive2() {
@@ -17,6 +20,7 @@ public class TestDrive2 extends Command {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.driveTrain);
+    requires(Robot.turret); //temp to get xbox to move turret
   }
 
   // Called just before this Command runs the first time
@@ -29,7 +33,9 @@ public class TestDrive2 extends Command {
   protected void execute() {
     Joystick stick = Robot.m_oi.getJoystick();
     Joystick stick2 = Robot.m_oi.getJoystick2();
+    XboxController xbox = Robot.m_oi.getXbox();
     Robot.driveTrain.Drive2(stick, stick2);
+    Robot.turret.Rotate(xbox.getX(Hand.kLeft));
   }
 
   // Make this return true when this Command no longer needs to run execute()
