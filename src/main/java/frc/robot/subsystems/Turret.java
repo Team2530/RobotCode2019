@@ -54,7 +54,13 @@ public class Turret extends Subsystem {
     return encoder.getDistance();
   }
   public void Rotate(double speed) {
-    motor0.set(ControlMode.PercentOutput, speed);
+    if(limitSwitch1.get() && speed > 0) { //false is closed on NO, but closed is true on NC
+      
+    } else if(limitSwitch2.get() && speed < 0) { //false is closed on ON, but closed is true on NC
+      
+    } else {
+      motor0.set(ControlMode.PercentOutput, speed);
+    }
   }
 
   public void Stop() {
