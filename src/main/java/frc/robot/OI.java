@@ -41,10 +41,10 @@ public class OI {
 
     button1.whenPressed(new TestSol());
     button2.whenPressed(new FireSol());
-    button3.whileHeld(new RotateTurret(1)); //forwards soon i hope it is clockwise rn
-    button4.whenPressed(new RotateTurretDegrees(180));
-    button5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
-    button6.whenPressed(new RotateTurretDegrees(-180));
+    //button3.whileHeld(new RotateTurret(1)); //forwards soon i hope it is clockwise rn
+    //button4.whenPressed(new RotateTurretDegrees(180));
+    //button5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
+    //button6.whenPressed(new RotateTurretDegrees(-180));
     //button5.whenPressed(new SwitchLight());
     //button6.whenPressed(new FireEndSol());
     button7.whenPressed(new CameraSub());
