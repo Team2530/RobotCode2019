@@ -110,6 +110,9 @@ public class DriveTrain extends Subsystem {
     rightPow = (y2); 
     leftPow = (y1); //should? be tank drive
 
+    rightPow = (0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
+    leftPow = (0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
+
     // motor0.set(rightPow);
     // motor2.set(rightPow);
 
