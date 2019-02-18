@@ -30,6 +30,8 @@ public class OI {
   Button button5 = new JoystickButton(stick, 5);
   Button button6 = new JoystickButton(stick, 6);
   Button button7 = new JoystickButton(stick, 7);
+  Button button9 = new JoystickButton(stick, 9);
+  Button button10 = new JoystickButton(stick, 10);
   
 
   XboxController xbox = new XboxController(0);
@@ -49,6 +51,8 @@ public class OI {
     //button6.whenPressed(new FireEndSol());
     button7.whenPressed(new CameraSub());
     xbox1.whenPressed(new FireSol());
+    button9.whileHeld(new DriveStraightSub("forwards"));
+    button9.whileHeld(new DriveStraightSub("backwards"));
   }
 
   //// CREATING BUTTON // One type of button is a joystick button which is any button on a
