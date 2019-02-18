@@ -55,7 +55,8 @@ public class Robot extends TimedRobot {
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-  NetworkTableEntry testEntry;
+  //NetworkTableEntry testEntry;
+  NetworkTable table;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -69,8 +70,8 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
-    NetworkTable table = NetworkTableInstance.getDefault().getTable("datatable");
-    testEntry = table.getEntry("time2");
+    table = NetworkTableInstance.getDefault().getTable("datatable");
+    //testEntry = table.getEntry("time2");
     //
     try {
       /* Communicate w/navX-MXP via the MXP SPI Bus.                                     */
@@ -179,7 +180,7 @@ double gyroz;
     SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
     SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
     SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
-    SmartDashboard.putNumber("Pi to RoboRio N",testEntry.getDouble(-1));
+    SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
     motionDetected = ahrs.isMoving();
     acclx = ahrs.getRawAccelX();
     accly = ahrs.getRawAccelY();
