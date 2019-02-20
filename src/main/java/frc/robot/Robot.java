@@ -184,6 +184,10 @@ double gyroz;
     SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
     SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
     SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
+    
+    SmartDashboard.putNumber("r1", table.getEntry("r1").getDouble(-1));
+    SmartDashboard.putNumber("t1", table.getEntry("t1").getDouble(600000));
+    
     motionDetected = ahrs.isMoving();
     acclx = ahrs.getRawAccelX();
     accly = ahrs.getRawAccelY();
