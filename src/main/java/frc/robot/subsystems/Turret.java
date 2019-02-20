@@ -13,6 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.RotateTurret;
 import frc.robot.commands.RotateTurretDegrees;
 
@@ -54,6 +55,8 @@ public class Turret extends Subsystem {
     return encoder.getDistance();
   }
   public void Rotate(double speed) {
+    SmartDashboard.putBoolean("LimitSwitch1", limitSwitch1.get());
+    SmartDashboard.putBoolean("LimitSwitch2", limitSwitch2.get());
     if(limitSwitch1.get() && speed > 0) { //false is closed on NO, but closed is true on NC
       
     } else if(limitSwitch2.get() && speed < 0) { //false is closed on ON, but closed is true on NC

@@ -123,7 +123,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = new TestDrive2();//m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -185,8 +185,9 @@ double gyroz;
     SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
     SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
     
-    SmartDashboard.putNumber("r1", table.getEntry("r1").getDouble(-1));
-    SmartDashboard.putNumber("t1", table.getEntry("t1").getDouble(600000));
+    /* SmartDashboard.putNumber("r1", table.getEntry("r1").getDouble(-1));
+    SmartDashboard.putNumber("t1", table.getEntry("t1").getDouble(600000)); */
+    
     
     motionDetected = ahrs.isMoving();
     acclx = ahrs.getRawAccelX();

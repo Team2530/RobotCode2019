@@ -230,6 +230,14 @@ public class DriveTrain extends Subsystem {
     
     System.out.println("Executed");  //comment this out later
   }
+  public void SetDrivePower(double leftpower,double rightpower){
+
+    motor3.set(ControlMode.PercentOutput, rightpower);
+    motor4.set(ControlMode.PercentOutput, -leftpower);
+
+    motor1.set(ControlMode.PercentOutput, rightpower); 
+    motor2.set(ControlMode.PercentOutput, -leftpower);
+  }
   public void DriveStraightBackwards() {
     
     motor3.set(ControlMode.PercentOutput, -1);
