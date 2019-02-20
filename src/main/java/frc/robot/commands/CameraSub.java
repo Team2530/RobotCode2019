@@ -17,9 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * Add your docs here.
  */
 public class CameraSub extends InstantCommand {
-  /**
-   * Add your docs here.
-   */
 
   UsbCamera camera0;
   UsbCamera camera1;
@@ -44,11 +41,27 @@ public class CameraSub extends InstantCommand {
     SmartDashboard.putBoolean("CameraSub", true);
     SmartDashboard.putNumber("camEnabled1", camEnabled);
 
+  if(camEnabled == 0){
+    server.setSource(camera1);
+    camEnabled = 1;
+    SmartDashboard.putNumber("camEnabled2", camEnabled);
+  }
+  else if(camEnabled == 1){
+    server.setSource(camera2);
+    camEnabled = 2;
+    SmartDashboard.putNumber("camEnabled2", camEnabled);
+  }
+  else if(camEnabled == 2){
+    server.setSource(camera0);
+    camEnabled = 0;
+    SmartDashboard.putNumber("camEnabled2", camEnabled);
+  }
+/*
     switch(camEnabled) {
       case 0: //camera0 is enabled
         server.setSource(camera1);
         camEnabled = 1;
-        SmartDashboard.putNumber("camEnabled2", camEnabled);
+        SmartDashboard.putNumber("camEnabled2", 1);
       case 1:
         server.setSource(camera2);
         camEnabled = 2;
@@ -57,7 +70,7 @@ public class CameraSub extends InstantCommand {
         server.setSource(camera0);
         camEnabled = 0;
         SmartDashboard.putNumber("camEnabled2", camEnabled);
-    }
+    }*/
       /*if(camEnabled){
       server.setSource(camera1);
      camEnabled =! camEnabled;
