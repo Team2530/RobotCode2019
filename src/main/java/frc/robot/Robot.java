@@ -157,6 +157,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    SmartDashboard.putNumber("Pi to RoboRio N", -1);
+
     AnalogInput.setGlobalSampleRate(62500);
     Command drive = new TestDrive2();
     ahrs.resetDisplacement();
