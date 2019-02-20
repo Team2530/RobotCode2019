@@ -232,11 +232,11 @@ public class DriveTrain extends Subsystem {
   }
   public void SetDrivePower(double leftpower,double rightpower){
 
-    motor3.set(ControlMode.PercentOutput, rightpower);
-    motor4.set(ControlMode.PercentOutput, -leftpower);
+    motor3.set(ControlMode.PercentOutput, -rightpower);
+    motor4.set(ControlMode.PercentOutput, leftpower);
 
-    motor1.set(ControlMode.PercentOutput, rightpower); 
-    motor2.set(ControlMode.PercentOutput, -leftpower);
+    motor1.set(ControlMode.PercentOutput, -rightpower); 
+    motor2.set(ControlMode.PercentOutput, leftpower);
   }
   public void DriveStraightBackwards() {
     

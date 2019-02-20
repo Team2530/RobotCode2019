@@ -187,7 +187,8 @@ double gyroz;
     
     /* SmartDashboard.putNumber("r1", table.getEntry("r1").getDouble(-1));
     SmartDashboard.putNumber("t1", table.getEntry("t1").getDouble(600000)); */
-    
+    //SmartDashboard.putNumber("leftpow",table.getEntry("leftpow").getDouble(15));
+    //SmartDashboard.putNumber("rightpow",table.getEntry("rightpow").getDouble(15));
     
     motionDetected = ahrs.isMoving();
     acclx = ahrs.getRawAccelX();

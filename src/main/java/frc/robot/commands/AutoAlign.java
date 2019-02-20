@@ -23,9 +23,10 @@ public class AutoAlign extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    table = NetworkTableInstance.getDefault().getTable("datatable");
     SmartDashboard.putNumber("leftpow",table.getEntry("leftpow").getDouble(15));
     SmartDashboard.putNumber("rightpow",table.getEntry("rightpow").getDouble(15));
-    table = NetworkTableInstance.getDefault().getTable("datatable");
+    
   }
 
   // Called repeatedly when this Command is scheduled to run

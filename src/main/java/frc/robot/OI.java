@@ -51,7 +51,7 @@ public class OI {
     button6.whenPressed(new FireEndSol());
     button7.whenPressed(new CameraSub());
     xbox1.whenPressed(new FireSol());
-    button2.whenPressed(new AutoAlign());
+    button2.whileHeld(new AutoAlign());
     //button9.whileHeld(new DriveStraightSub("forwards"));
     //button9.whileHeld(new DriveStraightSub("backwards"));
   }
