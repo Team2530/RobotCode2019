@@ -14,6 +14,7 @@ package frc.robot;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -147,6 +148,7 @@ public class Robot extends TimedRobot {
   }
 
   AnalogInput exampleAnalog = new AnalogInput(0);
+  DigitalInput magnet;
   
   @Override
   public void teleopInit() {
@@ -159,6 +161,8 @@ public class Robot extends TimedRobot {
     }
 
     SmartDashboard.putNumber("Pi to RoboRio N", -1);
+
+    magnet = new DigitalInput(5);
 
     AnalogInput.setGlobalSampleRate(62500);
     Command drive = new TestDrive2();
@@ -185,6 +189,8 @@ double gyroz;
     SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
     SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
     
+    SmartDashboard.putBoolean("Magnet", magnet.get());
+
     /* SmartDashboard.putNumber("r1", table.getEntry("r1").getDouble(-1));
     SmartDashboard.putNumber("t1", table.getEntry("t1").getDouble(600000)); */
     //SmartDashboard.putNumber("leftpow",table.getEntry("leftpow").getDouble(15));
