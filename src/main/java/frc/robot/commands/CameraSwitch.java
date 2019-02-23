@@ -9,77 +9,70 @@ package frc.robot.commands;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSink;
+//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * Add your docs here.
- */
-public class CameraSub extends InstantCommand {
-
+public class CameraSwitch extends Command {
+  int camEnabled = 0;
   UsbCamera camera0;
   UsbCamera camera1;
   UsbCamera camera2;
   VideoSink server;
-
-  public CameraSub() {
-    super();
+  
+  public CameraSwitch() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+  }
+
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
     camera0 = CameraServer.getInstance().startAutomaticCapture(0);
     camera1 = CameraServer.getInstance().startAutomaticCapture(1);
     camera2 = CameraServer.getInstance().startAutomaticCapture(2);
     server = CameraServer.getInstance().getServer();
   }
 
-  // Called once when the command executes
-  //boolean camEnabled = false;
-  int camEnabled = 0;
+  // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void initialize() {
-    SmartDashboard.putBoolean("CameraSub", true);
-    SmartDashboard.putNumber("camEnabled1", camEnabled);
-
-  if(camEnabled == 0){
-    server.setSource(camera1);
-    camEnabled = 1;
-    SmartDashboard.putNumber("camEnabled2", camEnabled);
-  }
-  else if(camEnabled == 1){
-    server.setSource(camera2);
-    camEnabled = 2;
-    SmartDashboard.putNumber("camEnabled2", camEnabled);
-  }
-  else if(camEnabled == 2){
-    server.setSource(camera0);
-    camEnabled = 0;
-    SmartDashboard.putNumber("camEnabled2", camEnabled);
-  }
-/*
-    switch(camEnabled) {
+  protected void execute() {
+    switch(camEnabled) { //switch works but camera not showing up
       case 0: //camera0 is enabled
         server.setSource(camera1);
         camEnabled = 1;
         SmartDashboard.putNumber("camEnabled2", 1);
+        break;
       case 1:
         server.setSource(camera2);
         camEnabled = 2;
         SmartDashboard.putNumber("camEnabled2", camEnabled);
+        break;
       case 2:
         server.setSource(camera0);
         camEnabled = 0;
         SmartDashboard.putNumber("camEnabled2", camEnabled);
-    }*/
-      /*if(camEnabled){
-      server.setSource(camera1);
-     camEnabled =! camEnabled;
-     } else /*(!m_oi.button7.get()&& !isLast) *///{
-       //Netwo!kTableInstance.getDefault().getTable("").putString("CameraSelection", camera1.getName());
-       /*server.setSource(camera2);
-       camEnabled =! camEnabled;
-     }*/
-     
+        break;
+      default: 
+        SmartDashboard.putNumber("camEnabled2", -1);
+    }
   }
 
+  // Make this return true when this Command no longer needs to run execute()
+  @Override
+  protected boolean isFinished() {
+    return true;
+  }
+
+  // Called once after isFinished returns true
+  @Override
+  protected void end() {
+  }
+
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
+  @Override
+  protected void interrupted() {
+  }
 }

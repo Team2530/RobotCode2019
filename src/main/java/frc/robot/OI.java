@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*; //imports all commands
-//import frc.robot.subsystems.CameraSub;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -49,7 +48,7 @@ public class OI {
     //button6.whenPressed(new RotateTurretDegrees(-180));
     //button5.whenPressed(new SwitchLight());
     button6.whenPressed(new FireEndSol());
-    button7.whenPressed(new CameraSub());
+    button7.whenPressed(new CameraSwitch());
     xbox1.whenPressed(new FireSol());
     button2.whileHeld(new AutoAlign());
     //button9.whileHeld(new DriveStraightSub("forwards"));
