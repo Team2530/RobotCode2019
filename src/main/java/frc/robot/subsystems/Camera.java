@@ -30,20 +30,20 @@ public class Camera extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
 
-  // public UsbCamera getCamera(int camera) {
-  //   switch(camera) {
-  //     case 0:
-  //       return camera0;
-  //     case 1:
-  //       return camera1;
-  //     case 2:
-  //       return camera2;
-  //     default:
-  //       return camera0;
-  //   }
-  // }
+  public UsbCamera getCamera(int camera) {
+    switch(camera) {
+      case 0:
+        return camera0;
+      case 1:
+        return camera1;
+      case 2:
+        return camera2;
+      default:
+        return camera0;
+    }
+  }
 
-  // public VideoSink getServer() {
-  //   return server;
-  // }
+  public VideoSink getServer() {
+    return server;
+  }
 }
