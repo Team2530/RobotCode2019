@@ -55,6 +55,7 @@ public class DriveTrain extends Subsystem {
   double leftPow;
   double rightPow;
   final double deadzone = 0.2;
+  double powerfactor = 1;
 
   @Override
   public void initDefaultCommand() {
@@ -85,6 +86,10 @@ public class DriveTrain extends Subsystem {
     //backrightPow = (y1 - z1 + x1);
     leftPow = (y1 - z1 + x1);
     //backleftPow = (y1 + z1 - x1);
+    powerfactor = -stick.getRawAxis(4);
+
+    rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
+    leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
 
     // if(false) {
     //   motor0.set(rightPow);
@@ -110,8 +115,10 @@ public class DriveTrain extends Subsystem {
     rightPow = (y2); 
     leftPow = (y1); //should? be tank drive
 
-    rightPow = (0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
-    leftPow = (0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
+    powerfactor = -stick1.getRawAxis(3);
+
+    rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
+    leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
 
     // motor0.set(rightPow);
     // motor2.set(rightPow);
