@@ -13,6 +13,7 @@ import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 
 public class CameraSwitch extends Command {
   int camEnabled = 0;
@@ -24,15 +25,17 @@ public class CameraSwitch extends Command {
   public CameraSwitch() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.camera);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    camera0 = CameraServer.getInstance().startAutomaticCapture(0);
-    camera1 = CameraServer.getInstance().startAutomaticCapture(1);
-    camera2 = CameraServer.getInstance().startAutomaticCapture(2);
-    server = CameraServer.getInstance().getServer();
+    camera0 = Robot.camera.getCamera(0);
+    camera1 = Robot.camera.getCamera(1);
+    camera2 = Robot.camera.getCamera(2);
+    server = Robot.camera.getServer();
+    server.setSource(camera0);
   }
 
   // Called repeatedly when this Command is scheduled to run
