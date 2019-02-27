@@ -86,10 +86,10 @@ public class DriveTrain extends Subsystem {
     //backrightPow = (y1 - z1 + x1);
     leftPow = (y1 - z1 + x1);
     //backleftPow = (y1 + z1 - x1);
-    powerfactor = -stick.getRawAxis(4);
+    //powerfactor = -stick.getRawAxis(4);
 
-    rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
-    leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
+    //rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
+    //leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
 
     // if(false) {
     //   motor0.set(rightPow);
