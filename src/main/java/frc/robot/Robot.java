@@ -51,6 +51,7 @@ public class Robot extends TimedRobot {
   public static Turret turret = new Turret(); 
   public static OI m_oi;
   public static TestSolSub sol = new TestSolSub();
+  public static Camera camera = new Camera();
   AHRS ahrs;
   boolean motionDetected;
   Command m_autonomousCommand;
