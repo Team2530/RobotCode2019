@@ -31,23 +31,6 @@ public class Camera extends Subsystem {
   }
 
   public UsbCamera getCamera(int camera) {
-<<<<<<< HEAD
-    switch(camera) {
-      case 0:
-        return camera0;
-      case 1:
-        return camera1;
-      case 2:
-        return camera2;
-      default:
-        return camera0;
-    }
-  }
-
-  public VideoSink getServer() {
-    return server;
-  }
-=======
      switch(camera) {
        case 0:
          return camera0;
@@ -63,5 +46,4 @@ public class Camera extends Subsystem {
    public VideoSink getServer() {
      return server;
      }
->>>>>>> threeCamerasV2
 }
