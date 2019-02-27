@@ -52,8 +52,8 @@ public class OI {
     button7.whenPressed(new CameraSub());
     xbox1.whenPressed(new FireSol());
     button2.whileHeld(new AutoAlign());
-    //button9.whileHeld(new DriveStraightSub("forwards"));
-    //button9.whileHeld(new DriveStraightSub("backwards"));
+    button9.whileHeld(new DriveStraightSub(1));
+    button10.whileHeld(new DriveStraightSub(-1));
   }
 
   //// CREATING BUTTON // One type of button is a joystick button which is any button on a

@@ -227,15 +227,24 @@ public class DriveTrain extends Subsystem {
     motor2.set(ControlMode.PercentOutput, 0);
   }
 
-  public void DriveStraightForwards() {
-    
+  public int DriveStraight(int botDirection) {
+    if (botDirection == 1){
     motor3.set(ControlMode.PercentOutput, 1);
     motor4.set(ControlMode.PercentOutput, -1);
 
     motor1.set(ControlMode.PercentOutput, 1); 
     motor2.set(ControlMode.PercentOutput, -1);
-    
+    }
+
+    if (botDirection == -1){
+      motor3.set(ControlMode.PercentOutput, -1);
+      motor4.set(ControlMode.PercentOutput, 1);
+  
+      motor1.set(ControlMode.PercentOutput, -1); 
+      motor2.set(ControlMode.PercentOutput, 1);
+    }
     System.out.println("Executed");  //comment this out later
+    return botDirection;
   }
   public void SetDrivePower(double leftpower,double rightpower){
 
@@ -245,14 +254,5 @@ public class DriveTrain extends Subsystem {
     motor1.set(ControlMode.PercentOutput, -rightpower); 
     motor2.set(ControlMode.PercentOutput, leftpower);
   }
-  public void DriveStraightBackwards() {
-    
-    motor3.set(ControlMode.PercentOutput, -1);
-    motor4.set(ControlMode.PercentOutput, 1);
-
-    motor1.set(ControlMode.PercentOutput, -1); 
-    motor2.set(ControlMode.PercentOutput, 1);
-    
-    System.out.println("Executed");  //comment this out later
-  }
+  
 }

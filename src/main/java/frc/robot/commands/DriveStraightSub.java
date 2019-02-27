@@ -9,12 +9,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
 
 public class DriveStraightSub extends Command {
-  String direction;
+  int direction;
+ 
 
-  public DriveStraightSub(String direction) {
+  public DriveStraightSub(int direction) {
     direction = this.direction;
     requires(Robot.driveTrain); 
 
@@ -29,12 +29,7 @@ public class DriveStraightSub extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if (direction == "forwards") {
-      Robot.driveTrain.DriveStraightForwards();
-    }
-    if (direction == "backwards") {
-      Robot.driveTrain.DriveStraightBackwards();
-    }
+    Robot.driveTrain.DriveStraight(direction); 
   }
 
   // Make this return true when this Command no longer needs to run execute()
