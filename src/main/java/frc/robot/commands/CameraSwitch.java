@@ -35,6 +35,9 @@ public class CameraSwitch extends Command {
     camera1 = Robot.camera.getCamera(1);
     camera2 = Robot.camera.getCamera(2);
     server = Robot.camera.getServer();
+    camera0.setBrightness(50);
+    camera1.setBrightness(50);
+    camera2.setBrightness(50);
     server.setSource(camera0);
   }
 

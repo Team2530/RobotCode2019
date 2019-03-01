@@ -31,6 +31,8 @@ public class OI {
   Button button7 = new JoystickButton(stick, 7);
   Button button9 = new JoystickButton(stick, 9);
   Button button10 = new JoystickButton(stick, 10);
+  Button button11 = new JoystickButton(stick, 11);
+  Button button12 = new JoystickButton(stick, 12);
   
 
   XboxController xbox = new XboxController(0);
@@ -51,6 +53,7 @@ public class OI {
     button7.whenPressed(new CameraSwitch());
     xbox1.whenPressed(new FireSol());
     button2.whileHeld(new AutoAlign());
+    button12.whenPressed(new DriveSwitch());
     //button9.whileHeld(new DriveStraightSub("forwards"));
     //button9.whileHeld(new DriveStraightSub("backwards"));
   }

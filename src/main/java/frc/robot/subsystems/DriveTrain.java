@@ -56,6 +56,7 @@ public class DriveTrain extends Subsystem {
   double rightPow;
   final double deadzone = 0.2;
   double powerfactor = 1;
+  int driveDirection = 1;
 
   @Override
   public void initDefaultCommand() {
@@ -65,8 +66,8 @@ public class DriveTrain extends Subsystem {
   }
 
   public void Drive(Joystick stick) {
-    x1 = stick.getX();
-    y1 = stick.getY();
+    x1 = driveDirection*stick.getX();
+    y1 = driveDirection*stick.getY();
     z1 = stick.getZ();
     if (x1 >= -deadzone && x1 <= deadzone) {
       x1 = 0;
@@ -254,5 +255,9 @@ public class DriveTrain extends Subsystem {
     motor2.set(ControlMode.PercentOutput, 1);
     
     System.out.println("Executed");  //comment this out later
+  }
+
+  public void FlipDrive(){
+    driveDirection *= -1;
   }
 }
