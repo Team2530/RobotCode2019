@@ -17,8 +17,7 @@ public class RotateTurret extends Command {
   int power;
 
   public RotateTurret(int speed) {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    //speed -> OI.java (button3whileheld fuction) | speed -> parenthesis
     power = speed;
     requires(Robot.turret);
   }
@@ -40,7 +39,8 @@ public class RotateTurret extends Command {
     } else if(Robot.turret.getLimit2Value() && power < 0) { //false is closed on ON, but closed is true on NC
       
     } else {
-      Robot.turret.Rotate(power);
+      Robot.turret.Rotate(power); //rotates it to the number in OI (parenthesis number)
+      //Rotate is in Turrent.java
     }
   }
 

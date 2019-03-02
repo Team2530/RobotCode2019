@@ -36,22 +36,29 @@ public class OI {
 
   XboxController xbox = new XboxController(0);
 
-  Button xbox1 = new JoystickButton(xbox, 1);
+  Button xboxA = new JoystickButton(xbox, 1);  //A button
+  Button xboxX = new JoystickButton(xbox, 2);  //X button
+  Button xboxY = new JoystickButton(xbox, 3);  //Y button
+  Button xboxB = new JoystickButton(xbox, 4);  //B button
   //Button xbox1 = new JoystickButton(xbox, 1);
 
   public OI() {
 
     button1.whenPressed(new TestSol());
+    button2.whileHeld(new AutoAlign());
     //button2.whenPressed(new FireSol());
-    //button3.whileHeld(new RotateTurret(1)); //forwards soon i hope it is clockwise rn
-    //button4.whenPressed(new RotateTurretDegrees(180));
+    button3.whenPressed(new TurrentInit());
+    button4.whileHeld(new RotateTurret(1));
+    button5.whileHeld(new RotateTurret(-1));
     //button5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
-    //button6.whenPressed(new RotateTurretDegrees(-180));
-    //button5.whenPressed(new SwitchLight());
+    button6.whenPressed(new RotateTurretDegrees(180));
     button6.whenPressed(new FireEndSol());
     button7.whenPressed(new CameraSub());
-    xbox1.whenPressed(new FireSol());
-    button2.whileHeld(new AutoAlign());
+    xboxA.whenPressed(new FireSol());
+    xboxX.whenPressed(new TurrentInit());
+    xboxX.whenPressed(new RotateTurret(1));
+    // xboxB.whenPressed(new RotateTurret(-1));
+    xboxB.whileHeld(new DriveStraightSub(1));
     button9.whileHeld(new DriveStraightSub(1));
     button10.whileHeld(new DriveStraightSub(-1));
   }

@@ -20,12 +20,13 @@ public class RotateTurretDegrees extends Command {
    //do we want to create an encoder subclass
   double initialEncoder;
   final double pulseToDegrees = 5.55; //encoder ticks divived by this to get degrees
-  final double gearRatio = 0.4; //idk lol
+  final double gearRatio = 0.4; //liitle gear and big gear rotation ratio (2rotations per 5 rotations)
   //one encoder click = 0.28089887640449438202247191011236 degrees
   //one rotation = 1281.6 encoder clicks
   double targetDegFin;
   double targetTicks;
   double encoderDegrees;
+  double BedrockPoint = 0;
   public RotateTurretDegrees(double target) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis); 
@@ -54,7 +55,7 @@ public class RotateTurretDegrees extends Command {
     SmartDashboard.putNumber("target (deg)", targetDeg); 
     SmartDashboard.putNumber("targetDegFin", targetDegFin);
     //code to spin to the target
-    encoderDegrees = ((Robot.turret.getEncoderValue()/pulseToDegrees)*gearRatio);
+    encoderDegrees = Math.abs(((Robot.turret.getEncoderValue()/pulseToDegrees)*gearRatio));
     SmartDashboard.putNumber("encoder (deg)", encoderDegrees);
 
 
