@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*; //imports all commands
-//import frc.robot.subsystems.CameraSub;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -32,6 +31,8 @@ public class OI {
   Button button7 = new JoystickButton(stick, 7);
   Button button9 = new JoystickButton(stick, 9);
   Button button10 = new JoystickButton(stick, 10);
+  Button button11 = new JoystickButton(stick, 11);
+  Button button12 = new JoystickButton(stick, 12);
   
 
   XboxController xbox = new XboxController(0);
@@ -43,17 +44,18 @@ public class OI {
 
     button1.whenPressed(new TestSol());
     //button2.whenPressed(new FireSol());
-    //button3.whileHeld(new RotateTurret(1)); //forwards soon i hope it is clockwise rn
+    button3.whileHeld(new RotateTurret(1)); //forwards soon i hope it is clockwise rn
     //button4.whenPressed(new RotateTurretDegrees(180));
-    //button5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
+    button5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
     //button6.whenPressed(new RotateTurretDegrees(-180));
     //button5.whenPressed(new SwitchLight());
     button6.whenPressed(new FireEndSol());
-    button7.whenPressed(new CameraSub());
+    button7.whenPressed(new CameraSwitch());
     xbox1.whenPressed(new FireSol());
     button2.whileHeld(new AutoAlign());
-    button9.whileHeld(new DriveStraightSub(1));
-    button10.whileHeld(new DriveStraightSub(-1));
+    button12.whenPressed(new DriveSwitch());
+    //button9.whileHeld(new DriveStraightSub("forwards"));
+    //button9.whileHeld(new DriveStraightSub("backwards"));
   }
 
   //// CREATING BUTTON // One type of button is a joystick button which is any button on a

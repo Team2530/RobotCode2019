@@ -56,6 +56,7 @@ public class DriveTrain extends Subsystem {
   double rightPow;
   final double deadzone = 0.2;
   double powerfactor = 1;
+  int driveDirection = 1;
 
   @Override
   public void initDefaultCommand() {
@@ -65,8 +66,8 @@ public class DriveTrain extends Subsystem {
   }
 
   public void Drive(Joystick stick) {
-    x1 = stick.getX();
-    y1 = stick.getY();
+    x1 = driveDirection*stick.getX();
+    y1 = driveDirection*stick.getY();
     z1 = stick.getZ();
     if (x1 >= -deadzone && x1 <= deadzone) {
       x1 = 0;
@@ -86,10 +87,10 @@ public class DriveTrain extends Subsystem {
     //backrightPow = (y1 - z1 + x1);
     leftPow = (y1 - z1 + x1);
     //backleftPow = (y1 + z1 - x1);
-    powerfactor = -stick.getRawAxis(4);
+    //powerfactor = -stick.getRawAxis(4);
 
-    rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
-    leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
+    //rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
+    //leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
 
     // if(false) {
     //   motor0.set(rightPow);

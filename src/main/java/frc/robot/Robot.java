@@ -51,6 +51,7 @@ public class Robot extends TimedRobot {
   public static Turret turret = new Turret(); 
   public static OI m_oi;
   public static TestSolSub sol = new TestSolSub();
+  public static Camera camera = new Camera();
   AHRS ahrs;
   boolean motionDetected;
   Command m_autonomousCommand;
@@ -148,7 +149,7 @@ public class Robot extends TimedRobot {
   }
 
   AnalogInput exampleAnalog = new AnalogInput(0);
-  DigitalInput magnet;
+  DigitalInput magnet = new DigitalInput(5);
   
   @Override
   public void teleopInit() {
@@ -162,10 +163,10 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putNumber("Pi to RoboRio N", -1);
 
-    magnet = new DigitalInput(5);
+    
 
     AnalogInput.setGlobalSampleRate(62500);
-    Command drive = new TestDrive2();
+    Command drive = new TestDrive();
     ahrs.resetDisplacement();
     
     drive.start();
