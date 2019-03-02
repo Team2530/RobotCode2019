@@ -166,7 +166,7 @@ public class Robot extends TimedRobot {
     
 
     AnalogInput.setGlobalSampleRate(62500);
-    Command drive = new TestDrive();
+    Command drive = new TestDrive2();
     ahrs.resetDisplacement();
     
     drive.start();
@@ -189,6 +189,7 @@ double gyroz;
     SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
     SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
     SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
+    SmartDashboard.putBoolean("Line Found",Boolean.parseBoolean(table.getEntry("lineFound").getString("false")));
     
     SmartDashboard.putBoolean("Magnet", magnet.get());
 
