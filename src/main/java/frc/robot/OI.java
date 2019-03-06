@@ -54,6 +54,7 @@ public class OI {
     xbox1.whenPressed(new FireSol());
     button2.whileHeld(new AutoAlign());
     button12.whenPressed(new DriveSwitch());
+    button11.whenPressed(new Rumble());
     //button9.whileHeld(new DriveStraightSub("forwards"));
     //button9.whileHeld(new DriveStraightSub("backwards"));
   }
