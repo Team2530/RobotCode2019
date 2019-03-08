@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Drive2;
@@ -72,7 +73,7 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    Shuffleboard.putData("Auto mode", m_chooser);
     table = NetworkTableInstance.getDefault().getTable("datatable");
     //testEntry = table.getEntry("time2");
     //
@@ -93,7 +94,7 @@ public class Robot extends TimedRobot {
    * autonomous, teleoperated and test.
    *
    * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
+   * LiveWindow and Shuffleboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
@@ -116,7 +117,7 @@ public class Robot extends TimedRobot {
   /**
    * This autonomous (along with the chooser code above) shows how to select
    * between different autonomous modes using the dashboard. The sendable
-   * chooser code works with the Java SmartDashboard. If you prefer the
+   * chooser code works with the Java Shuffleboard. If you prefer the
    * LabVIEW Dashboard, remove all of the chooser code and uncomment the
    * getString code to get the auto name from the text box below the Gyro
    *
@@ -129,7 +130,7 @@ public class Robot extends TimedRobot {
     m_autonomousCommand = new Drive2();//m_chooser.getSelected();
 
     /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
+     * String autoSelected = Shuffleboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
      * = new MyAutoCommand(); break; case "Default Auto": default:
      * autonomousCommand = new ExampleCommand(); break; }
@@ -162,7 +163,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    SmartDashboard.putNumber("Pi to RoboRio N", -1);
+    Shuffleboard.putNumber("Pi to RoboRio N", -1);
 
     
 
@@ -185,19 +186,19 @@ double gyroz;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putNumber("Analog", exampleAnalog.getValue());
-    SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
-    SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
-    SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
-    SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
-    SmartDashboard.putBoolean("Line Found",Boolean.parseBoolean(table.getEntry("lineFound").getString("false")));
+    Shuffleboard.putNumber("Analog", exampleAnalog.getValue());
+    Shuffleboard.putNumber("AnalogV", exampleAnalog.getVoltage());
+    Shuffleboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
+    Shuffleboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
+    Shuffleboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
+    Shuffleboard.putBoolean("Line Found",Boolean.parseBoolean(table.getEntry("lineFound").getString("false")));
     
-    SmartDashboard.putBoolean("Magnet", magnet.get());
+    Shuffleboard.putBoolean("Magnet", magnet.get());
 
-    /* SmartDashboard.putNumber("r1", table.getEntry("r1").getDouble(-1));
-    SmartDashboard.putNumber("t1", table.getEntry("t1").getDouble(600000)); */
-    //SmartDashboard.putNumber("leftpow",table.getEntry("leftpow").getDouble(15));
-    //SmartDashboard.putNumber("rightpow",table.getEntry("rightpow").getDouble(15));
+    /* Shuffleboard.putNumber("r1", table.getEntry("r1").getDouble(-1));
+    Shuffleboard.putNumber("t1", table.getEntry("t1").getDouble(600000)); */
+    //Shuffleboard.putNumber("leftpow",table.getEntry("leftpow").getDouble(15));
+    //Shuffleboard.putNumber("rightpow",table.getEntry("rightpow").getDouble(15));
     
     motionDetected = ahrs.isMoving();
     acclx = ahrs.getRawAccelX();
@@ -207,16 +208,16 @@ double gyroz;
     gyroy = ahrs.getRawGyroY();
     gyroz = ahrs.getRawGyroZ();
 
-    SmartDashboard.putBoolean("MotionDetected", motionDetected);
-    SmartDashboard.putNumber("Acclx", acclx);
-    SmartDashboard.putNumber("Accly", accly);
-    SmartDashboard.putNumber("Acclz", acclz);
-    SmartDashboard.putNumber("gyrox", gyrox);
-    SmartDashboard.putNumber("gyroy", gyroy);
-    SmartDashboard.putNumber("gyroz", gyroz);
-    SmartDashboard.putNumber("displacementx", ahrs.getDisplacementX());
-    SmartDashboard.putNumber("displacementy", ahrs.getDisplacementY());
-    SmartDashboard.putNumber("displacementz", ahrs.getDisplacementZ());
+    Shuffleboard.putBoolean("MotionDetected", motionDetected);
+    Shuffleboard.putNumber("Acclx", acclx);
+    Shuffleboard.putNumber("Accly", accly);
+    Shuffleboard.putNumber("Acclz", acclz);
+    Shuffleboard.putNumber("gyrox", gyrox);
+    Shuffleboard.putNumber("gyroy", gyroy);
+    Shuffleboard.putNumber("gyroz", gyroz);
+    Shuffleboard.putNumber("displacementx", ahrs.getDisplacementX());
+    Shuffleboard.putNumber("displacementy", ahrs.getDisplacementY());
+    Shuffleboard.putNumber("displacementz", ahrs.getDisplacementZ());
 
     //m_oi.button7.whenReleased(new Co);
     
