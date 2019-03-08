@@ -32,19 +32,21 @@ public class Turret extends Subsystem {
   DigitalInput limitSwitch1 = new DigitalInput(1);
   DigitalInput limitSwitch2 = new DigitalInput(2);
   Encoder encoder = new Encoder(3, 4);
-  VictorSPX motor0 = new VictorSPX(3);  //id 5  //3 ->5
+  VictorSPX motor0 = new VictorSPX(5);  //id 5  //3 ->5
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+        // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new RotateTurretDegrees(0));
     setDefaultCommand(new RotateTurret(0));
     encoder.setDistancePerPulse((double) 1);
   }
   
-  public boolean getInitTurrentRotate(boolean executed){
-    return executed;     //Will, please say turret
+
+
+  public Boolean InitExecuted(boolean executed){
+    return executed;
   }
 
   public DigitalInput getlimitSwitch1(){
@@ -71,14 +73,24 @@ public class Turret extends Subsystem {
   public void Rotate(double speed) {
     SmartDashboard.putBoolean("LimitSwitch1", limitSwitch1.get());
     SmartDashboard.putBoolean("LimitSwitch2", limitSwitch2.get());
-    
-      //when initialized:
-     if(executed && speed < 0) { //tests if you want to set it to 0degrees and it rotates counterclockwise
-      motor0.set(ControlMode.PercentOutput, speed);
 
+    if(limitSwitch1.get() && speed > 0) { //false is closed on NO, but closed is true on NC
+      motor0.set(ControlMode.PercentOutput, 0);
+      encoder.reset();
+    } else if(limitSwitch2.get() && speed < 0) { //false is closed on ON, but closed is true on NC
+      motor0.set(ControlMode.PercentOutput, 0);
+    } else {
+      motor0.set(ControlMode.PercentOutput, speed);
+    }
+      //when initialized:
+     /*if((executed = true) && (speed < 0)) { //tests if you want to set it to 0degrees and it rotates counterclockwise
+      motor0.set(ControlMode.PercentOutput, speed);
+      while(speed != 0){
+        [command that checks limitswitch]
+      }
      } else {
       motor0.set(ControlMode.PercentOutput, speed);
-    } 
+    } */
   }
 
   public void Stop() {

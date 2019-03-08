@@ -43,7 +43,7 @@ public class RotateTurretDegrees extends Command {
     SmartDashboard.putString("Ends","");
     SmartDashboard.putNumber("initial encoder", Robot.turret.getEncoderValue());    
     initialEncoder = Robot.turret.getEncoderValue();
-    targetDegFin = (targetDeg + ((initialEncoder/pulseToDegrees)* gearRatio));
+    targetDegFin = Math.abs((targetDeg + ((initialEncoder/pulseToDegrees)* gearRatio)));
   }
 
   // Called repeatedly when this Command is scheduled to run

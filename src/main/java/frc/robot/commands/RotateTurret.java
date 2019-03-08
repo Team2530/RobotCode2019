@@ -22,6 +22,9 @@ public class RotateTurret extends Command {
     requires(Robot.turret);
   }
 
+  
+  
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
@@ -47,16 +50,12 @@ public class RotateTurret extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.turret.getLimit1Value()&& power > 0) { //false is closed on NO, but closed is true on NC
-      interrupted();
-      return true;
-    } else if(Robot.turret.getLimit2Value() && power < 0) { //false is closed on ON, but closed is true on NC
-      interrupted();
-      return true;
-    } else {
-      return false;
+  return true;
     }
-  }
+    
+    
+  
+  
 
   // Called once after isFinished returns true
   @Override

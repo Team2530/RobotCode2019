@@ -19,7 +19,7 @@ public class TurrentInit extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    TurrentInitExecute = true;
+    
     
     //requires(Robot.turret);
   }
@@ -27,9 +27,10 @@ public class TurrentInit extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.turret.getInitTurrentRotate(TurrentInitExecute);
+    
+    
     Robot.turret.Rotate(-1);
-    TurrentInitExecute = false;
+    
     
   }
 
@@ -42,6 +43,7 @@ public class TurrentInit extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    //reset encoder here
   }
 
   // Called when another command which requires one or more of the same

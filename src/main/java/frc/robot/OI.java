@@ -30,16 +30,18 @@ public class OI {
   Button button5 = new JoystickButton(stick, 5);
   Button button6 = new JoystickButton(stick, 6);
   Button button7 = new JoystickButton(stick, 7);
+  Button button8 = new JoystickButton(stick, 8);
   Button button9 = new JoystickButton(stick, 9);
   Button button10 = new JoystickButton(stick, 10);
+  Button button11 = new JoystickButton(stick,11);
   
 
   XboxController xbox = new XboxController(0);
 
   Button xboxA = new JoystickButton(xbox, 1);  //A button
-  Button xboxX = new JoystickButton(xbox, 2);  //X button
-  Button xboxY = new JoystickButton(xbox, 3);  //Y button
-  Button xboxB = new JoystickButton(xbox, 4);  //B button
+  Button xboxX = new JoystickButton(xbox, 3);  //X button
+  Button xboxY = new JoystickButton(xbox, 4);  //Y button
+  Button xboxB = new JoystickButton(xbox, 2);  //B button
   //Button xbox1 = new JoystickButton(xbox, 1);
 
   public OI() {
@@ -47,16 +49,18 @@ public class OI {
     button1.whenPressed(new TestSol());
     button2.whileHeld(new AutoAlign());
     //button2.whenPressed(new FireSol());
-    button3.whenPressed(new TurrentInit());
-    button4.whileHeld(new RotateTurret(1));
-    button5.whileHeld(new RotateTurret(-1));
+    button3.whenPressed(new TurrentInit()); //turrentinit -> turrent.java -> motor0.set(ControlMode.PercentOutput, speed);
+    //button4.whileHeld(new RotateTurret(1));
+    //button5.whileHeld(new RotateTurret(-1));
+    button4.whenPressed(new RotateTurretDegrees(180));
+    button5.whenPressed(new RotateTurretDegrees(-180));
     //button5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
     button6.whenPressed(new RotateTurretDegrees(180));
-    button6.whenPressed(new FireEndSol());
     button7.whenPressed(new CameraSub());
+    button8.whenPressed(new FireEndSol());
     xboxA.whenPressed(new FireSol());
     xboxX.whenPressed(new TurrentInit());
-    xboxX.whenPressed(new RotateTurret(1));
+    xboxY.whenPressed(new RotateTurret(1));
     // xboxB.whenPressed(new RotateTurret(-1));
     xboxB.whileHeld(new DriveStraightSub(1));
     button9.whileHeld(new DriveStraightSub(1));
