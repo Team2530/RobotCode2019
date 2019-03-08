@@ -20,7 +20,7 @@ public class RotateTurretDegrees extends Command {
    //do we want to create an encoder subclass
   double initialEncoder;
   final double pulseToDegrees = 5.55; //encoder ticks divived by this to get degrees
-  final double gearRatio = 0.4; //liitle gear and big gear rotation ratio (2rotations per 5 rotations)
+  final double gearRatio = 1.5; //liitle gear and big gear rotation ratio (2rotations per 5 rotations)  //origonally 0.4
   //one encoder click = 0.28089887640449438202247191011236 degrees
   //one rotation = 1281.6 encoder clicks
   double targetDegFin;

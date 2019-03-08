@@ -50,20 +50,19 @@ public class OI {
     button2.whileHeld(new AutoAlign());
     //button2.whenPressed(new FireSol());
     button3.whenPressed(new TurrentInit()); //turrentinit -> turrent.java -> motor0.set(ControlMode.PercentOutput, speed);
+    button6.whenPressed(new FireEndSol());
+    button7.whenPressed(new CameraSwitch());
+    button8.whenPressed(new FireEndSol());
+    button9.whileHeld(new DriveStraightSub(1));
+    button10.whileHeld(new DriveStraightSub(-1));
+    button11.whenPressed(new Rumble());
+    button12.whenPressed(new DriveSwitch());
+
     xboxX.whenPressed(new TurrentInit());
     xboxY.whenPressed(new RotateTurret(1));
     xboxA.whenPressed(new FireSol());
-    button10.whileHeld(new DriveStraightSub(-1));
-    button9.whileHeld(new DriveStraightSub(1));
     xboxB.whileHeld(new DriveStraightSub(1));
-    button7.whenPressed(new CameraSub());
-    button11.whenPressed(new Rumble());
-    button12.whenPressed(new DriveSwitch());
-    button2.whileHeld(new AutoAlign());
-    xbox1.whenPressed(new FireSol());
-    button7.whenPressed(new CameraSwitch());
-    button6.whenPressed(new FireEndSol());
-    button8.whenPressed(new FireEndSol());
+    
   }
 
   //// CREATING BUTTON // One type of button is a joystick button which is any button on a
