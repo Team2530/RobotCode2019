@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import frc.robot.commands.TestDrive;
+import frc.robot.commands.Drive2;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -62,7 +62,7 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new TestDrive());
+    setDefaultCommand(new Drive2());
   }
 
   public void Drive(Joystick stick) {
@@ -252,6 +252,7 @@ public class DriveTrain extends Subsystem {
     
     System.out.println("Executed");  //comment this out later
   }
+
   public void SetDrivePower(double leftpower,double rightpower){
 
     motor3.set(ControlMode.PercentOutput, -rightpower);
@@ -260,6 +261,7 @@ public class DriveTrain extends Subsystem {
     motor1.set(ControlMode.PercentOutput, -rightpower); 
     motor2.set(ControlMode.PercentOutput, leftpower);
   }
+
   public void DriveStraightBackwards() {
     
     motor3.set(ControlMode.PercentOutput, -1);

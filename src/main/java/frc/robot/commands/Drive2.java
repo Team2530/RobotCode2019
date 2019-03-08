@@ -11,15 +11,17 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class TestDrive2 extends Command {
-  public TestDrive2() {
+public class Drive2 extends Command {
+  public Drive2() {
     //Robot robot = new Robot(); //idek
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.driveTrain);
     requires(Robot.turret);
+    requires(Robot.intake);
   }
 
   // Called just before this Command runs the first time
@@ -35,6 +37,9 @@ public class TestDrive2 extends Command {
     XboxController xbox = Robot.m_oi.getXbox();
     Robot.driveTrain.Drive2(stick, stick2);
     Robot.turret.Rotate(xbox.getX(Hand.kLeft));
+    Robot.intake.Intake(xbox.getPOV());
+    Robot.intake.UpAndDown(xbox.getY(Hand.kRight));
+    //SmartDashboard.putNumber("Dpad", xbox.getPOV());
   }
 
   // Make this return true when this Command no longer needs to run execute()

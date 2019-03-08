@@ -54,6 +54,7 @@ public class Turret extends Subsystem {
   public double getEncoderValue(){
     return encoder.getDistance();
   }
+  
   public void Rotate(double speed) {
     SmartDashboard.putBoolean("LimitSwitch1", limitSwitch1.get());
     SmartDashboard.putBoolean("LimitSwitch2", limitSwitch2.get());

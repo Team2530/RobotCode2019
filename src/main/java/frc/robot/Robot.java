@@ -28,8 +28,8 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.TestDrive;
-import frc.robot.commands.TestDrive2;
+import frc.robot.commands.Drive;
+import frc.robot.commands.Drive2;
 import frc.robot.commands.TestDriveXbox;
 import frc.robot.commands.TestDriveXbox2;
 //import frc.robot.subsystems.ExampleSubsystem;;
@@ -52,6 +52,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static TestSolSub sol = new TestSolSub();
   public static Camera camera = new Camera();
+  public static IntakeSub intake = new IntakeSub();
   AHRS ahrs;
   boolean motionDetected;
   Command m_autonomousCommand;
@@ -125,7 +126,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new TestDrive2();//m_chooser.getSelected();
+    m_autonomousCommand = new Drive2();//m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -149,7 +150,7 @@ public class Robot extends TimedRobot {
   }
 
   AnalogInput exampleAnalog = new AnalogInput(0);
-  DigitalInput magnet = new DigitalInput(5);
+  DigitalInput magnet = new DigitalInput(9);
   
   @Override
   public void teleopInit() {
@@ -166,7 +167,7 @@ public class Robot extends TimedRobot {
     
 
     AnalogInput.setGlobalSampleRate(62500);
-    Command drive = new TestDrive2();
+    Command drive = new Drive2();
     ahrs.resetDisplacement();
     
     drive.start();

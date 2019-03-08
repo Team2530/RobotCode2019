@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TestDrive extends Command {
-  public TestDrive() {
+public class Drive extends Command {
+  public Drive() {
     //Robot robot = new Robot(); //idek
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
