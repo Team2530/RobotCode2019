@@ -54,7 +54,7 @@ public class DriveTrain extends Subsystem {
   // double backrightPow;
   double leftPow;
   double rightPow;
-  final double deadzone = 0.2;
+  final double deadzone = 0.1;
   double powerfactor = 1;
   int driveDirection = 1;
 
@@ -108,18 +108,32 @@ public class DriveTrain extends Subsystem {
   }
 
   public void Drive2(Joystick stick1, Joystick stick2) {
-    x1 = stick1.getX();
+    //x1 = stick1.getX();
     y1 = stick1.getY();
-    x2 = stick2.getX();
+    //x2 = stick2.getX();
     y2 = stick2.getY();
+    if (y2 >= -deadzone && y2 <= deadzone) {
+      y2 = 0;
+    } 
+    if (y1 >= -deadzone && y1 <= deadzone) {
+      y1 = 0;
+    } 
 
     rightPow = (y1); 
     leftPow = (y2); //should? be tank drive
 
-    //powerfactor = 1;//-stick1.getRawAxis(3);
+    // SmartDashboard.putNumber("RightBefore", rightPow);
+    // SmartDashboard.putNumber("LeftBefore", leftPow);
 
-    //rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
-    //leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
+    powerfactor = -stick1.getRawAxis(3);
+    powerfactor = 0.5 * (powerfactor + 1); //changes max power based on slider
+    SmartDashboard.putNumber("powerfactor", powerfactor);
+
+    rightPow = powerfactor*(0.5 * Math.pow(rightPow, 3) + 0.5 * rightPow);
+    leftPow = powerfactor*(0.5 * Math.pow(leftPow, 3) + 0.5 * leftPow);
+
+    // SmartDashboard.putNumber("RightAfter", rightPow);
+    // SmartDashboard.putNumber("LeftAfter", leftPow);
 
     // motor0.set(rightPow);
     // motor2.set(rightPow);

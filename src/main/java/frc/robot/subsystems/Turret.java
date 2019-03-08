@@ -58,9 +58,9 @@ public class Turret extends Subsystem {
     SmartDashboard.putBoolean("LimitSwitch1", limitSwitch1.get());
     SmartDashboard.putBoolean("LimitSwitch2", limitSwitch2.get());
     if(limitSwitch1.get() && speed > 0) { //false is closed on NO, but closed is true on NC
-      
+      motor0.set(ControlMode.PercentOutput, 0);
     } else if(limitSwitch2.get() && speed < 0) { //false is closed on ON, but closed is true on NC
-      
+      motor0.set(ControlMode.PercentOutput, 0);
     } else {
       motor0.set(ControlMode.PercentOutput, speed);
     }
