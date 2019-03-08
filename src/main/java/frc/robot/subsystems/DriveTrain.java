@@ -27,20 +27,20 @@ public class DriveTrain extends Subsystem {
 
   
 
-  // VictorSP motor0 = new VictorSP(0);
-  // VictorSP motor2 = new VictorSP(2);
+  VictorSP motor0 = new VictorSP(0);
+  VictorSP motor2 = new VictorSP(2);
 
-  // VictorSPX motor1 = new VictorSPX(0); //id 0
-  // VictorSPX motor3 = new VictorSPX(1); //id 1
+  VictorSPX motor1 = new VictorSPX(0); //id 0
+  VictorSPX motor3 = new VictorSPX(1); //id 1
   
 
   //below for bot, above for practice bot
 
-  TalonSRX motor3 = new TalonSRX(3); //id 3
-  TalonSRX motor4 = new TalonSRX(4); //id 4
+  // TalonSRX motor3 = new TalonSRX(3); //id 3     //0 ->3
+  // TalonSRX motor4 = new TalonSRX(4); //id 4     //3 ->4
    
-  VictorSPX motor1 = new VictorSPX(1); //id 1
-  VictorSPX motor2 = new VictorSPX(2); //id 2
+  // VictorSPX motor1 = new VictorSPX(1); //id 1
+  // VictorSPX motor2 = new VictorSPX(2); //id 2
 
   // VictorSP motor0;
 
@@ -93,17 +93,17 @@ public class DriveTrain extends Subsystem {
     //leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
 
     // if(false) {
-    //   motor0.set(rightPow);
-    //   motor2.set(rightPow);
+      motor0.set(rightPow);
+      motor2.set(rightPow);
 
-    //   motor1.set(ControlMode.PercentOutput, leftPow);
-    //   motor3.set(ControlMode.PercentOutput, leftPow);
-    // } else {
+      motor1.set(ControlMode.PercentOutput, leftPow);
       motor3.set(ControlMode.PercentOutput, leftPow);
-      motor4.set(ControlMode.PercentOutput, -rightPow);
+    // } else {
+      // motor3.set(ControlMode.PercentOutput, leftPow);
+      // motor4.set(ControlMode.PercentOutput, -rightPow);
 
-      motor1.set(ControlMode.PercentOutput, leftPow); 
-      motor2.set(ControlMode.PercentOutput, -rightPow); 
+      // motor1.set(ControlMode.PercentOutput, leftPow); 
+      // motor2.set(ControlMode.PercentOutput, -rightPow); 
     // }
   }
 
@@ -138,8 +138,11 @@ public class DriveTrain extends Subsystem {
     // motor0.set(rightPow);
     // motor2.set(rightPow);
 
-    // motor1.set(ControlMode.PercentOutput, leftPow);
+    motor1.set(ControlMode.PercentOutput, leftPow);
+    motor3.set(ControlMode.PercentOutput, leftPow);
+
     // motor3.set(ControlMode.PercentOutput, leftPow);
+    // motor4.set(ControlMode.PercentOutput, -rightPow);
 
     motor3.set(ControlMode.PercentOutput, leftPow);
     motor4.set(ControlMode.PercentOutput, -rightPow);
@@ -175,19 +178,19 @@ public class DriveTrain extends Subsystem {
     rightPow = -(y1 + x1); 
     leftPow = (y1 - x1); //should? be tank drive
     
-    // motor0.set(leftPow);
-    // motor2.set(-rightPow);
+    motor0.set(leftPow);
+    motor2.set(-rightPow);
 
-    // motor1.set(ControlMode.PercentOutput, -rightPow);
-    // motor3.set(ControlMode.PercentOutput, leftPow);
+    motor1.set(ControlMode.PercentOutput, -rightPow);
+    motor3.set(ControlMode.PercentOutput, leftPow);
 
     //practice vs real
 
-    motor3.set(ControlMode.PercentOutput, leftPow);
-    motor4.set(ControlMode.PercentOutput, rightPow);
+    // motor3.set(ControlMode.PercentOutput, leftPow);
+    // motor4.set(ControlMode.PercentOutput, rightPow);
 
-    motor1.set(ControlMode.PercentOutput, leftPow); 
-    motor2.set(ControlMode.PercentOutput, rightPow); 
+    // motor1.set(ControlMode.PercentOutput, leftPow); 
+    // motor2.set(ControlMode.PercentOutput, rightPow); 
   }
 
   public void XboxDrive2(XboxController xbox) {
@@ -211,63 +214,73 @@ public class DriveTrain extends Subsystem {
     rightPow = (y1); 
     leftPow = (y2); //should? be tank drive
     
-    // motor0.set(leftPow);
-    // motor2.set(-rightPow);
+    motor0.set(leftPow);
+    motor2.set(-rightPow);
 
-    // motor1.set(ControlMode.PercentOutput, -rightPow);
-    // motor3.set(ControlMode.PercentOutput, leftPow);
+    motor1.set(ControlMode.PercentOutput, -rightPow);
+    motor3.set(ControlMode.PercentOutput, leftPow);
 
     //practice vs real
 
-    motor3.set(ControlMode.PercentOutput, -leftPow);
-    motor4.set(ControlMode.PercentOutput, rightPow);
+    // motor3.set(ControlMode.PercentOutput, -leftPow);  
+    // motor4.set(ControlMode.PercentOutput, rightPow);
 
-    motor1.set(ControlMode.PercentOutput, rightPow); 
-    motor2.set(ControlMode.PercentOutput, -leftPow); 
+    // motor1.set(ControlMode.PercentOutput, rightPow); 
+    // motor2.set(ControlMode.PercentOutput, -leftPow); 
   }
 
   public void Stop() {
-    // motor0.set(0);
-    // motor2.set(0);
+    motor0.set(0);
+    motor2.set(0);
 
-    // motor1.set(ControlMode.PercentOutput, 0);
-    // motor3.set(ControlMode.PercentOutput, 0);
+    motor1.set(ControlMode.PercentOutput, 0);
+    motor3.set(ControlMode.PercentOutput, 0);
 
     //practice vs real
 
-    motor3.set(ControlMode.PercentOutput, 0);
-    motor4.set(ControlMode.PercentOutput, 0);
+    // motor3.set(ControlMode.PercentOutput, 0);
+    // motor4.set(ControlMode.PercentOutput, 0);
 
-    motor1.set(ControlMode.PercentOutput, 0);
-    motor2.set(ControlMode.PercentOutput, 0);
+    // motor1.set(ControlMode.PercentOutput, 0);
+    // motor2.set(ControlMode.PercentOutput, 0);
   }
 
   public int DriveStraight(int botDirection) {
     if (botDirection == 1){
-    motor3.set(ControlMode.PercentOutput, 1);
-    motor4.set(ControlMode.PercentOutput, -1);
+      motor0.set(0.1);
+    motor2.set(0.1);
 
-    motor1.set(ControlMode.PercentOutput, 1); 
-    motor2.set(ControlMode.PercentOutput, -1);
+    motor1.set(ControlMode.PercentOutput, 0.1);
+    motor3.set(ControlMode.PercentOutput, 0.1);
+    // motor3.set(ControlMode.PercentOutput, 0.1);
+    // motor4.set(ControlMode.PercentOutput, -0.1);
+
+    // motor1.set(ControlMode.PercentOutput, -0.1); 
+    // motor2.set(ControlMode.PercentOutput, 0.1);
     }
 
     if (botDirection == -1){
-      motor3.set(ControlMode.PercentOutput, -1);
-      motor4.set(ControlMode.PercentOutput, 1);
+      motor0.set(0.1);
+    motor2.set(0.1);
+
+    motor1.set(ControlMode.PercentOutput, 0.1);
+    motor3.set(ControlMode.PercentOutput, 0.1);
+      // motor3.set(ControlMode.PercentOutput, -1);
+      // motor4.set(ControlMode.PercentOutput, 1);
   
-      motor1.set(ControlMode.PercentOutput, -1); 
-      motor2.set(ControlMode.PercentOutput, 1);
+      // motor1.set(ControlMode.PercentOutput, -1); 
+      // motor2.set(ControlMode.PercentOutput, 1);
     }
     System.out.println("Executed");  //comment this out later
     return botDirection;
   }
   public void SetDrivePower(double leftpower,double rightpower){
 
-    motor3.set(ControlMode.PercentOutput, -rightpower);
-    motor4.set(ControlMode.PercentOutput, leftpower);
+    // motor3.set(ControlMode.PercentOutput, -rightpower);
+    // motor4.set(ControlMode.PercentOutput, leftpower);
 
-    motor1.set(ControlMode.PercentOutput, -rightpower); 
-    motor2.set(ControlMode.PercentOutput, leftpower);
+    // motor1.set(ControlMode.PercentOutput, -rightpower); 
+    // motor2.set(ControlMode.PercentOutput, leftpower);
   }
   
 }

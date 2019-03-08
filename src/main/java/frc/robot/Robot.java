@@ -166,7 +166,7 @@ public class Robot extends TimedRobot {
     
 
     AnalogInput.setGlobalSampleRate(62500);
-    Command drive = new TestDrive2();
+    Command drive = new TestDrive();
     ahrs.resetDisplacement();
     
     drive.start();

@@ -7,67 +7,48 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class RotateTurret extends Command {
-
-  int power;
-
-  public RotateTurret(int speed) {
-    //speed -> OI.java (button3whileheld fuction) | speed -> parenthesis
-    power = speed;
-    requires(Robot.turret);
+public class TurrentInit extends Command {
+  boolean TurrentInitExecute = false;
+  public TurrentInit() {
+    
   }
-
-  
-  
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     
+    
+    //requires(Robot.turret);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    SmartDashboard.putBoolean("LimitSwitch1", Robot.turret.getlimitSwitch1().get());
-    SmartDashboard.putBoolean("LimitSwitch2", Robot.turret.getlimitSwitch2().get());
-    SmartDashboard.putNumber("encoder", Robot.turret.getEncoderValue());
-    if(Robot.turret.getLimit1Value() && power > 0) { //false is closed on NO, but closed is true on NC
-      
-    } else if(Robot.turret.getLimit2Value() && power < 0) { //false is closed on ON, but closed is true on NC
-      
-    } else {
-      Robot.turret.Rotate(power); //rotates it to the number in OI (parenthesis number)
-      //Rotate is in Turrent.java
-    }
+    
+    
+    Robot.turret.Rotate(-1);
+    
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-  return true;
-    }
-    
-    
-  
-  
+    return false;
+  }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.turret.Stop();
+    //reset encoder here
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.turret.Stop();
-
   }
 }
