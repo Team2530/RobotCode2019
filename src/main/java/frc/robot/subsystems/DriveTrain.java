@@ -297,4 +297,8 @@ public class DriveTrain extends Subsystem {
     System.out.println("Executed");  //comment this out later
   }
 
+  public void FlipDrive() {
+    driveDirection *= -1;   
+   }
+
 }
