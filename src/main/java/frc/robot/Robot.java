@@ -185,14 +185,14 @@ double gyroz;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putNumber("Analog", exampleAnalog.getValue());
-    SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
-    SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
-    SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
-    SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
+    // SmartDashboard.putNumber("Analog", exampleAnalog.getValue());
+    // SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
+    //SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
+    //SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
+    // SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
     SmartDashboard.putBoolean("Line Found",Boolean.parseBoolean(table.getEntry("lineFound").getString("false")));
     
-    SmartDashboard.putBoolean("Magnet", magnet.get());
+    // SmartDashboard.putBoolean("Magnet", magnet.get());
 
     /* SmartDashboard.putNumber("r1", table.getEntry("r1").getDouble(-1));
     SmartDashboard.putNumber("t1", table.getEntry("t1").getDouble(600000)); */
@@ -207,16 +207,16 @@ double gyroz;
     gyroy = ahrs.getRawGyroY();
     gyroz = ahrs.getRawGyroZ();
 
-    SmartDashboard.putBoolean("MotionDetected", motionDetected);
-    SmartDashboard.putNumber("Acclx", acclx);
-    SmartDashboard.putNumber("Accly", accly);
-    SmartDashboard.putNumber("Acclz", acclz);
+    // SmartDashboard.putBoolean("MotionDetected", motionDetected);
+    // SmartDashboard.putNumber("Acclx", acclx);
+    // SmartDashboard.putNumber("Accly", accly);
+    // SmartDashboard.putNumber("Acclz", acclz);
     SmartDashboard.putNumber("gyrox", gyrox);
     SmartDashboard.putNumber("gyroy", gyroy);
     SmartDashboard.putNumber("gyroz", gyroz);
-    SmartDashboard.putNumber("displacementx", ahrs.getDisplacementX());
-    SmartDashboard.putNumber("displacementy", ahrs.getDisplacementY());
-    SmartDashboard.putNumber("displacementz", ahrs.getDisplacementZ());
+    // SmartDashboard.putNumber("displacementx", ahrs.getDisplacementX());
+    // SmartDashboard.putNumber("displacementy", ahrs.getDisplacementY());
+    // SmartDashboard.putNumber("displacementz", ahrs.getDisplacementZ());
 
     //m_oi.button7.whenReleased(new Co);
     
