@@ -9,28 +9,29 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-// import frc.robot.subsystems.DriveTrain;
 
-public class DriveStraightSub extends Command {
-  int direction;
- 
-
-  public DriveStraightSub(int direction) {
-    direction = this.direction;
-    requires(Robot.driveTrain); 
-
+public class TurrentInit extends Command {
+  boolean TurrentInitExecute = false;
+  public TurrentInit() {
+    
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-   
+    
+    
+    //requires(Robot.turret);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.driveTrain.DriveStraight(direction); 
+    
+    
+    Robot.turret.Rotate(-1);
+    
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -42,7 +43,7 @@ public class DriveStraightSub extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveTrain.Stop();
+    //reset encoder here
   }
 
   // Called when another command which requires one or more of the same

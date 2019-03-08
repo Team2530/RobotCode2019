@@ -17,11 +17,13 @@ public class RotateTurret extends Command {
   int power;
 
   public RotateTurret(int speed) {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+    //speed -> OI.java (button3whileheld fuction) | speed -> parenthesis
     power = speed;
     requires(Robot.turret);
   }
+
+  
+  
 
   // Called just before this Command runs the first time
   @Override
@@ -40,21 +42,20 @@ public class RotateTurret extends Command {
     } else if(Robot.turret.getLimit2Value() && power < 0) { //false is closed on ON, but closed is true on NC
       
     } else {
-      Robot.turret.Rotate(power);
+      Robot.turret.Rotate(power); //rotates it to the number in OI (parenthesis number)
+      //Rotate is in Turrent.java
     }
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if(Robot.turret.getLimit1Value()&& power > 0) { //false is closed on NO, but closed is true on NC
-      return true;
-    } else if(Robot.turret.getLimit2Value() && power < 0) { //false is closed on ON, but closed is true on NC
-      return true;
-    } else {
-      return false;
+  return true;
     }
-  }
+    
+    
+  
+  
 
   // Called once after isFinished returns true
   @Override

@@ -29,6 +29,7 @@ public class OI {
   Button button5 = new JoystickButton(stick, 5);
   Button button6 = new JoystickButton(stick, 6);
   Button button7 = new JoystickButton(stick, 7);
+  Button button8 = new JoystickButton(stick, 8);
   Button button9 = new JoystickButton(stick, 9);
   Button button10 = new JoystickButton(stick, 10);
   Button button11 = new JoystickButton(stick, 11);
@@ -37,26 +38,31 @@ public class OI {
 
   XboxController xbox = new XboxController(0);
 
-  Button xbox1 = new JoystickButton(xbox, 1);
+  Button xboxA = new JoystickButton(xbox, 1);  //A button
+  Button xboxX = new JoystickButton(xbox, 3);  //X button
+  Button xboxY = new JoystickButton(xbox, 4);  //Y button
+  Button xboxB = new JoystickButton(xbox, 2);  //B button
   //Button xbox1 = new JoystickButton(xbox, 1);
 
   public OI() {
 
     button1.whenPressed(new TestSol());
+    button2.whileHeld(new AutoAlign());
     //button2.whenPressed(new FireSol());
-    button3.whileHeld(new RotateTurret(1)); //forwards soon i hope it is clockwise rn
-    //button4.whenPressed(new RotateTurretDegrees(180));
-    button5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
-    //button6.whenPressed(new RotateTurretDegrees(-180));
-    //button5.whenPressed(new SwitchLight());
+    button3.whenPressed(new TurrentInit()); //turrentinit -> turrent.java -> motor0.set(ControlMode.PercentOutput, speed);
     button6.whenPressed(new FireEndSol());
     button7.whenPressed(new CameraSwitch());
-    xbox1.whenPressed(new FireSol());
-    button2.whileHeld(new AutoAlign());
-    button12.whenPressed(new DriveSwitch());
+    button8.whenPressed(new FireEndSol());
+    button9.whileHeld(new DriveStraightSub(1));
+    button10.whileHeld(new DriveStraightSub(-1));
     button11.whenPressed(new Rumble());
-    //button9.whileHeld(new DriveStraightSub("forwards"));
-    //button9.whileHeld(new DriveStraightSub("backwards"));
+    button12.whenPressed(new DriveSwitch());
+
+    xboxX.whenPressed(new TurrentInit());
+    xboxY.whenPressed(new RotateTurret(1));
+    xboxA.whenPressed(new FireSol());
+    xboxB.whileHeld(new DriveStraightSub(1));
+    
   }
 
   //// CREATING BUTTON // One type of button is a joystick button which is any button on a
