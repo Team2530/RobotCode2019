@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,6 +20,8 @@ import frc.robot.commands.Drive2;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 
 /**
  * Add your docs here.
@@ -58,11 +61,15 @@ public class DriveTrain extends Subsystem {
   double powerfactor = 1;
   int driveDirection = 1;
 
+  //gyro/navx varibles
+  AHRS ahrs;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new Drive2());
+    
   }
 
   public void Drive(Joystick stick) {
@@ -275,5 +282,39 @@ public class DriveTrain extends Subsystem {
 
   public void FlipDrive(){
     driveDirection *= -1;
+  }
+
+  public void initNavX() {
+    try {
+      /* Communicate w/navX-MXP via the MXP SPI Bus.                                     */
+      /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
+      /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
+      ahrs = new AHRS(SPI.Port.kMXP); 
+    } catch (RuntimeException ex ) {
+      DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+    }
+  }
+
+  public void resetGryo() { 
+    ahrs.reset();
+  }
+
+  public double getGryo() {
+   
+    //double[] gyro = {ahrs.getRawGyroX(), ahrs.getRawGyroY(), ahrs.getRawGyroZ()};
+    double gyro = (double) ahrs.getAngle();
+    return gyro;
+  }
+
+  public void angleGyroTurn(double target,double power){
+    double offset = 2;
+
+    if(target<getGryo()-offset){
+      SetDrivePower(power, -power);
+    }else if(target>getGryo()+offset){
+      SetDrivePower(-power, power);
+    }else{
+
+    }
   }
 }
