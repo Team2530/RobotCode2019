@@ -90,11 +90,20 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("y", y1);
     SmartDashboard.putNumber("z", z1);
 
+    powerfactor = -stick.getRawAxis(3);
+    powerfactor = 0.5 * (powerfactor + 1); //changes max power based on slider
+    SmartDashboard.putNumber("powerfactor", powerfactor);
+
+    y1 = powerfactor*(0.5 * Math.pow(y1, 3) + 0.5 * y1);
+    z1 = powerfactor*(0.5 * Math.pow(z1, 3) + 0.5 * z1);
+
     rightPow = (y1 + z1);
     //backrightPow = (y1 - z1 + x1);
     leftPow = (y1 - z1);
     //backleftPow = (y1 + z1 - x1);
     //powerfactor = -stick.getRawAxis(4);
+
+    
 
     //rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
     //leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
