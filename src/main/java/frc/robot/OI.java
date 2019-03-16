@@ -66,7 +66,7 @@ public class OI {
     //button_1_5.whenPressed(new SwitchLight());
     button_1_6.whenPressed(new FireEndSol());
     button_1_7.whenPressed(new CameraSwitch());
-    xbox1.whenPressed(new FireSol());
+    xboxA.whenPressed(new FireSol());
     button_1_2.whileHeld(new AutoAlign());
     button_1_12.whenPressed(new DriveSwitch());
     button_1_11.whenPressed(new Rumble());
