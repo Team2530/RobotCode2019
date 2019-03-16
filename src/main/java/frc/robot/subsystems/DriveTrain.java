@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,6 +21,8 @@ import frc.robot.commands.Drive2;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 
 /**
  * Add your docs here.
@@ -59,11 +62,15 @@ public class DriveTrain extends Subsystem {
   double powerfactor = 1;
   int driveDirection = 1;
 
+  //gyro/navx varibles
+  AHRS ahrs;
+
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new Drive2());
+    
   }
 
   public void Drive(Joystick stick) {
@@ -84,11 +91,20 @@ public class DriveTrain extends Subsystem {
     SmartDashboard.putNumber("y", y1);
     SmartDashboard.putNumber("z", z1);
 
+    powerfactor = -stick.getRawAxis(3);
+    powerfactor = 0.5 * (powerfactor + 1); //changes max power based on slider
+    SmartDashboard.putNumber("powerfactor", powerfactor);
+
+    y1 = powerfactor*(0.5 * Math.pow(y1, 3) + 0.5 * y1);
+    z1 = powerfactor*(0.5 * Math.pow(z1, 3) + 0.5 * z1);
+
     rightPow = (y1 + z1);
     //backrightPow = (y1 - z1 + x1);
     leftPow = (y1 - z1);
     //backleftPow = (y1 + z1 - x1);
     //powerfactor = -stick.getRawAxis(4);
+
+    
 
     //rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
     //leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
@@ -298,8 +314,41 @@ public class DriveTrain extends Subsystem {
     System.out.println("Executed");  //comment this out later
   }
 
-  public void FlipDrive() {
-    driveDirection *= -1;   
-   }
+  public void FlipDrive(){
+    driveDirection *= -1;
+  }
 
+  public void initNavX() {
+    try {
+      /* Communicate w/navX-MXP via the MXP SPI Bus.                                     */
+      /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
+      /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
+      ahrs = new AHRS(SPI.Port.kMXP); 
+    } catch (RuntimeException ex ) {
+      DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+    }
+  }
+
+  public void resetGryo() { 
+    ahrs.reset();
+  }
+
+  public double getGryo() {
+   
+    //double[] gyro = {ahrs.getRawGyroX(), ahrs.getRawGyroY(), ahrs.getRawGyroZ()};
+    double gyro = (double) ahrs.getAngle();
+    return gyro;
+  }
+
+  public void angleGyroTurn(double target,double power){
+    double offset = 2;
+
+    if(target<getGryo()-offset){
+      SetDrivePower(power, -power);
+    }else if(target>getGryo()+offset){
+      SetDrivePower(-power, power);
+    }else{
+
+    }
+  }
 }

@@ -21,8 +21,9 @@ public class IntakeSub extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  VictorSPX motorLift = new VictorSPX(6);
-  VictorSPX motorIntake = new VictorSPX(7);
+  VictorSPX motorLift1 = new VictorSPX(6);
+  VictorSPX motorLift2 = new VictorSPX(7); //two motors for lifting
+  VictorSPX motorIntake = new VictorSPX(8);
   DigitalInput limitSwitch3 = new DigitalInput(5);
   DigitalInput limitSwitch4 = new DigitalInput(6);
   
@@ -36,11 +37,14 @@ public class IntakeSub extends Subsystem {
     SmartDashboard.putBoolean("LimitSwitch3", limitSwitch3.get());
     SmartDashboard.putBoolean("LimitSwitch4", limitSwitch4.get());
     if(limitSwitch3.get() && speed > 0) { //false is closed on NO, but closed is true on NC
-      motorLift.set(ControlMode.PercentOutput, 0);
+      motorLift1.set(ControlMode.PercentOutput, 0);
+      motorLift2.set(ControlMode.PercentOutput, 0);
     } else if(limitSwitch4.get() && speed < 0) { //false is closed on ON, but closed is true on NC
-      motorLift.set(ControlMode.PercentOutput, 0);
+      motorLift1.set(ControlMode.PercentOutput, 0);
+      motorLift2.set(ControlMode.PercentOutput, 0);
     } else {
-      motorLift.set(ControlMode.PercentOutput, speed);
+      motorLift1.set(ControlMode.PercentOutput, speed);
+      motorLift2.set(ControlMode.PercentOutput, speed);
     }
   }
 
