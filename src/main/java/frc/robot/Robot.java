@@ -151,7 +151,7 @@ public class Robot extends TimedRobot {
   }
 
   AnalogInput exampleAnalog = new AnalogInput(0);
-  DigitalInput magnet = new DigitalInput(9);
+  // DigitalInput magnet = new DigitalInput(9);
   
   @Override
   public void teleopInit() {
