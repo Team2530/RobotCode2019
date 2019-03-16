@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.RotateTurret;
 import frc.robot.commands.RotateTurretDegrees;
+import frc.robot.Robot;
 
 /**
  * Add your docs here.
@@ -61,6 +62,8 @@ public class Turret extends Subsystem {
     if(limitSwitch1.get() && speed > 0) { //false is closed on NO, but closed is true on NC
       motor0.set(ControlMode.PercentOutput, 0);
     } else if(limitSwitch2.get() && speed < 0) { //false is closed on ON, but closed is true on NC
+      motor0.set(ControlMode.PercentOutput, 0);
+    } else if(Robot.intake.getLimit3Value() || Robot.intake.getLimit4Value()){
       motor0.set(ControlMode.PercentOutput, 0);
     } else {
       motor0.set(ControlMode.PercentOutput, speed);
