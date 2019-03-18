@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.subsystems.DriveTrain;
+//import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class AutoAlign extends Command {
   NetworkTable table;
@@ -34,6 +35,7 @@ public class AutoAlign extends Command {
     lineFound = Boolean.parseBoolean(table.getEntry("lineFound").getString("false"));
     hadLine = false;
     Robot.driveTrain.resetGryo();
+    
   }
 
   // Called repeatedly when this Command is scheduled to run

@@ -53,7 +53,7 @@ public class Robot extends TimedRobot {
   public static TestSolSub sol = new TestSolSub();
   public static Camera camera = new Camera();
   public static IntakeSub intake = new IntakeSub();
-  //AHRS ahrs;
+  AHRS ahrs;
   boolean motionDetected;
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -74,17 +74,16 @@ public class Robot extends TimedRobot {
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     table = NetworkTableInstance.getDefault().getTable("datatable");
-    driveTrain.initNavX();
     //testEntry = table.getEntry("time2");
     //
-    // try {
-    //   /* Communicate w/navX-MXP via the MXP SPI Bus.                                     */
-    //   /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
-    //   /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
-    //   ahrs = new AHRS(SPI.Port.kMXP); 
-    // } catch (RuntimeException ex ) {
-    //   DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
-    // }
+    try {
+      /* Communicate w/navX-MXP via the MXP SPI Bus.                                     */
+      /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
+      /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
+      ahrs = new AHRS(SPI.Port.kMXP); 
+    } catch (RuntimeException ex ) {
+      DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+    }
     
   }
 
@@ -169,7 +168,7 @@ public class Robot extends TimedRobot {
 
     AnalogInput.setGlobalSampleRate(62500);
     Command drive = new Drive2();
-    // ahrs.resetDisplacement();
+    ahrs.resetDisplacement();
     
     drive.start();
   }
@@ -177,53 +176,46 @@ public class Robot extends TimedRobot {
   /**
    * This function is called periodically during operator control.
    */
-// double acclx;
-// double accly;
-// double acclz;
-// double gyrox;
-// double gyroy;
-// double gyroz;
+double acclx;
+double accly;
+double acclz;
+double gyrox;
+double gyroy;
+double gyroz;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    // SmartDashboard.putNumber("Analog", exampleAnalog.getValue());
-    // SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
-    //SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
-    //SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
-    // SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
-    
+    SmartDashboard.putNumber("Analog", exampleAnalog.getValue());
+    SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
+    SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
+    SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
+    SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
     SmartDashboard.putBoolean("Line Found",Boolean.parseBoolean(table.getEntry("lineFound").getString("false")));
-    SmartDashboard.putNumber("r1",(table.getEntry("r1").getDouble(-1)));
-    SmartDashboard.putNumber("t1",(table.getEntry("t1").getDouble(-1)));
-    
-    // SmartDashboard.putBoolean("Magnet", magnet.get());
+    SmartDashboard.putBoolean("Magnet", magnet.get());
 
     /* SmartDashboard.putNumber("r1", table.getEntry("r1").getDouble(-1));
     SmartDashboard.putNumber("t1", table.getEntry("t1").getDouble(600000)); */
     //SmartDashboard.putNumber("leftpow",table.getEntry("leftpow").getDouble(15));
     //SmartDashboard.putNumber("rightpow",table.getEntry("rightpow").getDouble(15));
     
-    // motionDetected = ahrs.isMoving();
-    // acclx = ahrs.getRawAccelX();
-    // accly = ahrs.getRawAccelY();
-    // acclz = ahrs.getRawAccelZ();
-    // gyrox = ahrs.getRawGyroX();
-    // gyroy = ahrs.getRawGyroY();
-    // gyroz = ahrs.getRawGyroZ();
+    motionDetected = ahrs.isMoving();
+    acclx = ahrs.getRawAccelX();
+    accly = ahrs.getRawAccelY();
+    acclz = ahrs.getRawAccelZ();
+    gyrox = ahrs.getRawGyroX();
+    gyroy = ahrs.getRawGyroY();
+    gyroz = ahrs.getRawGyroZ();
 
-    
-
-    // SmartDashboard.putBoolean("MotionDetected", motionDetected);
-    // SmartDashboard.putNumber("Acclx", acclx);
-    // SmartDashboard.putNumber("Accly", accly);
-    // SmartDashboard.putNumber("Acclz", acclz);
-    SmartDashboard.putNumber("gyro", driveTrain.getGryo());
-    table.getEntry("gyro").setDouble(driveTrain.getGryo());
-    //SmartDashboard.putNumber("gyroy", driveTrain.getGryo());
-   // SmartDashboard.putNumber("gyroz", driveTrain.getGryo());
-    // SmartDashboard.putNumber("displacementx", ahrs.getDisplacementX());
-    // SmartDashboard.putNumber("displacementy", ahrs.getDisplacementY());
-    // SmartDashboard.putNumber("displacementz", ahrs.getDisplacementZ());
+    SmartDashboard.putBoolean("MotionDetected", motionDetected);
+    SmartDashboard.putNumber("Acclx", acclx);
+    SmartDashboard.putNumber("Accly", accly);
+    SmartDashboard.putNumber("Acclz", acclz);
+    SmartDashboard.putNumber("gyrox", gyrox);
+    SmartDashboard.putNumber("gyroy", gyroy);
+    SmartDashboard.putNumber("gyroz", gyroz);
+    SmartDashboard.putNumber("displacementx", ahrs.getDisplacementX());
+    SmartDashboard.putNumber("displacementy", ahrs.getDisplacementY());
+    SmartDashboard.putNumber("displacementz", ahrs.getDisplacementZ());
 
     //m_oi.button7.whenReleased(new Co);
     
