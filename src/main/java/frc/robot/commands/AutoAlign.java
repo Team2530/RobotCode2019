@@ -12,14 +12,15 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveTrain;
+// import frc.robot.subsystems.DriveTrain;
 
 public class AutoAlign extends Command {
   NetworkTable table;
-  boolean lineFound;
-  boolean hadLine = false;
-  double r1;
-  double t1;
+  // NetworkTable tableP;
+  // boolean lineFound;
+  // boolean hadLine = false;
+  // double r1;
+  // double t1;
   public AutoAlign() {
     // Use requires() here to declare subsystem dependencies
      requires(Robot.driveTrain);
@@ -29,17 +30,15 @@ public class AutoAlign extends Command {
   @Override
   protected void initialize() {
     table = NetworkTableInstance.getDefault().getTable("datatable");
-    SmartDashboard.putNumber("leftpow",table.getEntry("leftpow").getDouble(15));
-    SmartDashboard.putNumber("rightpow",table.getEntry("rightpow").getDouble(15));
-    lineFound = Boolean.parseBoolean(table.getEntry("lineFound").getString("false"));
-    hadLine = false;
-    Robot.driveTrain.resetGryo();
+    // lineFound = Boolean.parseBoolean(table.getEntry("lineFound").getString("false"));
+    // hadLine = false;
+    // Robot.driveTrain.resetGryo();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    r1 = table.getEntry("r1").getDouble(-1);
+    /*r1 = table.getEntry("r1").getDouble(-1);
     t1 = table.getEntry("t1").getDouble(-1);
     lineFound = Boolean.parseBoolean(table.getEntry("lineFound").getString("false"));
     if(lineFound){
@@ -51,9 +50,14 @@ public class AutoAlign extends Command {
       }else{
         Robot.driveTrain.SetDrivePower(0.2,0.2);
       }
-    }
+    }*/
+    SmartDashboard.putNumber("leftpow parallel",table.getEntry("leftpowP").getDouble(15));
+    SmartDashboard.putNumber("rightpow parallel",table.getEntry("rightpowP").getDouble(15));
+
+    SmartDashboard.putNumber("leftpow",table.getEntry("leftpow").getDouble(15));
+    SmartDashboard.putNumber("rightpow",table.getEntry("rightpow").getDouble(15));
     
-    //Robot.driveTrain.SetDrivePower(table.getEntry("leftpow").getDouble(15), table.getEntry("rightpow").getDouble(15));
+    Robot.driveTrain.SetDrivePower(table.getEntry("leftpow").getDouble(15), table.getEntry("rightpow").getDouble(15));
   }
 
   // Make this return true when this Command no longer needs to run execute()
