@@ -57,7 +57,7 @@ public class OI {
     button_1_1.whenPressed(new TestSol());
     //button_1_2.whenPressed(new FireSol());
     button_1_3.whileHeld(new RotateTurret(1)); //forwards soon i hope it is clockwise rn
-    //button_1_4.whenPressed(new RotateTurretDegrees(180));
+    button_1_4.whenPressed(new RotateTurretDegrees(90));
     button_1_5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
     //button_1_6.whenPressed(new RotateTurretDegrees(-180));
     //button_1_5.whenPressed(new SwitchLight());

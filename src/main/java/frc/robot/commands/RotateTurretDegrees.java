@@ -15,23 +15,25 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class RotateTurretDegrees extends Command {
-  final double encoderRange = 0;
+  final double encoderRange = 5;
   double targetDeg;
    //do we want to create an encoder subclass
   double initialEncoder;
   final double pulseToDegrees = 5.55; //encoder ticks divived by this to get degrees
-  final double gearRatio = 0.4; //idk lol
+  final double gearRatio = 42/56; //idk lol
+  //42/56
   //one encoder click = 0.28089887640449438202247191011236 degrees
   //one rotation = 1281.6 encoder clicks
   double targetDegFin;
   double targetTicks;
   double encoderDegrees;
+
   public RotateTurretDegrees(double target) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis); 
     
     targetDeg = target;
-    requires(Robot.turret);
+    // requires(Robot.turret);
   }
 
   // Called just before this Command runs the first time
@@ -60,13 +62,11 @@ public class RotateTurretDegrees extends Command {
 
 
     if((encoderDegrees < targetDegFin) /*&& (encoderDegrees <= targetDegFin - encoderRange)*/){
-          Robot.turret.Rotate(1);
-      } 
-      
-      else if((encoderDegrees > targetDegFin) /*&& (encoderDegrees >= targetDegFin + encoderRange)*/){
-          Robot.turret.Rotate(-1);
-      }
-    }  
+      Robot.turret.Rotate(.5);
+    } else if((encoderDegrees > targetDegFin) /*&& (encoderDegrees >= targetDegFin + encoderRange)*/){
+      Robot.turret.Rotate(-.5);
+    }
+  }  
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
@@ -75,12 +75,10 @@ public class RotateTurretDegrees extends Command {
 
       SmartDashboard.putString("Ends","Limit");
       return true;
-    } 
-
-    else {
-      double encoderDegrees = (Robot.turret.getEncoderValue() / pulseToDegrees)*gearRatio;
+    } else {
+      // double encoderDegrees = (Robot.turret.getEncoderValue() / pulseToDegrees)*gearRatio;
       //double distanceABS = Math.abs(distance);
-      SmartDashboard.putNumber("CurrentEncoderDeg", encoderDegrees);
+      // SmartDashboard.putNumber("CurrentEncoderDeg", encoderDegrees);
       SmartDashboard.putBoolean("Is Done", (encoderDegrees >= targetDeg - encoderRange) && (encoderDegrees <= targetDeg + encoderRange));
 
 
@@ -106,7 +104,7 @@ public class RotateTurretDegrees extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    //Robot.turret.Stop();
+    Robot.turret.Stop();
     //Robot.turret.getlimitSwitch1().close();
     //Robot.turret.getlimitSwitch2().close();
     }
