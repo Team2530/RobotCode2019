@@ -36,7 +36,7 @@ public class Drive2 extends Command {
     Joystick stick2 = Robot.m_oi.getJoystick2();
     XboxController xbox = Robot.m_oi.getXbox();
     Robot.driveTrain.Drive2(stick, stick2);
-    Robot.turret.Rotate(xbox.getX(Hand.kLeft));
+    //Robot.turret.Rotate(xbox.getX(Hand.kLeft));
     Robot.intake.Intake(xbox.getPOV());
     Robot.intake.UpAndDown(xbox.getY(Hand.kRight));
     //SmartDashboard.putNumber("Dpad", xbox.getPOV());

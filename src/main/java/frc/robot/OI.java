@@ -56,9 +56,9 @@ public class OI {
 
     button_1_1.whenPressed(new TestSol());
     //button_1_2.whenPressed(new FireSol());
-    button_1_3.whileHeld(new RotateTurret(1)); //forwards soon i hope it is clockwise rn
+    //button_1_3.whileHeld(new RotateTurret(1)); //forwards soon i hope it is clockwise rn
     //button_1_4.whenPressed(new RotateTurretDegrees(180));
-    button_1_5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
+    //button_1_5.whileHeld(new RotateTurret(-1)); //backwards soon counterclockwise rn
     //button_1_6.whenPressed(new RotateTurretDegrees(-180));
     //button_1_5.whenPressed(new SwitchLight());
     button_1_6.whenPressed(new FireEndSol());
@@ -67,7 +67,7 @@ public class OI {
     button_1_2.whileHeld(new AutoAlign());
     button_1_12.whenPressed(new DriveSwitch());
     button_1_11.whenPressed(new Rumble());
-
+    
     button_2_1.whenPressed(new ResetNavx());
     //button_1_9.whileHeld(new DriveStraightSub("forwards"));
     //button_1_9.whileHeld(new DriveStraightSub("backwards"));

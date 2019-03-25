@@ -59,7 +59,7 @@ public class DriveTrain extends Subsystem {
   double rightPow;
   final double deadzone = 0.1;
   double powerfactor = 1;
-  int driveDirection = 1;
+  boolean driveDirection = true;
 
   //gyro/navx varibles
   AHRS ahrs;
@@ -73,8 +73,8 @@ public class DriveTrain extends Subsystem {
   }
 
   public void Drive(Joystick stick) {
-    x1 = driveDirection*stick.getX();
-    y1 = driveDirection*stick.getY();
+    x1 = stick.getX();
+    y1 = stick.getY();
     z1 = stick.getZ();
     if (x1 >= -deadzone && x1 <= deadzone) {
       x1 = 0;
@@ -135,8 +135,13 @@ public class DriveTrain extends Subsystem {
       y1 = 0;
     } 
 
-    rightPow = (y1); 
-    leftPow = (y2); //should? be tank drive
+    if(driveDirection) {
+      rightPow = (y1); 
+      leftPow = (y2); //should? be tank drive
+    } else {
+      rightPow = -y2;
+      leftPow = -y1;
+    }
 
     // SmartDashboard.putNumber("RightBefore", rightPow);
     // SmartDashboard.putNumber("LeftBefore", leftPow);
@@ -290,7 +295,11 @@ public class DriveTrain extends Subsystem {
   }
 
   public void FlipDrive(){
-    driveDirection *= -1;
+    if(driveDirection) {
+      driveDirection = false;
+    } else {
+      driveDirection = true;
+    }
   }
 
   public void initNavX() {

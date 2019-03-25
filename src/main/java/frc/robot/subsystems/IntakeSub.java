@@ -39,26 +39,26 @@ public class IntakeSub extends Subsystem {
     /*if(limitSwitchBottom.get() && speed > 0) { //false is closed on NO, but closed is true on NC
       motorLift1.set(ControlMode.PercentOutput, 0);
       motorLift2.set(ControlMode.PercentOutput, 0);
-     } else*/ //if(limitSwitchTop.get() && speed < 0) { //false is closed on ON, but closed is true on NC
-    //   motorLift1.set(ControlMode.PercentOutput, 0);
-    //   motorLift2.set(ControlMode.PercentOutput, 0);
-    // } else {
+     } else*/ if(limitSwitchTop.get() && speed < 0) { //false is closed on ON, but closed is true on NC
+      motorLift1.set(ControlMode.PercentOutput, 0);
+      motorLift2.set(ControlMode.PercentOutput, 0);
+    } else {
       motorLift1.set(ControlMode.PercentOutput, speed/3);
       motorLift2.set(ControlMode.PercentOutput, speed/3);
-    //}
+    }
   }
 
 
   public void Intake(double angle) { //dpad input
-    double Pow = .5;
+    double Pow = 1;
     double speed;
     SmartDashboard.putNumber("dpad", angle);
     if(angle > 90 && angle < 270) { //dpad down
       SmartDashboard.putString("dpad direction", "down");
-      speed = Pow; //succ in
+      speed = -Pow; //spit out
     } else if((angle < 90 && angle >= 0) || (angle > 270 && angle < 360)) { //dpad up
       SmartDashboard.putString("dpad direction", "up");
-      speed = -Pow; //spit out
+      speed = Pow; //succ in
     } else {
       SmartDashboard.putString("dpad direction", "none");
       speed = 0;
