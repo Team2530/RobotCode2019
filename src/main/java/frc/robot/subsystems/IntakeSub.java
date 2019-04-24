@@ -43,8 +43,8 @@ public class IntakeSub extends Subsystem {
       motorLift1.set(ControlMode.PercentOutput, 0);
       motorLift2.set(ControlMode.PercentOutput, 0);
     } else {
-      motorLift1.set(ControlMode.PercentOutput, speed/3);
-      motorLift2.set(ControlMode.PercentOutput, speed/3);
+      motorLift1.set(ControlMode.PercentOutput, speed/2.5);
+      motorLift2.set(ControlMode.PercentOutput, speed/2.5);
     }
   }
 

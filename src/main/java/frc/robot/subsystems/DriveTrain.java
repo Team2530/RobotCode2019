@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import frc.robot.commands.Drive;
 import frc.robot.commands.Drive2;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -96,12 +97,17 @@ public class DriveTrain extends Subsystem {
 
     y1 = powerfactor*(0.5 * Math.pow(y1, 3) + 0.5 * y1);
     z1 = powerfactor*(0.5 * Math.pow(z1, 3) + 0.5 * z1);
+    
 
-    rightPow = (y1 + z1);
-    //backrightPow = (y1 - z1 + x1);
-    leftPow = (y1 - z1);
-    //backleftPow = (y1 + z1 - x1);
-    //powerfactor = -stick.getRawAxis(4);
+    if(driveDirection) {
+      rightPow = (y1 + z1);
+      leftPow = (y1 - z1);  
+    } else {
+      rightPow = (-y1 + z1);
+      leftPow = (-y1 - z1);
+    }
+    // rightPow = (y1 + z1);
+    // leftPow = (y1 - z1);
 
     
 

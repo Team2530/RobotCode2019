@@ -33,8 +33,9 @@ public class Drive extends Command {
     Joystick stick = Robot.m_oi.getJoystick();
     XboxController xbox = Robot.m_oi.getXbox();
     Robot.driveTrain.Drive(stick);
-
-    Robot.turret.Rotate(xbox.getX(Hand.kLeft));
+    Robot.intake.Intake(xbox.getPOV());
+    Robot.intake.UpAndDown(xbox.getY(Hand.kRight));
+    //Robot.turret.Rotate(xbox.getX(Hand.kLeft));
   }
 
   // Make this return true when this Command no longer needs to run execute()
