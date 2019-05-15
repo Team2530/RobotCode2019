@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
+import frc.robot.Constants;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Drive2;
 
@@ -58,7 +59,7 @@ public class DriveTrain extends Subsystem {
   // double backrightPow;
   double leftPow;
   double rightPow;
-  final double deadzone = 0.1;
+  //final double deadzone = 0.1;
   double powerfactor = 1;
   boolean driveDirection = true;
 
@@ -77,10 +78,10 @@ public class DriveTrain extends Subsystem {
     x1 = stick.getX();
     y1 = stick.getY();
     z1 = stick.getZ();
-    if (x1 >= -deadzone && x1 <= deadzone) {
+    if (Math.abs(x1) <= Constants.deadzone) {
       x1 = 0;
     } 
-    if (y1 >= -deadzone && y1 <= deadzone) {
+    if (Math.abs(y1) <= Constants.deadzone) {
       y1 = 0;
     } 
     if (Math.abs(z1) <= 0.3) {
@@ -134,11 +135,11 @@ public class DriveTrain extends Subsystem {
     y1 = stick1.getY();
     //x2 = stick2.getX();
     y2 = stick2.getY();
-    if (y2 >= -deadzone && y2 <= deadzone) {
-      y2 = 0;
-    } 
-    if (y1 >= -deadzone && y1 <= deadzone) {
+    if (Math.abs(x1) <= Constants.deadzone) {
       y1 = 0;
+    } 
+    if (Math.abs(y2) <= Constants.deadzone) {
+      y2 = 0;
     } 
 
     if(driveDirection) {
@@ -181,16 +182,16 @@ public class DriveTrain extends Subsystem {
     y1 = xbox.getY(Hand.kLeft);
     x2 = xbox.getX(Hand.kRight);
     y2 = xbox.getY(Hand.kRight);
-    if (x1 >= -deadzone && x1 <= deadzone) {
+    if (Math.abs(x1) <= Constants.deadzone) {
       x1 = 0;
     }
-    if (x2 >= -deadzone && x2 <= deadzone) {
+    if (Math.abs(x2) <= Constants.deadzone) {
       x2 = 0;
     }
-    if (y1 >= -deadzone && y1 <= deadzone) {
+    if (Math.abs(y1) <= Constants.deadzone) {
       y1 = 0;
     }
-    if (y2 >= -deadzone && y2 <= deadzone) {
+    if (Math.abs(y2) <= Constants.deadzone) {
       y2 = 0;
     }
 
@@ -222,16 +223,16 @@ public class DriveTrain extends Subsystem {
     y1 = xbox.getY(Hand.kLeft);
     x2 = xbox.getX(Hand.kRight);
     y2 = xbox.getY(Hand.kRight);
-    if (x1 >= -deadzone && x1 <= deadzone) {
+    if (Math.abs(x1) <= Constants.deadzone) {
       x1 = 0;
     }
-    if (x2 >= -deadzone && x2 <= deadzone) {
+    if (Math.abs(x2) <= Constants.deadzone) {
       x2 = 0;
     }
-    if (y1 >= -deadzone && y1 <= deadzone) {
+    if (Math.abs(y1) <= Constants.deadzone) {
       y1 = 0;
     }
-    if (y2 >= -deadzone && y2 <= deadzone) {
+    if (Math.abs(y2) <= Constants.deadzone) {
       y2 = 0;
     }
 

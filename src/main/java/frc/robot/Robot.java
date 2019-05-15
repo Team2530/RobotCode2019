@@ -70,9 +70,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    // m_chooser.setDefaultOption("Default Drive/Single Stick Drive", new Drive());
+    // m_chooser.addOption("Double Stick Drive", new Drive2());
+    // m_chooser.addOption("Single Stick Mecanum Drive", new MecanumDrive());
+    // m_chooser.addOption("Double Stick Mecanum Drive", new MecanumDrive2());
+    // SmartDashboard.putData("Drive Mode", m_chooser);
+
     table = NetworkTableInstance.getDefault().getTable("datatable");
     driveTrain.initNavX();
     //testEntry = table.getEntry("time2");
