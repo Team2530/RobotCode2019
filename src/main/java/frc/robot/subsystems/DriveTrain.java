@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.Constants;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Drive2;
+import frc.robot.commands.MecanumDrive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -59,6 +60,11 @@ public class DriveTrain extends Subsystem {
   // double backrightPow;
   double leftPow;
   double rightPow;
+
+  double frontRightPow;
+  double frontLeftPow;
+  double backRightPow;
+  double backLeftPow;
   //final double deadzone = 0.1;
   double powerfactor = 1;
   boolean driveDirection = true;
@@ -70,7 +76,7 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new Drive2());
+    setDefaultCommand(new MecanumDrive());
     
   }
 
@@ -174,6 +180,65 @@ public class DriveTrain extends Subsystem {
 
     motor1.set(ControlMode.PercentOutput, leftPow); 
     motor2.set(ControlMode.PercentOutput, -rightPow/*.4*/); 
+  }
+
+  public void MecanumDrive(Joystick stick) {
+    x1 = stick.getX();
+    y1 = stick.getY();
+    z1 = stick.getZ();
+    if (Math.abs(x1) <= Constants.deadzone) {
+      x1 = 0;
+    } 
+    if (Math.abs(y1) <= Constants.deadzone) {
+      y1 = 0;
+    } 
+    if (Math.abs(z1) <= 0.3) {
+      z1 = 0;
+    }
+
+    SmartDashboard.putNumber("x", x1);
+    SmartDashboard.putNumber("y", y1);
+    SmartDashboard.putNumber("z", z1);
+
+    powerfactor = -stick.getRawAxis(3);
+    powerfactor = 0.5 * (powerfactor + 1); //changes max power based on slider
+    SmartDashboard.putNumber("powerfactor", powerfactor);
+
+    y1 = powerfactor*(0.5 * Math.pow(y1, 3) + 0.5 * y1);
+    x1 = powerfactor*(0.5 * Math.pow(x1, 3) + 0.5 * x1);
+    z1 = powerfactor*(0.5 * Math.pow(z1, 3) + 0.5 * z1);
+    
+
+    if(driveDirection) {
+      frontRightPow = (y1 + z1 + x1);
+      frontLeftPow = (y1 - z1 - x1);
+      backRightPow = (y1 + z1 - x1);
+      backLeftPow = (y1 - z1 + x1);
+    } else {
+      //rightPow = (-y1 + z1);
+      //leftPow = (-y1 - z1);
+    }
+    // rightPow = (y1 + z1);
+    // leftPow = (y1 - z1);
+
+    
+
+    //rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
+    //leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
+
+    // if(false) {
+    //   motor0.set(rightPow);
+    //   motor2.set(rightPow);
+
+    //   motor1.set(ControlMode.PercentOutput, leftPow);
+    //   motor3.set(ControlMode.PercentOutput, leftPow);
+    // } else {
+      motor3.set(ControlMode.PercentOutput, backLeftPow);
+      motor4.set(ControlMode.PercentOutput, -backRightPow);
+
+      motor1.set(ControlMode.PercentOutput, frontLeftPow); 
+      motor2.set(ControlMode.PercentOutput, -frontRightPow); 
+    // }
   }
 
 

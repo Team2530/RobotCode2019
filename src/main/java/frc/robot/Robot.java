@@ -28,6 +28,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.MecanumDrive;
 import frc.robot.commands.Drive;
 import frc.robot.commands.Drive2;
 import frc.robot.commands.TestDriveXbox;
@@ -171,7 +172,7 @@ public class Robot extends TimedRobot {
     
 
     AnalogInput.setGlobalSampleRate(62500);
-    Command drive = new Drive2();
+    Command drive = new MecanumDrive();
     // ahrs.resetDisplacement();
     
     drive.start();
