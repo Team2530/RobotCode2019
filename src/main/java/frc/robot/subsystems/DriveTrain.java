@@ -221,7 +221,10 @@ public class DriveTrain extends Subsystem {
     // rightPow = (y1 + z1);
     // leftPow = (y1 - z1);
 
-    
+    SmartDashboard.putNumber("FRP", frontRightPow);
+    SmartDashboard.putNumber("FLP", frontLeftPow);
+    SmartDashboard.putNumber("BRP", backRightPow);
+    SmartDashboard.putNumber("BLP", backLeftPow);
 
     //rightPow = powerfactor*(0.75 * Math.pow(rightPow, 3) + 0.25 * rightPow);
     //leftPow = powerfactor*(0.75 * Math.pow(leftPow, 3) + 0.25 * leftPow);
