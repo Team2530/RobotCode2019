@@ -47,21 +47,15 @@ public class OI {
 
   public OI() {
 
-    button1.whenPressed(new TestSol());
     button2.whileHeld(new AutoAlign());
     //button2.whenPressed(new FireSol());
-    button3.whenPressed(new TurrentInit()); //turrentinit -> turrent.java -> motor0.set(ControlMode.PercentOutput, speed);
-    button6.whenPressed(new FireEndSol());
+    
     button7.whenPressed(new CameraSwitch());
-    button8.whenPressed(new FireEndSol());
     button9.whileHeld(new DriveStraightSub(1));
     button10.whileHeld(new DriveStraightSub(-1));
     button11.whenPressed(new Rumble());
     button12.whenPressed(new DriveSwitch());
 
-    xboxX.whenPressed(new TurrentInit());
-    xboxY.whenPressed(new RotateTurret(1));
-    xboxA.whenPressed(new FireSol());
     xboxB.whileHeld(new DriveStraightSub(1));
     }
 

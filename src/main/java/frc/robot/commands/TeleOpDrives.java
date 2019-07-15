@@ -8,21 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class FireSol extends CommandGroup {
-
-  private double delayTime = .5; // secound
-
+public class TeleOpDrives extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public FireSol() {
-
-    addSequential(new TestSol());
-    addSequential(new WaitCommand(delayTime));
-    addSequential(new TestSol());
-
+  public TeleOpDrives() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

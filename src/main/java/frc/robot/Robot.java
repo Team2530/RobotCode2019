@@ -9,29 +9,18 @@ package frc.robot;
 
 // import edu.wpi.first.cameraserver.CameraServer;
 
-// import edu.wpi.cscore.UsbCamera;
-// import edu.wpi.cscore.VideoSink;
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.Drive;
-import frc.robot.commands.Drive2;
-import frc.robot.commands.TestDriveXbox;
-import frc.robot.commands.TestDriveXbox2;
+import frc.robot.commands.SingleJoystickDrive;
 //import frc.robot.subsystems.ExampleSubsystem;;
 import frc.robot.subsystems.*;
 // import edu.wpi.cscore.CvSink;
@@ -48,14 +37,12 @@ import frc.robot.subsystems.*;
 public class Robot extends TimedRobot {
   public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static DriveTrain driveTrain = new DriveTrain();
-  public static Turret turret = new Turret(); 
   public static OI m_oi;
-  public static TestSolSub sol = new TestSolSub();
   public static Camera camera = new Camera();
-  public static IntakeSub intake = new IntakeSub();
-  AHRS ahrs;
-  boolean motionDetected;
+  public static PositionalTracking positionalTracker = new PositionalTracking();
+
   Command m_autonomousCommand;
+  Command m_teleopCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   //NetworkTableEntry testEntry;
@@ -80,7 +67,7 @@ public class Robot extends TimedRobot {
       /* Communicate w/navX-MXP via the MXP SPI Bus.                                     */
       /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
       /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
-      ahrs = new AHRS(SPI.Port.kMXP); 
+    
     } catch (RuntimeException ex ) {
       DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
     }
@@ -104,8 +91,11 @@ public class Robot extends TimedRobot {
    * You can use it to reset any subsystem information you want to clear when
    * the robot is disabled.
    */
+
+  //!IMPORTANT MIGHT BREAK
   @Override
   public void disabledInit() {
+    m_teleopCommand.cancel();
   }
 
   @Override
@@ -126,7 +116,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new Drive2();//m_chooser.getSelected();
+    m_autonomousCommand = new SingleJoystickDrive();//m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -134,8 +124,6 @@ public class Robot extends TimedRobot {
      * = new MyAutoCommand(); break; case "Default Auto": default:
      * autonomousCommand = new ExampleCommand(); break; }
      */
-
-    // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.start();
     }
@@ -149,9 +137,7 @@ public class Robot extends TimedRobot {
     Scheduler.getInstance().run();
   }
 
-  AnalogInput exampleAnalog = new AnalogInput(0);
-  DigitalInput magnet = new DigitalInput(9);
-  
+ 
   @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when
@@ -167,44 +153,35 @@ public class Robot extends TimedRobot {
     
 
     AnalogInput.setGlobalSampleRate(62500);
-    Command drive = new Drive2();
-    ahrs.resetDisplacement();
+    m_teleopCommand= new SingleJoystickDrive();
+  
     
-    drive.start();
+    m_teleopCommand.start();
   }
 
-  /**
-   * This function is called periodically during operator control.
-   */
-double acclx;
-double accly;
-double acclz;
-double gyrox;
-double gyroy;
-double gyroz;
+  double acclx;
+  double accly;
+  double acclz;
+  double gyrox;
+  double gyroy;
+  double gyroz;
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    SmartDashboard.putNumber("Analog", exampleAnalog.getValue());
-    SmartDashboard.putNumber("AnalogV", exampleAnalog.getVoltage());
-    SmartDashboard.putNumber("AnalogAverage", exampleAnalog.getAverageValue());
-    SmartDashboard.putNumber("AnalogAverageV", exampleAnalog.getAverageVoltage());
     SmartDashboard.putNumber("Pi to RoboRio N",table.getEntry("test").getDouble(-1));
     SmartDashboard.putBoolean("Line Found",Boolean.parseBoolean(table.getEntry("lineFound").getString("false")));
-    SmartDashboard.putBoolean("Magnet", magnet.get());
-
     /* SmartDashboard.putNumber("r1", table.getEntry("r1").getDouble(-1));
     SmartDashboard.putNumber("t1", table.getEntry("t1").getDouble(600000)); */
     //SmartDashboard.putNumber("leftpow",table.getEntry("leftpow").getDouble(15));
     //SmartDashboard.putNumber("rightpow",table.getEntry("rightpow").getDouble(15));
     
-    motionDetected = ahrs.isMoving();
-    acclx = ahrs.getRawAccelX();
-    accly = ahrs.getRawAccelY();
-    acclz = ahrs.getRawAccelZ();
-    gyrox = ahrs.getRawGyroX();
-    gyroy = ahrs.getRawGyroY();
-    gyroz = ahrs.getRawGyroZ();
+    boolean motionDetected = positionalTracker.ahrs.isMoving();
+    acclx = positionalTracker.ahrs.getRawAccelX();
+    accly = positionalTracker.ahrs.getRawAccelY();
+    acclz = positionalTracker.ahrs.getRawAccelZ();
+    gyrox = positionalTracker.ahrs.getRawGyroX();
+    gyroy = positionalTracker.ahrs.getRawGyroY();
+    gyroz = positionalTracker.ahrs.getRawGyroZ();
 
     SmartDashboard.putBoolean("MotionDetected", motionDetected);
     SmartDashboard.putNumber("Acclx", acclx);
@@ -213,9 +190,9 @@ double gyroz;
     SmartDashboard.putNumber("gyrox", gyrox);
     SmartDashboard.putNumber("gyroy", gyroy);
     SmartDashboard.putNumber("gyroz", gyroz);
-    SmartDashboard.putNumber("displacementx", ahrs.getDisplacementX());
-    SmartDashboard.putNumber("displacementy", ahrs.getDisplacementY());
-    SmartDashboard.putNumber("displacementz", ahrs.getDisplacementZ());
+    SmartDashboard.putNumber("displacementx", positionalTracker.ahrs.getDisplacementX());
+    SmartDashboard.putNumber("displacementy", positionalTracker.ahrs.getDisplacementY());
+    SmartDashboard.putNumber("displacementz", positionalTracker.ahrs.getDisplacementZ());
 
     //m_oi.button7.whenReleased(new Co);
     

@@ -7,34 +7,59 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Drive extends Command {
-  public Drive() {
-    //Robot robot = new Robot(); //idek
+public class XboxDriveTank extends Command {
+
+  XboxController xbox;
+
+  double y1;
+  double y2;
+
+  double leftPow;
+  double rightPow;
+
+  public XboxDriveTank() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.driveTrain);
-    requires(Robot.turret);
   }
 
   // Called just before this Command runs the first time
+
   @Override
   protected void initialize() {
+    xbox = Robot.m_oi.getXbox();
   }
 
   // Called repeatedly when this Command is scheduled to run
+
   @Override
   protected void execute() {
-    Joystick stick = Robot.m_oi.getJoystick();
-    XboxController xbox = Robot.m_oi.getXbox();
-    Robot.driveTrain.Drive(stick);
+    y1 = xbox.getY(Hand.kLeft);
+    y2 = xbox.getY(Hand.kRight);
+    if (y2 >= -Robot.driveTrain.deadzone && y2 <= Robot.driveTrain.deadzone) {
+      y2 = 0;
+    }
+    if (y1 >= -Robot.driveTrain.deadzone && y1 <= Robot.driveTrain.deadzone) {
+      y1 = 0;
+    }
+    
 
-    Robot.turret.Rotate(xbox.getX(Hand.kLeft));
+    rightPow = (y1);
+    leftPow = (y2); // should? be tank drive
+
+    Robot.driveTrain.setMotorPower(0, rightPow);
+    Robot.driveTrain.setMotorPower(2, rightPow);
+
+    Robot.driveTrain.setMotorPower(1, leftPow);
+    Robot.driveTrain.setMotorPower(3, leftPow);
+
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()

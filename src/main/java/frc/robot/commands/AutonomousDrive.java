@@ -10,32 +10,35 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class FireEndSol extends Command {
-  public FireEndSol() {
+public class AutonomousDrive extends Command {
+
+  Float distance;
+  double power;
+  public AutonomousDrive(Float distance, double power) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.sol);
+    requires(Robot.driveTrain);
+    requires(Robot.positionalTracker);
+    this.distance = distance;
+    this.power = power;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.positionalTracker.initAHRS();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.sol.getEndSol()) {
-      Robot.sol.retractEndSol();
-    } else {
-      Robot.sol.extendEndSol();
-    }
+    
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
   // Called once after isFinished returns true
@@ -48,4 +51,5 @@ public class FireEndSol extends Command {
   @Override
   protected void interrupted() {
   }
+
 }
