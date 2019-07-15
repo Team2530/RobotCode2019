@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class XboxDrive extends Command {
 
@@ -45,16 +46,16 @@ public class XboxDrive extends Command {
     y1 = xbox.getY(Hand.kLeft);
     x2 = xbox.getX(Hand.kRight);
     y2 = xbox.getY(Hand.kRight);
-    if (x1 >= -Robot.driveTrain.deadzone && x1 <= Robot.driveTrain.deadzone) {
+    if (x1 >= -RobotMap.deadzone && x1 <= RobotMap.deadzone) {
       y1 = 0;
     }
-    if (x2 >= -Robot.driveTrain.deadzone && x2 <= Robot.driveTrain.deadzone) {
+    if (x2 >= -RobotMap.deadzone && x2 <= RobotMap.deadzone) {
       y2 = 0;
     }
-    if (y2 >= -Robot.driveTrain.deadzone && y2 <= Robot.driveTrain.deadzone) {
+    if (y2 >= -RobotMap.deadzone && y2 <= RobotMap.deadzone) {
       y2 = 0;
     }
-    if (y1 >= -Robot.driveTrain.deadzone && y1 <= Robot.driveTrain.deadzone) {
+    if (y1 >= -RobotMap.deadzone && y1 <= RobotMap.deadzone) {
       y1 = 0;
     }
     

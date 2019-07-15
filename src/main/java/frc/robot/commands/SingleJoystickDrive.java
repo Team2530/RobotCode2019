@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class SingleJoystickDrive extends Command {
   
@@ -43,13 +44,13 @@ public class SingleJoystickDrive extends Command {
   
   @Override
   protected void execute() {
-    x1 = Robot.driveTrain.getDriveDirection()*stick.getX();
-    y1 = Robot.driveTrain.getDriveDirection()*stick.getY();
+    x1 = RobotMap.driveDirection*stick.getX();
+    y1 = RobotMap.driveDirection*stick.getY();
     z1 = stick.getZ();
-    if (x1 >= -Robot.driveTrain.deadzone && x1 <= Robot.driveTrain.deadzone) {
+    if (x1 >= -RobotMap.deadzone && x1 <= RobotMap.deadzone) {
       x1 = 0;
     } 
-    if (y1 >= -Robot.driveTrain.deadzone && y1 <= Robot.driveTrain.deadzone) {
+    if (y1 >= -RobotMap.deadzone && y1 <= RobotMap.deadzone) {
       y1 = 0;
     } 
     if (Math.abs(z1) <= 0.3) {

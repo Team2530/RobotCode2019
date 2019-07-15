@@ -53,7 +53,10 @@ public class AutoAlign extends Command {
       if(hadLine){
         //Robot.driveTrain.angleGyroTurn(t1, 0.3);
       }else{
-        Robot.driveTrain.SetDrivePower(0.2,0.2);
+        for (int i = 0; i < 3; i++) {
+          Robot.driveTrain.setMotorPower(i, 0.2);
+        }
+
       }
     }
     

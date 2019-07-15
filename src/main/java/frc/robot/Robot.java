@@ -175,24 +175,7 @@ public class Robot extends TimedRobot {
     //SmartDashboard.putNumber("leftpow",table.getEntry("leftpow").getDouble(15));
     //SmartDashboard.putNumber("rightpow",table.getEntry("rightpow").getDouble(15));
     
-    boolean motionDetected = positionalTracker.ahrs.isMoving();
-    acclx = positionalTracker.ahrs.getRawAccelX();
-    accly = positionalTracker.ahrs.getRawAccelY();
-    acclz = positionalTracker.ahrs.getRawAccelZ();
-    gyrox = positionalTracker.ahrs.getRawGyroX();
-    gyroy = positionalTracker.ahrs.getRawGyroY();
-    gyroz = positionalTracker.ahrs.getRawGyroZ();
-
-    SmartDashboard.putBoolean("MotionDetected", motionDetected);
-    SmartDashboard.putNumber("Acclx", acclx);
-    SmartDashboard.putNumber("Accly", accly);
-    SmartDashboard.putNumber("Acclz", acclz);
-    SmartDashboard.putNumber("gyrox", gyrox);
-    SmartDashboard.putNumber("gyroy", gyroy);
-    SmartDashboard.putNumber("gyroz", gyroz);
-    SmartDashboard.putNumber("displacementx", positionalTracker.ahrs.getDisplacementX());
-    SmartDashboard.putNumber("displacementy", positionalTracker.ahrs.getDisplacementY());
-    SmartDashboard.putNumber("displacementz", positionalTracker.ahrs.getDisplacementZ());
+    
 
     //m_oi.button7.whenReleased(new Co);
     

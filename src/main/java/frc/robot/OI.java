@@ -49,14 +49,9 @@ public class OI {
 
     button2.whileHeld(new AutoAlign());
     //button2.whenPressed(new FireSol());
-    
     button7.whenPressed(new CameraSwitch());
-    button9.whileHeld(new DriveStraightSub(1));
-    button10.whileHeld(new DriveStraightSub(-1));
     button11.whenPressed(new Rumble());
     button12.whenPressed(new DriveSwitch());
-
-    xboxB.whileHeld(new DriveStraightSub(1));
     }
 
 
