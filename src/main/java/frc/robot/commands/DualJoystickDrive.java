@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class DualJoystickDrive extends Command {
 
@@ -46,10 +47,10 @@ public class DualJoystickDrive extends Command {
     y1 = stick1.getY();
     // x2 = stick2.getX();
     y2 = stick2.getY();
-    if (y2 >= -Robot.driveTrain.deadzone && y2 <= Robot.driveTrain.deadzone) {
+    if (y2 >= -RobotMap.deadzone && y2 <= RobotMap.deadzone) {
       y2 = 0;
     }
-    if (y1 >= -Robot.driveTrain.deadzone && y1 <= Robot.driveTrain.deadzone) {
+    if (y1 >= -RobotMap.deadzone && y1 <= RobotMap.deadzone) {
       y1 = 0;
     }
 

@@ -9,11 +9,9 @@ package frc.robot.subsystems;
 
 //import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.VictorSP;
 import frc.robot.RobotMap;
 import frc.robot.commands.SingleJoystickDrive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 //!!!!IMPORTANT NOTE!!!!     -slot 0 = Xbox controller  -slot 1 = stick1  -slot 2 = stick2
 
@@ -55,36 +53,8 @@ public class DriveTrain extends Subsystem {
   }
 
   // ! do not use
-  //public int DriveStraight(int power) {
-    if (botDirection == 1) {
-      
-    }
-
-    if (botDirection == -1) {
-      RobotMap.motor0.set(0.1);
-      RobotMap.motor2.set(0.1);
-
-      RobotMap.motor1.set(ControlMode.PercentOutput, 0.1);
-      RobotMap.motor3.set(ControlMode.PercentOutput, 0.1);
-
-    }
-    System.out.println("Executed"); // comment this out later
-    return botDirection;
-  }
-
-  public void SetDrivePower(double leftpower, double rightpower) {
-
-    // motor3.set(ControlMode.PercentOutput, -rightpower);
-    // motor4.set(ControlMode.PercentOutput, leftpower);
-
-    // motor1.set(ControlMode.PercentOutput, -rightpower);
-    // motor2.set(ControlMode.PercentOutput, leftpower);
-
-    // Real(^^)
-
-  }
-
   public void FlipDrive() {
     RobotMap.driveDirection *= -1;
   }
+
 }
