@@ -42,7 +42,7 @@ public class XboxDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
 
   @Override
-  protected void execute() {
+  protected void execute() {//this can be switched
     x2 = -xbox.getX(Hand.kLeft);
     y2 = xbox.getY(Hand.kLeft);
     x1 = -xbox.getX(Hand.kRight);
