@@ -11,6 +11,8 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.SingleJoystickDrive;
+import frc.robot.commands.XboxDrive;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 //!!!!IMPORTANT NOTE!!!!     -slot 0 = Xbox controller  -slot 1 = stick1  -slot 2 = stick2
@@ -24,22 +26,22 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new SingleJoystickDrive());
+    setDefaultCommand(new XboxDrive());
   }
 
-  public void setMotorPower(int port, double speed) {
-    switch (port) {
-    case 0:
-      RobotMap.motor0.set(speed);
-      return;
+  public void setMotorPower(int id, double speed) {
+    switch (id) {//THESE ARE ARBITRARY
     case 1:
-      RobotMap.motor1.set(ControlMode.PercentOutput, speed);
+      RobotMap.motor_Front_Left.set(ControlMode.PercentOutput,speed);
       return;
-    case 2:
-      RobotMap.motor2.set(speed);
+    case 0:
+      RobotMap.motor_Back_Right.set(ControlMode.PercentOutput, -speed);
       return;
     case 3:
-      RobotMap.motor3.set(ControlMode.PercentOutput, speed);
+      RobotMap.motor_Back_Left.set(ControlMode.PercentOutput,speed);
+      return;
+    case 2:
+      RobotMap.motor_Front_Right.set(ControlMode.PercentOutput, -speed);
       return;
     default:
       return;

@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -42,32 +43,31 @@ public class XboxDrive extends Command {
 
   @Override
   protected void execute() {
-    x1 = xbox.getX(Hand.kLeft);
-    y1 = xbox.getY(Hand.kLeft);
-    x2 = xbox.getX(Hand.kRight);
-    y2 = xbox.getY(Hand.kRight);
-    if (x1 >= -RobotMap.deadzone && x1 <= RobotMap.deadzone) {
-      y1 = 0;
+    x2 = -xbox.getX(Hand.kLeft);
+    y2 = xbox.getY(Hand.kLeft);
+    x1 = -xbox.getX(Hand.kRight);
+    y1 = xbox.getY(Hand.kRight);
+    if (x1 >= -RobotMap.xboxDeadzone && x1 <= RobotMap.xboxDeadzone) {
+      x1 = 0;
     }
-    if (x2 >= -RobotMap.deadzone && x2 <= RobotMap.deadzone) {
+    if (x2 >= -RobotMap.xboxDeadzone && x2 <= RobotMap.xboxDeadzone) {
+      x2 = 0;
+    }
+    if (y2 >= -RobotMap.xboxDeadzone && y2 <= RobotMap.xboxDeadzone) {
       y2 = 0;
     }
-    if (y2 >= -RobotMap.deadzone && y2 <= RobotMap.deadzone) {
-      y2 = 0;
-    }
-    if (y1 >= -RobotMap.deadzone && y1 <= RobotMap.deadzone) {
+    if (y1 >= -RobotMap.xboxDeadzone && y1 <= RobotMap.xboxDeadzone) {
       y1 = 0;
     }
-    
+    SmartDashboard.putNumber("x", x1);
+    SmartDashboard.putNumber("y", y1);
+    SmartDashboard.putNumber("z", x2);
 
-    rightPow = -(y1 + x1);
-    leftPow = (y1 - x1);
+    Robot.driveTrain.setMotorPower(0,y1-x2+x1);//br
+    Robot.driveTrain.setMotorPower(2,y1-x2-x1);//fr
 
-    Robot.driveTrain.setMotorPower(0, rightPow);
-    Robot.driveTrain.setMotorPower(2, rightPow);
-
-    Robot.driveTrain.setMotorPower(1, leftPow);
-    Robot.driveTrain.setMotorPower(3, leftPow);
+    Robot.driveTrain.setMotorPower(1,y1+x2+x1);//fl
+    Robot.driveTrain.setMotorPower(3, y1+x2-x1);//bl
 
     
   }

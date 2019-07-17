@@ -45,15 +45,15 @@ public class SingleJoystickDrive extends Command {
   @Override
   protected void execute() {
     x1 = RobotMap.driveDirection*stick.getX();
-    y1 = RobotMap.driveDirection*stick.getY();
-    z1 = stick.getZ();
+    y1 = -RobotMap.driveDirection*stick.getY();
+    z1 = -stick.getZ();
     if (x1 >= -RobotMap.deadzone && x1 <= RobotMap.deadzone) {
       x1 = 0;
     } 
     if (y1 >= -RobotMap.deadzone && y1 <= RobotMap.deadzone) {
       y1 = 0;
     } 
-    if (Math.abs(z1) <= 0.3) {
+    if (Math.abs(z1) <= RobotMap.zDeadzone) {
       z1 = 0;
     }
 
@@ -61,14 +61,12 @@ public class SingleJoystickDrive extends Command {
     SmartDashboard.putNumber("y", y1);
     SmartDashboard.putNumber("z", z1);
 
-    rightPow = (y1 + z1);
-    leftPow = (y1 - z1);
   
-    Robot.driveTrain.setMotorPower(0,rightPow);
-    Robot.driveTrain.setMotorPower(2,rightPow);
+    Robot.driveTrain.setMotorPower(0,y1-z1+x1);//br
+    Robot.driveTrain.setMotorPower(2,y1-z1-x1);//fr
 
-    Robot.driveTrain.setMotorPower(1,leftPow);
-    Robot.driveTrain.setMotorPower(3, leftPow);
+    Robot.driveTrain.setMotorPower(1,y1+z1+x1);//fl
+    Robot.driveTrain.setMotorPower(3, y1+z1-x1);//bl
 
   }
 

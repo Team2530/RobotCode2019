@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.SingleJoystickDrive;
+import frc.robot.commands.XboxDrive;
 //import frc.robot.subsystems.ExampleSubsystem;;
 import frc.robot.subsystems.*;
 // import edu.wpi.cscore.CvSink;
@@ -95,7 +96,7 @@ public class Robot extends TimedRobot {
   //!IMPORTANT MIGHT BREAK
   @Override
   public void disabledInit() {
-    m_teleopCommand.cancel();
+    
   }
 
   @Override
@@ -153,7 +154,7 @@ public class Robot extends TimedRobot {
     
 
     AnalogInput.setGlobalSampleRate(62500);
-    m_teleopCommand= new SingleJoystickDrive();
+    m_teleopCommand= new XboxDrive();
   
     
     m_teleopCommand.start();
