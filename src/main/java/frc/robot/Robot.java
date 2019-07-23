@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Camera camera = new Camera();
   public static PositionalTracking positionalTracker = new PositionalTracking();
+  public static ManualControl control = new ManualControl();
 
   Command m_autonomousCommand;
   Command m_teleopCommand;

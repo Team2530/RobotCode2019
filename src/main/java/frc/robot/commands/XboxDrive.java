@@ -43,10 +43,10 @@ public class XboxDrive extends Command {
 
   @Override
   protected void execute() {//this can be switched
-    x2 = -xbox.getX(Hand.kLeft);
-    y2 = xbox.getY(Hand.kLeft);
-    x1 = -xbox.getX(Hand.kRight);
-    y1 = xbox.getY(Hand.kRight);
+    x2 = Robot.control.exponentialRebind(-xbox.getX(Hand.kLeft));
+    y2 = Robot.control.exponentialRebind(xbox.getY(Hand.kLeft));
+    x1 = Robot.control.exponentialRebind(-xbox.getX(Hand.kRight));
+    y1 = Robot.control.exponentialRebind(xbox.getY(Hand.kRight));
     if (x1 >= -RobotMap.xboxDeadzone && x1 <= RobotMap.xboxDeadzone) {
       x1 = 0;
     }
@@ -61,7 +61,7 @@ public class XboxDrive extends Command {
     }
     SmartDashboard.putNumber("x", x1);
     SmartDashboard.putNumber("y", y1);
-    SmartDashboard.putNumber("z", x2);
+    SmartDashboard.putNumber("x2", x2);
 
     Robot.driveTrain.setMotorPower(0,y1-x2+x1);//br
     Robot.driveTrain.setMotorPower(2,y1-x2-x1);//fr

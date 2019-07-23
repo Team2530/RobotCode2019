@@ -29,7 +29,8 @@ public class RobotMap {
 
   public static final double deadzone = 0.1; // deadzone stuff
   public static final double zDeadzone = 0.3; // deadzone for z axis turns
-  public static final double xboxDeadzone = 0.1; // deadzone for z axis turns
+  public static final double xboxDeadzone = 0.05; // deadzone for xbox
+  public static final double exponentialControlFactor = 10;
   public static double powerfactor = 1; // power multiplier
   public static int driveDirection = 1; // used for multidirectional drive
   // For example to map the left and right motors, you could define the
