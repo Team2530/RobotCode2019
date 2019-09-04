@@ -30,7 +30,7 @@ public class DriveTrain extends Subsystem {
   }
 
   public void setMotorPower(int id, double speed) {
-    switch (id) {//THESE ARE ARBITRARY
+    switch (id) {//TODO THESE ARE ARBITRARY
     case 1:
       RobotMap.motor_Front_Left.set(ControlMode.PercentOutput,speed);
       return;
