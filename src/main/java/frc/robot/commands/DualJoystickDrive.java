@@ -47,10 +47,10 @@ public class DualJoystickDrive extends Command {
     y1 = stick1.getY();
     // x2 = stick2.getX();
     y2 = stick2.getY();
-    if (y2 >= -RobotMap.deadzone && y2 <= RobotMap.deadzone) {
+    if (Math.abs(y2) <= RobotMap.deadzone) {
       y2 = 0;
     }
-    if (y1 >= -RobotMap.deadzone && y1 <= RobotMap.deadzone) {
+    if (Math.abs(y1) <= RobotMap.deadzone) {
       y1 = 0;
     }
 

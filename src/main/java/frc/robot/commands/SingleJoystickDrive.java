@@ -24,6 +24,8 @@ public class SingleJoystickDrive extends Command {
 
   double leftPow;
   double rightPow;
+
+  double powerfactor;
   
   public SingleJoystickDrive() {
     // Use requires() here to declare subsystem dependencies
@@ -37,7 +39,7 @@ public class SingleJoystickDrive extends Command {
 
   @Override
   protected void initialize() {
-    stick =Robot.m_oi.getJoystick();
+    stick = Robot.m_oi.getJoystick();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -47,15 +49,24 @@ public class SingleJoystickDrive extends Command {
     x1 = RobotMap.driveDirection*stick.getX();
     y1 = -RobotMap.driveDirection*stick.getY();
     z1 = -stick.getZ();
-    if (x1 >= -RobotMap.deadzone && x1 <= RobotMap.deadzone) {
+    if (Math.abs(x1) <= RobotMap.deadzone) {
       x1 = 0;
     } 
-    if (y1 >= -RobotMap.deadzone && y1 <= RobotMap.deadzone) {
+    if (Math.abs(y1) <= RobotMap.deadzone) {
       y1 = 0;
     } 
     if (Math.abs(z1) <= RobotMap.zDeadzone) {
       z1 = 0;
     }
+
+    powerfactor = -stick.getRawAxis(3);
+    powerfactor = 0.5 * (powerfactor + 1); //changes max power based on slider
+    SmartDashboard.putNumber("powerfactor", powerfactor);
+
+    x1 = powerfactor*(0.5 * Math.pow(x1, 3) + 0.5 * x1);
+    y1 = powerfactor*(0.5 * Math.pow(y1, 3) + 0.5 * y1); //fancy exponent growth stuff
+    z1 = powerfactor*(0.5 * Math.pow(z1, 3) + 0.5 * z1);
+
 
     SmartDashboard.putNumber("x", x1);
     SmartDashboard.putNumber("y", y1);
