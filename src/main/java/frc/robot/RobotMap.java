@@ -19,11 +19,30 @@ import edu.wpi.first.wpilibj.VictorSP;
  * floating around.
  */
 public class RobotMap {
-  public static final double driveDelta = 1;//TODO needs to be calibrated
-  public static VictorSPX motor_Front_Left = new VictorSPX(1); // fakeid = idk
-  public static TalonSRX motor_Back_Left = new TalonSRX(3); // fakeid = idk
-  public static TalonSRX motor_Back_Right = new TalonSRX(4); // id 0 //fakeid = 2
-  public static VictorSPX motor_Front_Right = new VictorSPX(2); // id 1 //fakeid = 4
+
+  //----------Used only in creating the motors----------\\
+
+  private static final int motor_Front_Left_ID = 1; //ID on bot
+  private static final int motor_Back_Left_ID = 3; //ID on bot
+  private static final int motor_Front_Right_ID = 4; //ID on bot
+  private static final int motor_Back_Right_ID = 2; //ID on bot
+
+  //----------To be used in code for Joanthan's IDs----------\\
+
+  public static final int FrontLeftMotor = 1; //ID in code
+  public static final int BackLeftMotor = 3; //ID in code
+  public static final int FrontRightMotor = 2; //ID in code
+  public static final int BackRightMotor = 0; //ID in code
+
+  //----------Defining motors----------\\
+
+  public static final double driveDelta = 1; //TODO needs to be calibrated
+  public static VictorSPX motor_Front_Left = new VictorSPX(motor_Front_Left_ID); //look above for IDS
+  public static TalonSRX motor_Back_Left = new TalonSRX(motor_Back_Left_ID); //look above for IDS
+  public static TalonSRX motor_Back_Right = new TalonSRX(motor_Front_Right_ID); //look above for IDS
+  public static VictorSPX motor_Front_Right = new VictorSPX(motor_Back_Right_ID); //look above for IDS
+
+
 
   // these are for joystick
 

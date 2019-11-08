@@ -53,11 +53,11 @@ public class XboxDriveTank extends Command {
     rightPow = (y1);
     leftPow = (y2); // should? be tank drive
 
-    Robot.driveTrain.setMotorPower(0, rightPow);
-    Robot.driveTrain.setMotorPower(2, rightPow);
+    Robot.driveTrain.setMotorPower(BackRightMotor, rightPow);
+    Robot.driveTrain.setMotorPower(FrontRightMotor, rightPow);
 
-    Robot.driveTrain.setMotorPower(1, leftPow);
-    Robot.driveTrain.setMotorPower(3, leftPow);
+    Robot.driveTrain.setMotorPower(FrontLeftMotor, leftPow);
+    Robot.driveTrain.setMotorPower(BackLeftMotor, leftPow);
 
     
   }

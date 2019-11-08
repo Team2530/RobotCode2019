@@ -23,10 +23,11 @@ public class ManualControl extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
   }
   public double exponentialRebind(double x){
+    double controlFactor = RobotMap.exponentialControlFactor;
     if(x>0){
-    return 1/(1+RobotMap.exponentialControlFactor)*Math.pow(RobotMap.exponentialControlFactor,x)-1/(1+RobotMap.exponentialControlFactor);
+    return 1/(1+controlFactor)*Math.pow(controlFactor,x)-1/(1+controlFactor);
     }else{
-    return -(1/(1+RobotMap.exponentialControlFactor)*Math.pow(RobotMap.exponentialControlFactor,-x)-1/(1+RobotMap.exponentialControlFactor));
+    return -(1/(1+controlFactor)*Math.pow(controlFactor,-x)-1/(1+controlFactor));
     }
   }
 }

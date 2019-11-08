@@ -64,11 +64,11 @@ public class DualJoystickDrive extends Command {
     rightPow = powerfactor * (0.5 * Math.pow(rightPow, 3) + 0.5 * rightPow);
     leftPow = powerfactor * (0.5 * Math.pow(leftPow, 3) + 0.5 * leftPow);
 
-    Robot.driveTrain.setMotorPower(0, rightPow);
-    Robot.driveTrain.setMotorPower(2, rightPow);
+    Robot.driveTrain.setMotorPower(BackRightMotor, rightPow);
+    Robot.driveTrain.setMotorPower(FrontRightMotor, rightPow);
 
-    Robot.driveTrain.setMotorPower(1, leftPow);
-    Robot.driveTrain.setMotorPower(3, leftPow);
+    Robot.driveTrain.setMotorPower(FrontLeftMotor, leftPow);
+    Robot.driveTrain.setMotorPower(BackLeftMotor, leftPow);
 
     
   }

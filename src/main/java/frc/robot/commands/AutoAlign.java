@@ -44,10 +44,10 @@ public class AutoAlign extends Command {
     t1 = table.getEntry("t1").getDouble(-1);
     lineFound = Boolean.parseBoolean(table.getEntry("lineFound").getString("false"));
     if(lineFound){
-      Robot.driveTrain.setMotorPower(0,0.2);
-      Robot.driveTrain.setMotorPower(1,0.2);
-      Robot.driveTrain.setMotorPower(2,0.2);
-      Robot.driveTrain.setMotorPower(3,0.2);
+      Robot.driveTrain.setMotorPower(BackRightMotor,0.2);
+      Robot.driveTrain.setMotorPower(FrontLeftMotor,0.2);
+      Robot.driveTrain.setMotorPower(FrontRightMotor,0.2);
+      Robot.driveTrain.setMotorPower(BackLeftMotor,0.2);
       hadLine = true;
     }else{
       if(hadLine){
