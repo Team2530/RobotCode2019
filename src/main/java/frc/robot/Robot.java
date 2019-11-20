@@ -118,7 +118,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new SingleJoystickDrive();//m_chooser.getSelected();
+    m_autonomousCommand = RobotMap.driveType; //m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -155,7 +155,7 @@ public class Robot extends TimedRobot {
     
 
     AnalogInput.setGlobalSampleRate(62500);
-    m_teleopCommand= new XboxDrive();
+    m_teleopCommand = RobotMap.driveType;
   
     
     m_teleopCommand.start();

@@ -10,8 +10,6 @@ package frc.robot.subsystems;
 //import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.SingleJoystickDrive;
-import frc.robot.commands.XboxDrive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -26,7 +24,7 @@ public class DriveTrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new XboxDrive());
+    setDefaultCommand(RobotMap.driveType);
   }
 
   public void setMotorPower(int id, double speed) {

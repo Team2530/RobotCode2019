@@ -10,6 +10,8 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import frc.robot.commands.SingleJoystickDrive;
+
 //import edu.wpi.first.wpilibj.VictorSP;
 
 /**
@@ -41,6 +43,10 @@ public class RobotMap {
   public static TalonSRX motor_Back_Left = new TalonSRX(motor_Back_Left_ID); //look above for IDS
   public static TalonSRX motor_Back_Right = new TalonSRX(motor_Front_Right_ID); //look above for IDS
   public static VictorSPX motor_Front_Right = new VictorSPX(motor_Back_Right_ID); //look above for IDS
+
+  //----------Drive Type----------\\
+
+  public static final SingleJoystickDrive driveType = new SingleJoystickDrive();
 
 
 
