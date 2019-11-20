@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.SingleJoystickDrive;
 import frc.robot.commands.XboxDrive;
+import frc.robot.commands.TurnDegreesInPlace;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
@@ -28,7 +29,7 @@ public class DriveTrain extends Subsystem {
     // setDefaultCommand(new MySpecialCommand());
     setDefaultCommand(new XboxDrive());
   }
-
+ 
   public void setMotorPower(int id, double speed) {
     switch (id) {//TODO THESE ARE ARBITRARY
     case 1:
@@ -58,5 +59,24 @@ public class DriveTrain extends Subsystem {
   public void FlipDrive() {
     RobotMap.driveDirection *= -1;
   }
+  public double getFLEncoder(){
+    return RobotMap.encoder_motor_Front_Left.getDistance() *RobotMap.ENCODER_todegrees*RobotMap.GEAR_RATIO*RobotMap.DIAMETER*Math.PI;
+
+  }
+    public double getFREncoder(){
+      return RobotMap.encoder_motor_Front_Right.getDistance() *RobotMap.ENCODER_todegrees*RobotMap.GEAR_RATIO*RobotMap.DIAMETER*Math.PI;
+  }
+    public double getBLEncoder(){
+      return RobotMap.encoder_motor_Back_Left.getDistance() *RobotMap.ENCODER_todegrees*RobotMap.GEAR_RATIO*RobotMap.DIAMETER*Math.PI;
+    }
+    public double getBREncoder(){
+      return RobotMap.encoder_motor_Back_Right.getDistance() *RobotMap.ENCODER_todegrees*RobotMap.GEAR_RATIO*RobotMap.DIAMETER*Math.PI;
+  }
+  public void turnDegrees() {
+   
+
+  }
+
+
 
 }

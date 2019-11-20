@@ -10,7 +10,9 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -18,21 +20,33 @@ import edu.wpi.first.wpilibj.VictorSP;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap {
+public class RobotMap extends DriveTrain {
   public static final double driveDelta = 1;//TODO needs to be calibrated
   public static VictorSPX motor_Front_Left = new VictorSPX(1); // fakeid = idk
   public static TalonSRX motor_Back_Left = new TalonSRX(3); // fakeid = idk
   public static TalonSRX motor_Back_Right = new TalonSRX(4); // id 0 //fakeid = 2
   public static VictorSPX motor_Front_Right = new VictorSPX(2); // id 1 //fakeid = 4
+  
+  public static Encoder encoder_motor_Front_Left = new Encoder(6, 9);
+  public static Encoder encoder_motor_Back_Left = new Encoder(6, 9);
+  public static Encoder encoder_motor_Front_Right = new Encoder(6, 9);
+  public static Encoder encoder_motor_Back_Right = new Encoder(6, 9);
 
   // these are for joystick
-
+  
   public static final double deadzone = 0.1; // deadzone stuff
   public static final double zDeadzone = 0.3; // deadzone for z axis turns
   public static final double xboxDeadzone = 0.05; // deadzone for xbox
   public static final double exponentialControlFactor = 10;
   public static double powerfactor = 1; // power multiplier
   public static int driveDirection = 1; // used for multidirectional drive
+  public static final double ENCODER_todegrees = 200;
+  public static final double GEAR_RATIO = 3/2;
+  public static final double DIAMETER = 6; 
+  
+  
+  
+  
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
   // public static int leftMotor = 1;

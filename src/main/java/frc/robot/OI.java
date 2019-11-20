@@ -46,12 +46,14 @@ public class OI {
 
 
   public OI() {
-
+    
     button2.whileHeld(new AutoAlign());
     //button2.whenPressed(new FireSol());
     button7.whenPressed(new CameraSwitch());
     button11.whenPressed(new Rumble());
     button12.whenPressed(new DriveSwitch());
+    button4.whileHeld(new BasicDrive(10));
+    button1.whenPressed(new TurnDegreesInPlace());
     }
 
   // You create one by telling it which joystick it's on and which button
@@ -81,6 +83,7 @@ public class OI {
 
   public Joystick getJoystick() {
     return stick;
+  
   }
 
   public XboxController getXbox() {
