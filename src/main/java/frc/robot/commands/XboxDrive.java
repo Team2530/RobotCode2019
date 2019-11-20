@@ -63,11 +63,11 @@ public class XboxDrive extends Command {
     SmartDashboard.putNumber("y", y1);
     SmartDashboard.putNumber("x2", x2);
 
-    Robot.driveTrain.setMotorPower(BackRightMotor,y1-x2+x1);//br
-    Robot.driveTrain.setMotorPower(FrontRightMotor,y1-x2-x1);//fr
+    Robot.driveTrain.setMotorPower(RobotMap.BackRightMotor,y1-x2+x1);//br
+    Robot.driveTrain.setMotorPower(RobotMap.FrontRightMotor,y1-x2-x1);//fr
 
-    Robot.driveTrain.setMotorPower(FrontLeftMotor,y1+x2+x1);//fl
-    Robot.driveTrain.setMotorPower(BackLeftMotor, y1+x2-x1);//bl
+    Robot.driveTrain.setMotorPower(RobotMap.FrontLeftMotor,y1+x2+x1);//fl
+    Robot.driveTrain.setMotorPower(RobotMap.BackLeftMotor, y1+x2-x1);//bl
 
     
   }

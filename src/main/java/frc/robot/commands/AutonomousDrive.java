@@ -48,11 +48,11 @@ public class AutonomousDrive extends Command {
   
   
     //left
-  Robot.driveTrain.setMotorPower(BackRightMotor, leftPower);
-  Robot.driveTrain.setMotorPower(FrontLeftMotor, leftPower);
+  Robot.driveTrain.setMotorPower(RobotMap.BackRightMotor, leftPower);
+  Robot.driveTrain.setMotorPower(RobotMap.FrontLeftMotor, leftPower);
   //right
-  Robot.driveTrain.setMotorPower(FrontRightMotor, rightPower);
-  Robot.driveTrain.setMotorPower(BackLeftMotor, rightPower);
+  Robot.driveTrain.setMotorPower(RobotMap.FrontRightMotor, rightPower);
+  Robot.driveTrain.setMotorPower(RobotMap.BackLeftMotor, rightPower);
   }
 
   // Make this return true when this Command no longer needs to run execute()

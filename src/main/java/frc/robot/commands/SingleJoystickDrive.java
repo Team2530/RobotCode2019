@@ -72,11 +72,11 @@ public class SingleJoystickDrive extends Command {
     SmartDashboard.putNumber("y", y1);
     SmartDashboard.putNumber("z", z1);
   
-    Robot.driveTrain.setMotorPower(BackRightMotor,y1);//only one motor for now
-    // Robot.driveTrain.setMotorPower(FrontRightMotor,y1-z1-x1);//fr
+    Robot.driveTrain.setMotorPower(RobotMap.BackRightMotor,y1);//only one motor for now
+    // Robot.driveTrain.setMotorPower(RobotMap.FrontRightMotor,y1-z1-x1);//fr
 
-    // Robot.driveTrain.setMotorPower(FrontLeftMotor,y1+z1+x1);//fl
-    // Robot.driveTrain.setMotorPower(BackLeftMotor, y1+z1-x1);//bl
+    // Robot.driveTrain.setMotorPower(RobotMap.FrontLeftMotor,y1+z1+x1);//fl
+    // Robot.driveTrain.setMotorPower(RobotMap.BackLeftMotor, y1+z1-x1);//bl
 
   }
 

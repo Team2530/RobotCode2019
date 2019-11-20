@@ -12,6 +12,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+
 //import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class AutoAlign extends Command {
@@ -44,10 +46,10 @@ public class AutoAlign extends Command {
     t1 = table.getEntry("t1").getDouble(-1);
     lineFound = Boolean.parseBoolean(table.getEntry("lineFound").getString("false"));
     if(lineFound){
-      Robot.driveTrain.setMotorPower(BackRightMotor,0.2);
-      Robot.driveTrain.setMotorPower(FrontLeftMotor,0.2);
-      Robot.driveTrain.setMotorPower(FrontRightMotor,0.2);
-      Robot.driveTrain.setMotorPower(BackLeftMotor,0.2);
+      Robot.driveTrain.setMotorPower(RobotMap.BackRightMotor,0.2);
+      Robot.driveTrain.setMotorPower(RobotMap.FrontLeftMotor,0.2);
+      Robot.driveTrain.setMotorPower(RobotMap.FrontRightMotor,0.2);
+      Robot.driveTrain.setMotorPower(RobotMap.BackLeftMotor,0.2);
       hadLine = true;
     }else{
       if(hadLine){
