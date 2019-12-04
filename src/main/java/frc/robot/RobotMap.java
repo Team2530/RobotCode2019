@@ -26,8 +26,8 @@ public class RobotMap {
 
   private static final int motor_Front_Left_ID = 2; //ID on bot //1  regually
   private static final int motor_Back_Left_ID = 3; //ID on bot
-  private static final int motor_Front_Right_ID = 4; //ID on bot
-  private static final int motor_Back_Right_ID = 1; //ID on bot //2 regually
+  private static final int motor_Front_Right_ID = 1; //ID on bot
+  private static final int motor_Back_Right_ID = 4; //ID on bot //2 regually
 
   //----------To be used in code for Joanthan's IDs----------\\
 
@@ -41,7 +41,7 @@ public class RobotMap {
   public static final double driveDelta = 1; //TODO needs to be calibrated
   public static VictorSPX motor_Front_Left = new VictorSPX(motor_Front_Left_ID); //look above for IDS
   public static TalonSRX motor_Back_Left = new TalonSRX(motor_Back_Left_ID); //look above for IDS
-  public static VictorSPX motor_Back_Right = new VictorSPX(motor_Back_Right_ID); //look above for IDS
+  public static TalonSRX motor_Back_Right = new TalonSRX(motor_Back_Right_ID); //look above for IDS
   public static VictorSPX motor_Front_Right = new VictorSPX(motor_Front_Right_ID); //look above for IDS
 
   //----------Drive Type----------\\
